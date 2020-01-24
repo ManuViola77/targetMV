@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
 
   boldLink: {
     fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 
   container: {
@@ -29,6 +30,7 @@ const styles = StyleSheet.create({
   link: {
     alignSelf: 'center',
     marginBottom: 15,
+    textTransform: 'uppercase',
   },
 
   mediumSpace: {

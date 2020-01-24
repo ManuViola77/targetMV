@@ -8,5 +8,8 @@ export default {
     email: 'Email',
     password: 'Contraseña',
     button: 'Iniciar sesión',
+    forgotPass: '¿Olvidaste tu contraseña?',
+    connectFb: 'Conectar con Facebook',
+    signUp: 'Registrarse',
   },
 };

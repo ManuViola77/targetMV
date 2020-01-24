@@ -23,15 +23,15 @@ const LoginScreen = () => (
       <ButtonForm title={strings.LOGIN.button} />
       <View style={styles.container}>
         <TouchableOpacity>
-          <Text style={styles.smallLink}>Forgot your password?</Text>
+          <Text style={styles.smallLink}>{strings.LOGIN.forgotPass}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.mediumSpace}>
-          <Text style={styles.boldLink}>CONNECT WITH FACEBOOK</Text>
+          <Text style={styles.boldLink}>{strings.LOGIN.connectFb}</Text>
         </TouchableOpacity>
         <View style={styles.allLeftSpace}>
           <View style={styles.lineStyle} />
-          <TouchableOpacity style={styles.link}>
-            <Text>SIGN UP</Text>
+          <TouchableOpacity>
+            <Text style={styles.link}>{strings.LOGIN.signUp}</Text>
           </TouchableOpacity>
         </View>
       </View>
