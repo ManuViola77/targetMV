@@ -4,22 +4,20 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Text,
-  StyleSheet,
   ImageBackground,
 } from 'react-native';
-import {Header, InputForm, ButtonForm, Spacer} from '../components/common';
+import Header from 'components/common/Header';
+import InputForm from 'components/common/InputForm';
+import ButtonForm from 'components/common/ButtonForm';
+import styles from './styles';
 
 const LoginScreen = () => (
   <ImageBackground
-    source={require('../../assets/logoLogin.png')}
+    source={require('assets/logoLogin.png')}
     style={styles.image}>
     <Header title="TARGET MV" />
 
     <SafeAreaView style={styles.safeArea}>
-      <Spacer />
-      <Spacer />
-      <Spacer />
-
       <InputForm title="Email" secureTextEntry={false} />
 
       <InputForm title="Password" secureTextEntry={true} />
@@ -31,10 +29,7 @@ const LoginScreen = () => (
           <Text style={styles.smallLink}>Forgot your password?</Text>
         </TouchableOpacity>
 
-        <Spacer />
-        <Spacer />
-
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.mediumSpace}>
           <Text style={styles.boldLink}>CONNECT WITH FACEBOOK</Text>
         </TouchableOpacity>
 
@@ -48,46 +43,5 @@ const LoginScreen = () => (
     </SafeAreaView>
   </ImageBackground>
 );
-
-const styles = StyleSheet.create({
-  image: {
-    height: 260,
-    flex: 1,
-  },
-
-  safeArea: {
-    flex: 1,
-  },
-
-  container: {
-    alignItems: 'center',
-    flex: 1,
-  },
-
-  smallLink: {
-    fontSize: 12,
-  },
-
-  boldLink: {
-    fontWeight: 'bold',
-  },
-
-  allLeftSpace: {
-    flex: 1,
-    justifyContent: 'flex-end',
-  },
-
-  lineStyle: {
-    borderWidth: 0.5,
-    borderColor: 'black',
-    marginBottom: 20,
-    width: 121,
-  },
-
-  link: {
-    marginBottom: 15,
-    alignSelf: 'center',
-  },
-});
 
 export default LoginScreen;
