@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
   },
 
   input: {
-    borderColor: 'black',
     borderWidth: 1,
     fontSize: 16,
     height: 40,

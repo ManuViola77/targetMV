@@ -3,18 +3,13 @@ import { BLACK, WHITE } from 'constants/colors';
 
 const styles = StyleSheet.create({
   button: {
-    alignItems: 'center',
+    alignSelf: 'center',
     backgroundColor: BLACK,
     borderWidth: 1,
     height: 40,
     justifyContent: 'center',
-    width: 110,
-  },
-
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center',
     margin: 15,
+    width: 110,
   },
 
   text: {

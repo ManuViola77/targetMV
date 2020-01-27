@@ -7,8 +7,8 @@ import {
   ImageBackground,
 } from 'react-native';
 import Header from 'components/common/Header';
-import InputForm from 'components/common/InputForm';
-import ButtonForm from 'components/common/ButtonForm';
+import Input from 'components/common/Form/Input';
+import Button from 'components/common/Form/Button';
 import styles from './styles';
 import strings from 'locale';
 
@@ -18,9 +18,9 @@ const LoginScreen = () => (
     style={styles.image}>
     <Header title={strings.COMMON.headerTitle} />
     <SafeAreaView style={styles.safeArea}>
-      <InputForm title={strings.LOGIN.email} secureTextEntry={false} />
-      <InputForm title={strings.LOGIN.password} secureTextEntry={true} />
-      <ButtonForm title={strings.LOGIN.button} />
+      <Input title={strings.LOGIN.email} />
+      <Input title={strings.LOGIN.password} secureTextEntry />
+      <Button title={strings.LOGIN.button} />
       <View style={styles.container}>
         <TouchableOpacity>
           <Text style={styles.smallLink}>{strings.LOGIN.forgotPass}</Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import styles from './styles';
 
-const InputForm = ({ title, secureTextEntry }) => (
+const Input = ({ title, secureTextEntry = false }) => (
   <View style={styles.container}>
     <Text style={styles.title}> {title} </Text>
     <TextInput
@@ -15,4 +15,4 @@ const InputForm = ({ title, secureTextEntry }) => (
   </View>
 );
 
-export default InputForm;
+export default Input;
