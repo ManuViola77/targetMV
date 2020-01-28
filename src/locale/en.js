@@ -25,11 +25,14 @@ export default {
   },
 
   SIGN_UP_ERROR: {
-    emptyName: 'You forgot to put your name!',
-    emptyEmail: 'Oops! This email is not valid',
+    emptyName: "Name can't be blank",
+    emptyEmail: "Email can't be blank",
+    emptyPassword: "Password can't be blank",
+    emptyConfirmPassword: "Confirm Password can't be blank",
+    emptyGender: "Gender can't be blank",
+    emailNotValid: 'Email not valid',
     passwordSixChar: 'Password must be at least 6 characters long',
-    confirmPasswordMatch: "Passwords don't match",
-    emptyGender: 'You forgot to select your gender!',
+    confirmPasswordMatch: 'Confirm Password is not equal to Password',
   },
 
   SIGN_UP_HELP: {

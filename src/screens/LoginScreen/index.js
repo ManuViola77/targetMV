@@ -14,6 +14,8 @@ import strings from 'locale';
 import { SIGN_UP_SCREEN } from 'constants/screens';
 import loginIcon from 'assets/logoLogin.png';
 
+const { COMMON, LOGIN } = strings;
+
 const LoginScreen = ({ navigation }) => {
   const signUp = useCallback(() => navigation.push(SIGN_UP_SCREEN), [
     navigation,
@@ -21,22 +23,22 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <ImageBackground source={loginIcon} style={styles.image}>
-      <Header title={strings.COMMON.headerTitle} />
+      <Header title={COMMON.headerTitle} />
       <SafeAreaView style={styles.safeArea}>
-        <Input title={strings.LOGIN.email} />
-        <Input title={strings.LOGIN.password} secureTextEntry />
-        <Button title={strings.LOGIN.button} />
+        <Input title={LOGIN.email} />
+        <Input title={LOGIN.password} secureTextEntry />
+        <Button title={LOGIN.button} />
         <View style={styles.container}>
           <TouchableOpacity>
-            <Text style={styles.smallLink}>{strings.LOGIN.forgotPass}</Text>
+            <Text style={styles.smallLink}>{LOGIN.forgotPass}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.mediumSpace}>
-            <Text style={styles.boldLink}>{strings.LOGIN.connectFb}</Text>
+            <Text style={styles.boldLink}>{LOGIN.connectFb}</Text>
           </TouchableOpacity>
           <View style={styles.allLeftSpace}>
             <View style={styles.lineStyle} />
             <TouchableOpacity onPress={signUp}>
-              <Text style={styles.link}>{strings.LOGIN.signUp}</Text>
+              <Text style={styles.link}>{LOGIN.signUp}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -46,7 +48,7 @@ const LoginScreen = ({ navigation }) => {
 };
 
 LoginScreen.navigationOption = {
-  title: strings.LOGIN.title,
+  title: LOGIN.title,
 };
 
 export default LoginScreen;

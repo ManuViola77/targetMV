@@ -25,11 +25,14 @@ export default {
   },
 
   SIGN_UP_ERROR: {
-    emptyName: 'Te olvidaste de poner tu nombre!',
-    emptyEmail: 'Ups! Este email no es válido',
+    emptyName: 'Nombre no puede ser vacío',
+    emptyEmail: 'Email no puede ser vacío',
+    emptyPassword: 'Contraseña no puede ser vacía',
+    emptyConfirmPassword: 'Confirmar Contraseña no puede ser vacía',
+    emptyGender: 'Género no puede ser vacío',
+    emailNotValid: 'Email no válido',
     passwordSixChar: 'La contraseña debe tener mínimo 6 caracteres',
-    confirmPasswordMatch: 'Las contraseñas no son iguales',
-    emptyGender: 'Te olvidaste de seleccionar tu género!',
+    confirmPasswordMatch: 'Confirmar Contraseña no es igual a Contraseña',
   },
 
   SIGN_UP_HELP: {

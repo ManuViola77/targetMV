@@ -13,30 +13,20 @@ import styles from './styles';
 import strings from 'locale';
 import loginIcon from 'assets/logoLogin.png';
 import useSignUpStates from 'hooks/useSignUpStates';
+import {
+  name,
+  email,
+  password,
+  confirmPassword,
+  gender,
+} from 'constants/fields';
 
 const { SIGN_UP, SIGN_UP_HELP } = strings;
 
 const SignUp = ({ navigation }) => {
-  const signIn = useCallback(() => navigation.goBack());
+  const signIn = useCallback(() => navigation.goBack(), [navigation]);
 
-  const {
-    name,
-    email,
-    password,
-    confirmPassword,
-    gender,
-    errorName,
-    errorEmail,
-    errorPassword,
-    errorConfirmPassword,
-    errorGender,
-    cbName,
-    cbEmail,
-    cbPassword,
-    cbConfirmPassword,
-    cbGender,
-    cbSignUp,
-  } = useSignUpStates();
+  const { values, errors, handleChange, handleSignUp } = useSignUpStates();
 
   return (
     <ImageBackground source={loginIcon} style={styles.image}>
@@ -44,38 +34,38 @@ const SignUp = ({ navigation }) => {
       <SafeAreaView style={styles.safeArea}>
         <Input
           title={SIGN_UP.name}
-          text={name}
-          callback={cbName}
-          errorMessage={errorName}
+          text={values.name}
+          callback={newValue => handleChange(name, newValue)}
+          errorMessage={errors.name}
         />
         <Input
           title={SIGN_UP.email}
-          text={email}
-          callback={cbEmail}
-          errorMessage={errorEmail}
+          text={values.email}
+          callback={newValue => handleChange(email, newValue)}
+          errorMessage={errors.email}
         />
         <Input
           title={SIGN_UP.password}
           secureTextEntry
-          text={password}
-          callback={cbPassword}
-          errorMessage={errorPassword}
+          text={values.password}
+          callback={newValue => handleChange(password, newValue)}
+          errorMessage={errors.password}
           help={SIGN_UP_HELP.helpPassword}
         />
         <Input
           title={SIGN_UP.confirmPassword}
           secureTextEntry
-          text={confirmPassword}
-          callback={cbConfirmPassword}
-          errorMessage={errorConfirmPassword}
+          text={values.confirmPassword}
+          callback={newValue => handleChange(confirmPassword, newValue)}
+          errorMessage={errors.confirmPassword}
         />
         <Input
           title={SIGN_UP.gender}
-          text={gender}
-          callback={cbGender}
-          errorMessage={errorGender}
+          text={values.gender}
+          callback={newValue => handleChange(gender, newValue)}
+          errorMessage={errors.gender}
         />
-        <Button title={SIGN_UP.button} onPress={cbSignUp} />
+        <Button title={SIGN_UP.button} onPress={handleSignUp} />
         <View style={styles.allLeftSpace}>
           <View style={styles.lineStyle} />
           <TouchableOpacity onPress={signIn}>

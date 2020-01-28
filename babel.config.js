@@ -12,6 +12,7 @@ module.exports = {
           locale: './src/locale',
           navigators: './src/navigators',
           screens: './src/screens',
+          validations: './src/validations',
         },
       },
     ],
