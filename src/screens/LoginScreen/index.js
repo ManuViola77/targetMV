@@ -7,11 +7,12 @@ import {
   ImageBackground,
 } from 'react-native';
 import Header from 'components/common/Header';
-import Input from 'components/common/Form/Input';
-import Button from 'components/common/Form/Button';
+import Input from 'components/common/form/Input';
+import Button from 'components/common/form/Button';
 import styles from './styles';
 import strings from 'locale';
 import { SIGN_UP_SCREEN } from 'constants/screens';
+import loginIcon from 'assets/logoLogin.png';
 
 const LoginScreen = ({ navigation }) => {
   const signUp = useCallback(() => navigation.push(SIGN_UP_SCREEN), [
@@ -19,9 +20,7 @@ const LoginScreen = ({ navigation }) => {
   ]);
 
   return (
-    <ImageBackground
-      source={require('assets/logoLogin.png')}
-      style={styles.image}>
+    <ImageBackground source={loginIcon} style={styles.image}>
       <Header title={strings.COMMON.headerTitle} />
       <SafeAreaView style={styles.safeArea}>
         <Input title={strings.LOGIN.email} />

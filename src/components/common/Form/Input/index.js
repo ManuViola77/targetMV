@@ -12,7 +12,7 @@ const Input = ({
 }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}> {title} </Text>
+      <Text style={styles.title}>{title}</Text>
       <TextInput
         secureTextEntry={secureTextEntry}
         value={text}
