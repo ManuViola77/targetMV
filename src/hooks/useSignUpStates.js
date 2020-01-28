@@ -17,37 +17,31 @@ const useSignUpStates = () => {
   const { SIGN_UP_ERROR } = strings;
 
   const cbName = newName => {
-    console.log('cbName');
     setName(newName);
     setErrorName('');
   };
 
   const cbEmail = newEmail => {
-    console.log('cbEmail');
     setEmail(newEmail);
     setErrorEmail('');
   };
 
   const cbPassword = newPassword => {
-    console.log('cbPassword');
     setPassword(newPassword);
     setErrorPassword('');
   };
 
   const cbConfirmPassword = newConfirmPassword => {
-    console.log('cbConfirmPassword');
     setConfirmPassword(newConfirmPassword);
     setErrorConfirmPassword('');
   };
 
   const cbGender = newGender => {
-    console.log('cbGender');
     setGender(newGender);
     setErrorGender('');
   };
 
   const cbSignUp = () => {
-    console.log('cbsignup');
     setErrorEmail('');
     setErrorEmail('');
     setErrorPassword('');
