@@ -1,114 +1,175 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
+import { Alert, Text, TextInput, StyleSheet, View } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
-};
+    this.inputRefs = {};
+
+    this.state = {
+      favColor: undefined,
+      items: [
+        {
+          label: 'Red',
+          value: 'red',
+        },
+        {
+          label: 'Orange',
+          value: 'orange',
+        },
+        {
+          label: 'Blue',
+          value: 'blue',
+        },
+      ],
+      favSport: undefined,
+      items2: [
+        {
+          label: 'Football',
+          value: 'football',
+        },
+        {
+          label: 'Baseball',
+          value: 'baseball',
+        },
+        {
+          label: 'Hockey',
+          value: 'hockey',
+        },
+      ],
+    };
+  }
+
+  componentDidMount() {
+    // if the component is using the optional `value` prop, the parent
+    // has the abililty to both set the initial value and also update it
+    setTimeout(() => {
+      this.setState({
+        favColor: 'red',
+      });
+    }, 1000);
+
+    // parent can also update the `items` prop
+    setTimeout(() => {
+      this.setState({
+        items: this.state.items.concat([{ value: 'purple', label: 'Purple' }]),
+      });
+    }, 2000);
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>Name?</Text>
+        <TextInput
+          ref={el => {
+            this.inputRefs.name = el;
+          }}
+          returnKeyType="next"
+          enablesReturnKeyAutomatically
+          onSubmitEditing={() => {
+            this.inputRefs.picker.togglePicker();
+          }}
+          style={pickerSelectStyles.inputIOS}
+          blurOnSubmit={false}
+        />
+
+        <View style={{ paddingVertical: 5 }} />
+
+        <Text>What&rsquo;s your favorite color?</Text>
+        <RNPickerSelect
+          placeholder={{
+            label: 'Select a color...',
+            value: null,
+          }}
+          items={this.state.items}
+          onValueChange={value => {
+            this.setState({
+              favColor: value,
+            });
+          }}
+          onUpArrow={() => {
+            this.inputRefs.name.focus();
+          }}
+          onDownArrow={() => {
+            this.inputRefs.picker2.togglePicker();
+          }}
+          style={{ ...pickerSelectStyles }}
+          value={this.state.favColor}
+          ref={el => {
+            this.inputRefs.picker = el;
+          }}
+        />
+
+        <View style={{ paddingVertical: 5 }} />
+
+        <Text>What&rsquo;s your favorite sport?</Text>
+        <RNPickerSelect
+          placeholder={{
+            label: 'Select a sport...',
+            value: null,
+          }}
+          items={this.state.items2}
+          onValueChange={value => {
+            this.setState({
+              favSport: value,
+            });
+          }}
+          onUpArrow={() => {
+            this.inputRefs.picker.togglePicker();
+          }}
+          onDownArrow={() => {
+            this.inputRefs.company.focus();
+          }}
+          style={{ ...pickerSelectStyles }}
+          value={this.state.favSport}
+          ref={el => {
+            this.inputRefs.picker2 = el;
+          }}
+        />
+
+        <View style={{ paddingVertical: 5 }} />
+
+        <Text>Company?</Text>
+        <TextInput
+          ref={el => {
+            this.inputRefs.company = el;
+          }}
+          returnKeyType="go"
+          enablesReturnKeyAutomatically
+          style={pickerSelectStyles.inputIOS}
+          onSubmitEditing={() => {
+            Alert.alert('Success', 'Form submitted', [
+              { text: 'Okay', onPress: null },
+            ]);
+          }}
+        />
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
+  container: {
+    paddingTop: 30,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    paddingHorizontal: 10,
   },
 });
 
-export default App;
+const pickerSelectStyles = StyleSheet.create({
+  inputIOS: {
+    fontSize: 16,
+    paddingTop: 13,
+    paddingHorizontal: 10,
+    paddingBottom: 12,
+    borderWidth: 1,
+    borderColor: 'gray',
+    borderRadius: 4,
+    backgroundColor: 'white',
+    color: 'black',
+  },
+});

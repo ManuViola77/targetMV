@@ -1,27 +1,32 @@
 import React from 'react';
-import { bool, number, string, array, arrayOf, object } from 'prop-types';
-import { View, Text, Picker as PickerRN } from 'react-native';
+import { bool, string, array, object, func } from 'prop-types';
+import { View, Text, PickerRN } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 import styles from './styles';
 
-/*
-  
-*/
+const Picker = ({
+  title,
+  text,
+  placeholder,
+  options,
+  callback,
+  errorMessage,
+}) => {
+  var stylePicker = { ...styles };
+  if (errorMessage) {
+    stylePicker = { ...styles, inputIOS: styles.pickerError };
+  }
 
-const Picker = ({ title, text, options, callback, errorMessage }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      <PickerRN
-        style={[styles.picker, errorMessage ? styles.pickerError : {}]}
-        itemStyle={styles.pickerItem}
-        selectedValue={text}
-        onValueChange={callback}>
-        {options.map((item, index) => {
-          return (
-            <PickerRN.Item label={item.label} value={item.value} key={index} />
-          );
-        })}
-      </PickerRN>
+      <RNPickerSelect
+        placeholder={placeholder}
+        items={options}
+        onValueChange={callback}
+        value={text}
+        style={{ ...stylePicker }}
+      />
       {!!errorMessage && (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
       )}
@@ -30,11 +35,17 @@ const Picker = ({ title, text, options, callback, errorMessage }) => {
 };
 
 Picker.propTypes = {
-  title: string,
+  title: string.isRequired,
+  text: string.isRequired,
+  placeholder: object.isRequired,
+  options: array.isRequired,
+  callback: func.isRequired,
+  errorMessage: array,
 };
 
 Picker.defaultProps = {
-  title: 'hola',
+  text: '',
+  errorMessage: null,
 };
 
 export default Picker;

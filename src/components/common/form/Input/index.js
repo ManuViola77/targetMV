@@ -3,18 +3,6 @@ import { bool, string, array, func } from 'prop-types';
 import { View, Text, TextInput } from 'react-native';
 import styles from './styles';
 
-/*
-  Input Props:
-  title(*): label for the input title
-  secureTextEntry: use secureTextEntry or not
-  text(*): value of input (is the state value)
-  callback(*): function to change state value
-  errorMessage: array of error messages for the input
-  autoCapitalize: type of autoCapitalize to use
-  autoCorrect: use autoCorrect or not
-  help: text for the input placeholder
-*/
-
 const Input = ({
   title,
   secureTextEntry,
@@ -57,6 +45,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
   secureTextEntry: false,
+  text: '',
   errorMessage: null,
   autoCapitalize: 'none',
   autoCorrect: false,

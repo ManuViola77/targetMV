@@ -40,8 +40,8 @@ export default {
   },
 
   GENDER: {
+    placeholder: { label: 'Select your gender', value: '' },
     options: [
-      { label: 'Select your gender', value: '' },
       { label: 'Male', value: 'male' },
       { label: 'Female', value: 'female' },
     ],

@@ -13,20 +13,23 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 
-  picker: {
+  inputIOS: {
     alignSelf: 'center',
     borderWidth: 1,
+    fontSize: 16,
     height: 40,
+    textAlign: 'center',
     width: 220,
   },
 
   pickerError: {
-    borderColor: RED,
-  },
-
-  pickerItem: {
-    height: 40,
+    alignSelf: 'center',
+    borderWidth: 1,
     fontSize: 16,
+    height: 40,
+    textAlign: 'center',
+    width: 220,
+    borderColor: RED,
   },
 
   title: {

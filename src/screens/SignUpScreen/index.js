@@ -66,6 +66,7 @@ const SignUp = ({ navigation }) => {
           <Picker
             title={SIGN_UP.gender}
             text={values.gender}
+            placeholder={GENDER.placeholder}
             options={GENDER.options}
             callback={newValue => handleChange(gender, newValue)}
             errorMessage={errors.gender}
