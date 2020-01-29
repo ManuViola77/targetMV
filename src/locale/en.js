@@ -38,4 +38,12 @@ export default {
   SIGN_UP_HELP: {
     helpPassword: 'MIN. 6 CHARACTERS LONG',
   },
+
+  GENDER: {
+    options: [
+      { label: 'Select your gender', value: '' },
+      { label: 'Male', value: 'male' },
+      { label: 'Female', value: 'female' },
+    ],
+  },
 };

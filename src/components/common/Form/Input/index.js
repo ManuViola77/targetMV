@@ -8,6 +8,8 @@ const Input = ({
   text,
   callback,
   errorMessage,
+  autoCapitalize = 'none',
+  autoCorrect = false,
   help = '',
 }) => {
   return (
@@ -18,8 +20,8 @@ const Input = ({
         value={text}
         onChangeText={callback}
         style={[styles.input, errorMessage ? styles.inputError : {}]}
-        autoCapitalize="none"
-        autoCorrect={false}
+        autoCapitalize={autoCapitalize}
+        autoCorrect={autoCorrect}
         placeholder={help}
       />
       {!!errorMessage && (
