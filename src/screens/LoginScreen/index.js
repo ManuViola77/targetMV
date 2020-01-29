@@ -13,6 +13,8 @@ import styles from './styles';
 import strings from 'locale';
 import { SIGN_UP_SCREEN } from 'constants/screens';
 import loginIcon from 'assets/logoLogin.png';
+import useSignUpStates from 'hooks/useSignUpStates';
+import { loginEmail, loginPassword } from 'constants/fields';
 
 const { COMMON, LOGIN } = strings;
 
@@ -21,12 +23,25 @@ const LoginScreen = ({ navigation }) => {
     navigation,
   ]);
 
+  const { values, errors, handleChange } = useSignUpStates();
+
   return (
     <ImageBackground source={loginIcon} style={styles.image}>
       <Header title={COMMON.headerTitle} />
       <SafeAreaView style={styles.safeArea}>
-        <Input title={LOGIN.email} />
-        <Input title={LOGIN.password} secureTextEntry />
+        <Input
+          title={LOGIN.email}
+          text={values.loginEmail}
+          callback={newValue => handleChange(loginEmail, newValue)}
+          errorMessage={errors.loginEmail}
+        />
+        <Input
+          title={LOGIN.password}
+          secureTextEntry
+          text={values.loginPassword}
+          callback={newValue => handleChange(loginPassword, newValue)}
+          errorMessage={errors.loginPassword}
+        />
         <Button title={LOGIN.button} />
         <View style={styles.container}>
           <TouchableOpacity>

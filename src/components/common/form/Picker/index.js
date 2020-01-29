@@ -1,22 +1,27 @@
 import React from 'react';
-import { View, Text, Picker } from 'react-native';
+import { bool, number, string, array, arrayOf, object } from 'prop-types';
+import { View, Text, Picker as PickerRN } from 'react-native';
 import styles from './styles';
 
-const MyPicker = ({ title, text, options, callback, errorMessage }) => {
+/*
+  
+*/
+
+const Picker = ({ title, text, options, callback, errorMessage }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
-      <Picker
+      <PickerRN
         style={[styles.picker, errorMessage ? styles.pickerError : {}]}
         itemStyle={styles.pickerItem}
         selectedValue={text}
         onValueChange={callback}>
         {options.map((item, index) => {
           return (
-            <Picker.Item label={item.label} value={item.value} key={index} />
+            <PickerRN.Item label={item.label} value={item.value} key={index} />
           );
         })}
-      </Picker>
+      </PickerRN>
       {!!errorMessage && (
         <Text style={styles.errorMessage}>{errorMessage}</Text>
       )}
@@ -24,4 +29,12 @@ const MyPicker = ({ title, text, options, callback, errorMessage }) => {
   );
 };
 
-export default MyPicker;
+Picker.propTypes = {
+  title: string,
+};
+
+Picker.defaultProps = {
+  title: 'hola',
+};
+
+export default Picker;

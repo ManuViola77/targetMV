@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import validate from 'validate.js';
+import validate from 'validations';
 import signUpValidations from 'validations/signUpValidations';
+import { Keyboard } from 'react-native';
 
 const useSignUpStates = () => {
   const [values, setValues] = useState({});
@@ -8,10 +9,11 @@ const useSignUpStates = () => {
 
   handleChange = (key, value) => {
     setValues({ ...values, [key]: value });
-    setErrors({ ...errors, [key]: '' });
+    setErrors({ ...errors, [key]: null });
   };
 
   const handleSignUp = () => {
+    Keyboard.dismiss();
     const constraints = signUpValidations;
     setErrors(validate(values, constraints));
   };

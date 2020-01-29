@@ -34,7 +34,7 @@ const SignUp = ({ navigation }) => {
     <ImageBackground source={loginIcon} style={styles.image}>
       <Header title={strings.COMMON.headerTitle} />
       <SafeAreaView style={styles.safeArea}>
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps={'handled'}>
           <Input
             title={SIGN_UP.name}
             text={values.name}
