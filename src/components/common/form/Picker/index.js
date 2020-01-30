@@ -12,10 +12,9 @@ const Picker = ({
   callback,
   errorMessage,
 }) => {
-  var stylePicker = { ...styles };
-  if (errorMessage) {
-    stylePicker = { ...styles, inputIOS: styles.pickerError };
-  }
+  var stylePicker = errorMessage
+    ? { ...styles, inputIOS: styles.pickerError }
+    : { ...styles };
 
   return (
     <View style={styles.container}>
