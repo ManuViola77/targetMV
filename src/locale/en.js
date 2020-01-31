@@ -1,6 +1,8 @@
 export default {
   COMMON: {
     headerTitle: 'Target MV',
+    loading: 'Loading',
+    somethingWentWrong: 'Something Went Wrong',
   },
 
   LOGIN: {
@@ -44,6 +46,12 @@ export default {
     options: [
       { label: 'Male', value: 'male' },
       { label: 'Female', value: 'female' },
+      { label: 'Other', value: 'other' },
     ],
+  },
+
+  API: {
+    errorMessage: 'No response returned from fetch',
+    errorNotJSON: 'Response not JSON',
   },
 };

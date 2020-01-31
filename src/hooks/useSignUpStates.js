@@ -3,7 +3,7 @@ import validate from 'validations';
 import signUpValidations from 'validations/signUpValidations';
 import { Keyboard } from 'react-native';
 
-const useSignUpStates = () => {
+const useSignUpStates = onSubmit => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -15,7 +15,8 @@ const useSignUpStates = () => {
   const handleSignUp = () => {
     Keyboard.dismiss();
     const constraints = signUpValidations;
-    setErrors(validate(values, constraints));
+    const errorMessages = validate(values, constraints);
+    errorMessages ? setErrors(errorMessages) : onSubmit(values);
   };
 
   return {
