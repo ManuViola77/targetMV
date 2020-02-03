@@ -1,17 +1,23 @@
 import strings from 'locale';
-import { password } from 'constants/fields';
+import {
+  name,
+  email,
+  password,
+  confirmPassword,
+  gender,
+} from 'constants/fields';
 
 const { SIGN_UP_ERROR } = strings;
 
 const signUpValidations = {
-  name: {
+  [name]: {
     presence: {
       value: true,
       message: SIGN_UP_ERROR.emptyName,
     },
   },
 
-  email: {
+  [email]: {
     presence: {
       value: true,
       message: SIGN_UP_ERROR.emptyEmail,
@@ -22,7 +28,7 @@ const signUpValidations = {
     },
   },
 
-  password: {
+  [password]: {
     presence: {
       value: true,
       message: SIGN_UP_ERROR.emptyPassword,
@@ -33,7 +39,7 @@ const signUpValidations = {
     },
   },
 
-  confirmPassword: {
+  [confirmPassword]: {
     presence: {
       value: true,
       message: SIGN_UP_ERROR.emptyConfirmPassword,
@@ -44,7 +50,7 @@ const signUpValidations = {
     },
   },
 
-  gender: {
+  [gender]: {
     presence: {
       value: true,
       message: SIGN_UP_ERROR.emptyGender,

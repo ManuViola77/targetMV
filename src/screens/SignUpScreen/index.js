@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   View,
   SafeAreaView,
@@ -6,7 +6,10 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { useStatus } from '@rootstrap/redux-tools';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 import Header from 'components/common/Header';
 import Input from 'components/common/form/Input';
 import Button from 'components/common/form/Button';
@@ -15,6 +18,7 @@ import styles from './styles';
 import strings from 'locale';
 import loginIcon from 'assets/logoLogin.png';
 import useSignUpStates from 'hooks/useSignUpStates';
+import { signUp } from 'actions/userActions';
 import {
   name,
   email,
@@ -22,13 +26,23 @@ import {
   confirmPassword,
   gender,
 } from 'constants/fields';
+import { SIGNUP_RESET } from 'constants/userActions';
 
 const { SIGN_UP, SIGN_UP_HELP, GENDER } = strings;
 
 const SignUp = ({ navigation }) => {
-  const signIn = useCallback(() => navigation.goBack(), [navigation]);
+  useEffect(() => {
+    return () => dispatch(SIGNUP_RESET);
+  }, []);
 
-  const { values, errors, handleChange, handleSignUp } = useSignUpStates();
+  const signIn = useCallback(() => navigation.goBack(), [navigation]);
+  const dispatch = useDispatch();
+  const signUpRequest = useCallback(user => dispatch(signUp(user)), [dispatch]);
+  const { error } = useStatus(signUp);
+  const { values, errors, handleChange, handleSignUp } = useSignUpStates(
+    signUpRequest,
+  );
+  const errorMessages = { ...errors, ...error };
 
   return (
     <ImageBackground source={loginIcon} style={styles.image}>
@@ -37,39 +51,39 @@ const SignUp = ({ navigation }) => {
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'handled'}>
           <Input
             title={SIGN_UP.name}
-            text={values.name}
+            text={values[name]}
             callback={newValue => handleChange(name, newValue)}
-            errorMessage={errors.name}
+            errorMessage={errorMessages[name]}
             autoCapitalize="words"
           />
           <Input
             title={SIGN_UP.email}
-            text={values.email}
+            text={values[email]}
             callback={newValue => handleChange(email, newValue)}
-            errorMessage={errors.email}
+            errorMessage={errorMessages[email]}
           />
           <Input
             title={SIGN_UP.password}
             secureTextEntry
-            text={values.password}
+            text={values[password]}
             callback={newValue => handleChange(password, newValue)}
-            errorMessage={errors.password}
+            errorMessage={errorMessages[password]}
             help={SIGN_UP_HELP.helpPassword}
           />
           <Input
             title={SIGN_UP.confirmPassword}
             secureTextEntry
-            text={values.confirmPassword}
+            text={values[confirmPassword]}
             callback={newValue => handleChange(confirmPassword, newValue)}
-            errorMessage={errors.confirmPassword}
+            errorMessage={errorMessages[confirmPassword]}
           />
           <Picker
             title={SIGN_UP.gender}
-            text={values.gender}
+            text={values[gender]}
             placeholder={GENDER.placeholder}
             options={GENDER.options}
             callback={newValue => handleChange(gender, newValue)}
-            errorMessage={errors.gender}
+            errorMessage={errorMessages[gender]}
           />
           <Button title={SIGN_UP.button} onPress={handleSignUp} />
         </KeyboardAwareScrollView>
