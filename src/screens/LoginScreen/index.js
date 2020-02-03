@@ -15,6 +15,7 @@ import { SIGN_UP_SCREEN } from 'constants/screens';
 import loginIcon from 'assets/logoLogin.png';
 import useSignUpStates from 'hooks/useSignUpStates';
 import { loginEmail, loginPassword } from 'constants/fields';
+import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 
 const { COMMON, LOGIN } = strings;
 
@@ -24,6 +25,8 @@ const LoginScreen = ({ navigation }) => {
   ]);
 
   const { values, errors, handleChange } = useSignUpStates();
+
+  useNavigateOnLoginEffect(navigation);
 
   return (
     <ImageBackground source={loginIcon} style={styles.image}>

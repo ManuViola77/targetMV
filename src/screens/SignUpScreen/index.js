@@ -27,6 +27,7 @@ import {
   gender,
 } from 'constants/fields';
 import { SIGNUP_RESET } from 'constants/userActions';
+import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 
 const { SIGN_UP, SIGN_UP_HELP, GENDER } = strings;
 
@@ -43,6 +44,8 @@ const SignUp = ({ navigation }) => {
     signUpRequest,
   );
   const errorMessages = { ...errors, ...error };
+
+  useNavigateOnLoginEffect(navigation);
 
   return (
     <ImageBackground source={loginIcon} style={styles.image}>
