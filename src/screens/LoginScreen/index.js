@@ -1,4 +1,6 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useStatus } from '@rootstrap/redux-tools';
 import {
   View,
   SafeAreaView,
@@ -6,16 +8,21 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
+
 import Header from 'components/common/Header';
 import Input from 'components/common/form/Input';
 import Button from 'components/common/form/Button';
+import ErrorView from 'components/common/form/ErrorView';
 import styles from './styles';
 import strings from 'locale';
 import { SIGN_UP_SCREEN } from 'constants/screens';
 import loginIcon from 'assets/logoLogin.png';
-import useSignUpStates from 'hooks/useSignUpStates';
-import { loginEmail, loginPassword } from 'constants/fields';
+import useAuthStates from 'hooks/useAuthStates';
+import { email, password, errorMsg } from 'constants/fields';
+import { login } from 'actions/userActions';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
+import { LOGIN_RESET } from 'constants/userActions';
+import signInValidations from 'validations/signInValidations';
 
 const { COMMON, LOGIN } = strings;
 
@@ -24,7 +31,34 @@ const LoginScreen = ({ navigation }) => {
     navigation,
   ]);
 
-  const { values, errors, handleChange } = useSignUpStates();
+  const dispatch = useDispatch();
+  const loginRequest = useCallback(user => dispatch(login(user)), [dispatch]);
+  const { error } = useStatus(login);
+
+  const {
+    values,
+    errors,
+    handleChange,
+    handleAuth,
+    resetState,
+  } = useAuthStates(loginRequest);
+
+  const errorMessages = { ...errors, ...error };
+
+  const cleanUp = () => {
+    dispatch(LOGIN_RESET);
+    resetState();
+  };
+
+  useEffect(() => {
+    const focusListener = navigation.addListener('willBlur', () => {
+      cleanUp();
+    });
+    return () => {
+      cleanUp();
+      focusListener.remove();
+    };
+  }, []);
 
   useNavigateOnLoginEffect(navigation);
 
@@ -34,18 +68,22 @@ const LoginScreen = ({ navigation }) => {
       <SafeAreaView style={styles.safeArea}>
         <Input
           title={LOGIN.email}
-          text={values.loginEmail}
-          callback={newValue => handleChange(loginEmail, newValue)}
-          errorMessage={errors.loginEmail}
+          text={values[email]}
+          callback={newValue => handleChange(email, newValue)}
+          errorMessage={errorMessages[email]}
         />
         <Input
           title={LOGIN.password}
           secureTextEntry
-          text={values.loginPassword}
-          callback={newValue => handleChange(loginPassword, newValue)}
-          errorMessage={errors.loginPassword}
+          text={values[password]}
+          callback={newValue => handleChange(password, newValue)}
+          errorMessage={errorMessages[password]}
         />
-        <Button title={LOGIN.button} />
+        <ErrorView error={errorMessages[errorMsg]} />
+        <Button
+          title={LOGIN.button}
+          onPress={() => handleAuth(signInValidations)}
+        />
         <View style={styles.container}>
           <TouchableOpacity>
             <Text style={styles.smallLink}>{LOGIN.forgotPass}</Text>

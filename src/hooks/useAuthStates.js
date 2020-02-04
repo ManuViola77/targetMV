@@ -1,30 +1,36 @@
 import { useState } from 'react';
 import validate from 'validations';
 import signUpValidations from 'validations/signUpValidations';
+import signInValidations from 'validations/signInValidations';
 import { Keyboard } from 'react-native';
 
-const useSignUpStates = onSubmit => {
+const useAuthStates = onSubmit => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
 
-  handleChange = (key, value) => {
+  const handleChange = (key, value) => {
     setValues({ ...values, [key]: value });
     setErrors({ ...errors, [key]: null });
   };
 
-  const handleSignUp = () => {
+  const handleAuth = constraints => {
     Keyboard.dismiss();
-    const constraints = signUpValidations;
     const errorMessages = validate(values, constraints);
     errorMessages ? setErrors(errorMessages) : onSubmit(values);
+  };
+
+  const resetState = () => {
+    setValues({});
+    setErrors({});
   };
 
   return {
     values,
     errors,
     handleChange,
-    handleSignUp,
+    handleAuth,
+    resetState,
   };
 };
 
-export default useSignUpStates;
+export default useAuthStates;

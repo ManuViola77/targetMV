@@ -6,3 +6,5 @@ export const gender = 'gender';
 
 export const loginEmail = 'loginEmail';
 export const loginPassword = 'loginPassword';
+
+export const errorMsg = 'error';

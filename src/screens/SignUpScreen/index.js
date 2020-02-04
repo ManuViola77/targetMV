@@ -14,10 +14,11 @@ import Header from 'components/common/Header';
 import Input from 'components/common/form/Input';
 import Button from 'components/common/form/Button';
 import Picker from 'components/common/form/Picker';
+import ErrorView from 'components/common/form/ErrorView';
 import styles from './styles';
 import strings from 'locale';
 import loginIcon from 'assets/logoLogin.png';
-import useSignUpStates from 'hooks/useSignUpStates';
+import useAuthStates from 'hooks/useAuthStates';
 import { signUp } from 'actions/userActions';
 import {
   name,
@@ -25,9 +26,11 @@ import {
   password,
   confirmPassword,
   gender,
+  errorMsg,
 } from 'constants/fields';
 import { SIGNUP_RESET } from 'constants/userActions';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
+import signUpValidations from 'validations/signUpValidations';
 
 const { SIGN_UP, SIGN_UP_HELP, GENDER } = strings;
 
@@ -40,7 +43,7 @@ const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
   const signUpRequest = useCallback(user => dispatch(signUp(user)), [dispatch]);
   const { error } = useStatus(signUp);
-  const { values, errors, handleChange, handleSignUp } = useSignUpStates(
+  const { values, errors, handleChange, handleAuth } = useAuthStates(
     signUpRequest,
   );
   const errorMessages = { ...errors, ...error };
@@ -88,7 +91,11 @@ const SignUp = ({ navigation }) => {
             callback={newValue => handleChange(gender, newValue)}
             errorMessage={errorMessages[gender]}
           />
-          <Button title={SIGN_UP.button} onPress={handleSignUp} />
+          <ErrorView error={errorMessages[errorMsg]} />
+          <Button
+            title={SIGN_UP.button}
+            onPress={() => handleAuth(signUpValidations)}
+          />
         </KeyboardAwareScrollView>
         <View style={styles.allLeftSpace}>
           <View style={styles.lineStyle} />

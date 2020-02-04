@@ -2,6 +2,7 @@ import React from 'react';
 import { bool, string, array, func } from 'prop-types';
 import { View, Text, TextInput } from 'react-native';
 import styles from './styles';
+import ErrorView from 'components/common/form/ErrorView';
 
 const Input = ({
   title,
@@ -25,9 +26,7 @@ const Input = ({
         autoCorrect={autoCorrect}
         placeholder={help}
       />
-      {!!errorMessage && (
-        <Text style={styles.errorMessage}>{errorMessage[0]}</Text>
-      )}
+      {!!errorMessage && <ErrorView error={errorMessage[0]} />}
     </View>
   );
 };
