@@ -7,7 +7,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useStatus } from '@rootstrap/redux-tools';
+import { useStatus, LOADING } from '@rootstrap/redux-tools';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import Header from 'components/common/Header';
@@ -32,7 +32,7 @@ import { SIGNUP_RESET } from 'constants/userActions';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 import signUpValidations from 'validations/signUpValidations';
 
-const { SIGN_UP, SIGN_UP_HELP, GENDER } = strings;
+const { SIGN_UP, SIGN_UP_HELP, GENDER, COMMON } = strings;
 
 const SignUp = ({ navigation }) => {
   useEffect(() => {
@@ -42,7 +42,7 @@ const SignUp = ({ navigation }) => {
   const signIn = useCallback(() => navigation.goBack(), [navigation]);
   const dispatch = useDispatch();
   const signUpRequest = useCallback(user => dispatch(signUp(user)), [dispatch]);
-  const { error } = useStatus(signUp);
+  const { error, status } = useStatus(signUp);
   const { values, errors, handleChange, handleAuth } = useAuthStates(
     signUpRequest,
   );
@@ -93,7 +93,7 @@ const SignUp = ({ navigation }) => {
           />
           <ErrorView error={errorMessages[errorMsg]} />
           <Button
-            title={SIGN_UP.button}
+            title={status === LOADING ? COMMON.loading : SIGN_UP.button}
             onPress={() => handleAuth(signUpValidations)}
           />
         </KeyboardAwareScrollView>

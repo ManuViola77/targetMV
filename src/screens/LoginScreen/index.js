@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useStatus } from '@rootstrap/redux-tools';
+import { useStatus, LOADING } from '@rootstrap/redux-tools';
 import {
   View,
   SafeAreaView,
@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
 
   const dispatch = useDispatch();
   const loginRequest = useCallback(user => dispatch(login(user)), [dispatch]);
-  const { error } = useStatus(login);
+  const { error, status } = useStatus(login);
 
   const {
     values,
@@ -81,7 +81,7 @@ const LoginScreen = ({ navigation }) => {
         />
         <ErrorView error={errorMessages[errorMsg]} />
         <Button
-          title={LOGIN.button}
+          title={status === LOADING ? COMMON.loading : LOGIN.button}
           onPress={() => handleAuth(signInValidations)}
         />
         <View style={styles.container}>
