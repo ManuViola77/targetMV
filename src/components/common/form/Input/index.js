@@ -1,8 +1,9 @@
 import React from 'react';
-import { bool, string, array, func } from 'prop-types';
 import { View, Text, TextInput } from 'react-native';
-import styles from './styles';
+import { bool, string, array, func } from 'prop-types';
+
 import ErrorView from 'components/common/form/ErrorView';
+import styles from './styles';
 
 const Input = ({
   title,

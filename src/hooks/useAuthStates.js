@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import validate from 'validations';
-import signUpValidations from 'validations/signUpValidations';
-import signInValidations from 'validations/signInValidations';
 import { Keyboard } from 'react-native';
+
+import validate from 'validations';
 
 const useAuthStates = onSubmit => {
   const [values, setValues] = useState({});

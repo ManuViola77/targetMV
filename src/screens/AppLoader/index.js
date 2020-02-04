@@ -1,8 +1,9 @@
 import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { object } from 'prop-types';
-import useSessionChangeEffect from 'hooks/useSessionChangeEffect';
+
 import { LOGIN_SCREEN, MAIN_SCREEN } from 'constants/screens';
+import useSessionChangeEffect from 'hooks/useSessionChangeEffect';
 import styles from './styles';
 
 export default function AppLoader({ navigation }) {

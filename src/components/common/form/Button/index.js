@@ -1,6 +1,7 @@
 import React from 'react';
-import { string } from 'prop-types';
 import { Text, TouchableOpacity } from 'react-native';
+import { string } from 'prop-types';
+
 import styles from './styles';
 
 const Button = ({ title, ...props }) => (

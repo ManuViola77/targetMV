@@ -1,11 +1,11 @@
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
+import { createStackNavigator } from 'react-navigation-stack';
 
-import LoginScreen from 'screens/LoginScreen';
-import SignUpScreen from 'screens/SignUpScreen';
-import MainScreen from 'screens/MainScreen';
 import AppLoader from 'screens/AppLoader';
+import LoginScreen from 'screens/LoginScreen';
+import MainScreen from 'screens/MainScreen';
+import SignUpScreen from 'screens/SignUpScreen';
 
 const AuthNavigator = createStackNavigator(
   {

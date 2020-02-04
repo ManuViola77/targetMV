@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useStatus, LOADING } from '@rootstrap/redux-tools';
 import {
   View,
   SafeAreaView,
@@ -8,21 +6,23 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
-import Header from 'components/common/Header';
-import Input from 'components/common/form/Input';
+import { login } from 'actions/userActions';
+import loginIcon from 'assets/logoLogin.png';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
-import styles from './styles';
-import strings from 'locale';
-import { SIGN_UP_SCREEN } from 'constants/screens';
-import loginIcon from 'assets/logoLogin.png';
-import useAuthStates from 'hooks/useAuthStates';
+import Input from 'components/common/form/Input';
+import Header from 'components/common/Header';
 import { email, password, errorMsg } from 'constants/fields';
-import { login } from 'actions/userActions';
-import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
+import { SIGN_UP_SCREEN } from 'constants/screens';
 import { LOGIN_RESET } from 'constants/userActions';
+import useAuthStates from 'hooks/useAuthStates';
+import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
+import strings from 'locale';
 import signInValidations from 'validations/signInValidations';
+import styles from './styles';
 
 const { COMMON, LOGIN } = strings;
 

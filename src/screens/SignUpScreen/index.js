@@ -6,20 +6,17 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
-import Header from 'components/common/Header';
-import Input from 'components/common/form/Input';
-import Button from 'components/common/form/Button';
-import Picker from 'components/common/form/Picker';
-import ErrorView from 'components/common/form/ErrorView';
-import styles from './styles';
-import strings from 'locale';
-import loginIcon from 'assets/logoLogin.png';
-import useAuthStates from 'hooks/useAuthStates';
 import { signUp } from 'actions/userActions';
+import loginIcon from 'assets/logoLogin.png';
+import Button from 'components/common/form/Button';
+import ErrorView from 'components/common/form/ErrorView';
+import Input from 'components/common/form/Input';
+import Picker from 'components/common/form/Picker';
+import Header from 'components/common/Header';
 import {
   name,
   email,
@@ -29,8 +26,11 @@ import {
   errorMsg,
 } from 'constants/fields';
 import { SIGNUP_RESET } from 'constants/userActions';
+import useAuthStates from 'hooks/useAuthStates';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
+import strings from 'locale';
 import signUpValidations from 'validations/signUpValidations';
+import styles from './styles';
 
 const { SIGN_UP, SIGN_UP_HELP, GENDER, COMMON } = strings;
 

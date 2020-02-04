@@ -1,5 +1,5 @@
-import strings from 'locale';
 import { email, password } from 'constants/fields';
+import strings from 'locale';
 
 const { SIGN_UP_ERROR } = strings;
 
