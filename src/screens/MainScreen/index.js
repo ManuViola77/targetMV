@@ -1,14 +1,17 @@
 import React, { useCallback } from 'react';
-import { Text } from 'react-native';
+import { Image, Text, View } from 'react-native';
+import MapView from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 
-// TODO: import styles from './styles';
-import Button from 'components/common/form/Button';
 import { logout } from 'actions/userActions';
+import profileIcon from 'assets/images/profile.png';
+import chatBubble from 'assets/images/chat_bubble.png';
+import Button from 'components/common/form/Button';
+import Title from 'components/common/Title';
+import strings from 'locale';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
+import styles from './styles';
 
-// TODO: Make the real Main Screen
-// The logout button is just to test easier the login and sign up feature
 const Main = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
@@ -17,7 +20,13 @@ const Main = ({ navigation }) => {
 
   return (
     <>
-      <Text>This is Main Screen to be implemented later</Text>
+      <Title
+        title={strings.TITLE.main}
+        leftIcon={profileIcon}
+        rightIcon={chatBubble}
+      />
+      <MapView style={styles.map} />
+      {/* TODO delete this logout (just leaving it for testing) */}
       <Button title="Log Out (temp)" onPress={handleLogout} />
     </>
   );

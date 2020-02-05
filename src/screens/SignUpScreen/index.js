@@ -11,7 +11,7 @@ import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
 import { signUp } from 'actions/userActions';
-import loginIcon from 'assets/logoLogin.png';
+import loginIcon from 'assets/images/logoLogin.png';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';

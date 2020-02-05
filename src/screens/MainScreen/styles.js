@@ -1,6 +1,11 @@
 import { StyleSheet } from 'react-native';
 
-// TODO: set styles to main screen
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  map: {
+    flex: 1,
+    marginBottom: 10,
+    marginTop: 10,
+  },
+});
 
 export default styles;
