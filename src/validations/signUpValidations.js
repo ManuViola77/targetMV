@@ -1,4 +1,3 @@
-import strings from 'locale';
 import {
   name,
   email,
@@ -6,6 +5,7 @@ import {
   confirmPassword,
   gender,
 } from 'constants/fields';
+import strings from 'locale';
 
 const { SIGN_UP_ERROR } = strings;
 

@@ -6,29 +6,33 @@ import {
   Text,
   ImageBackground,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useStatus } from '@rootstrap/redux-tools';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useDispatch } from 'react-redux';
+import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
-import Header from 'components/common/Header';
-import Input from 'components/common/form/Input';
-import Button from 'components/common/form/Button';
-import Picker from 'components/common/form/Picker';
-import styles from './styles';
-import strings from 'locale';
-import loginIcon from 'assets/logoLogin.png';
-import useSignUpStates from 'hooks/useSignUpStates';
 import { signUp } from 'actions/userActions';
+import loginIcon from 'assets/logoLogin.png';
+import Button from 'components/common/form/Button';
+import ErrorView from 'components/common/form/ErrorView';
+import Input from 'components/common/form/Input';
+import Picker from 'components/common/form/Picker';
+import Header from 'components/common/Header';
 import {
   name,
   email,
   password,
   confirmPassword,
   gender,
+  errorMsg,
 } from 'constants/fields';
 import { SIGNUP_RESET } from 'constants/userActions';
+import useAuthStates from 'hooks/useAuthStates';
+import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
+import strings from 'locale';
+import signUpValidations from 'validations/signUpValidations';
+import styles from './styles';
 
-const { SIGN_UP, SIGN_UP_HELP, GENDER } = strings;
+const { SIGN_UP, SIGN_UP_HELP, GENDER, COMMON } = strings;
 
 const SignUp = ({ navigation }) => {
   useEffect(() => {
@@ -38,11 +42,13 @@ const SignUp = ({ navigation }) => {
   const signIn = useCallback(() => navigation.goBack(), [navigation]);
   const dispatch = useDispatch();
   const signUpRequest = useCallback(user => dispatch(signUp(user)), [dispatch]);
-  const { error } = useStatus(signUp);
-  const { values, errors, handleChange, handleSignUp } = useSignUpStates(
+  const { error, status } = useStatus(signUp);
+  const { values, errors, handleChange, handleAuth } = useAuthStates(
     signUpRequest,
   );
   const errorMessages = { ...errors, ...error };
+
+  useNavigateOnLoginEffect(navigation);
 
   return (
     <ImageBackground source={loginIcon} style={styles.image}>
@@ -85,7 +91,11 @@ const SignUp = ({ navigation }) => {
             callback={newValue => handleChange(gender, newValue)}
             errorMessage={errorMessages[gender]}
           />
-          <Button title={SIGN_UP.button} onPress={handleSignUp} />
+          <ErrorView error={errorMessages[errorMsg]} />
+          <Button
+            title={status === LOADING ? COMMON.loading : SIGN_UP.button}
+            onPress={() => handleAuth(signUpValidations)}
+          />
         </KeyboardAwareScrollView>
         <View style={styles.allLeftSpace}>
           <View style={styles.lineStyle} />

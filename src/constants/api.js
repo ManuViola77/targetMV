@@ -1,4 +1,6 @@
+export const ACCESS_TOKEN = 'access-token';
 export const APPLICATION_JSON = 'application/json';
+export const CLIENT = 'client';
 export const CONTENT_TYPE = 'Content-Type';
 export const HTTP_VERB = {
   GET: 'get',
@@ -7,7 +9,5 @@ export const HTTP_VERB = {
   PUT: 'put',
   PATCH: 'patch',
 };
-export const ACCESS_TOKEN = 'access-token';
 export const UID = 'uid';
-export const CLIENT = 'client';
 export const UNAUTHORIZED = 401;

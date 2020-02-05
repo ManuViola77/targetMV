@@ -8,11 +8,6 @@ const styles = StyleSheet.create({
     height: 95,
   },
 
-  errorMessage: {
-    color: RED,
-    marginTop: 5,
-  },
-
   input: {
     borderColor: BLACK,
     borderWidth: 1,

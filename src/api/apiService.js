@@ -66,7 +66,6 @@ class ApiService {
 
       return this.handleResponse(response);
     } catch (error) {
-      console.log(error);
       return this.handleRequestError(error);
     }
   }

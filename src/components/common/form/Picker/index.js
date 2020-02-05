@@ -1,7 +1,8 @@
 import React from 'react';
-import { bool, string, array, object, func } from 'prop-types';
-import { View, Text, PickerRN } from 'react-native';
+import { View, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
+import { string, array, object, func } from 'prop-types';
+
 import styles from './styles';
 
 const Picker = ({

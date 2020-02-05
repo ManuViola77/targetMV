@@ -1,14 +1,14 @@
 import React from 'react';
-import { setCustomText } from 'react-native-global-props';
-import { Provider } from 'react-redux';
 import { ActivityIndicator } from 'react-native';
+import { setCustomText } from 'react-native-global-props';
 import { PersistGate } from 'redux-persist/integration/react';
+import { Provider } from 'react-redux';
 
 import api from 'api';
 import applyDefaultInterceptors from 'api/utils/applyDefaultInterceptors';
+import { defaultFont } from 'constants/fonts';
 import AppContainer from 'navigators';
 import configureStore from 'store/configureStore';
-import { defaultFont } from 'constants/fonts';
 
 const customTextProps = {
   style: {

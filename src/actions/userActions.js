@@ -1,7 +1,8 @@
 import { createThunk, createAction } from '@rootstrap/redux-tools';
+
+import { LOGIN, LOGOUT, SIGNUP, UPDATE_SESSION } from 'constants/userActions';
 import userService from 'services/userService';
 import parseError from 'utils/parseError';
-import { LOGIN, LOGOUT, SIGNUP, UPDATE_SESSION } from 'constants/userActions';
 
 export const login = createThunk(LOGIN, async user => {
   try {
