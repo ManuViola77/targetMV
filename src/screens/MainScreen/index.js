@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import { Image, Text, View } from 'react-native';
+import React, { useCallback, useEffect } from 'react';
 import MapView from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 
@@ -9,6 +8,7 @@ import chatBubble from 'assets/images/chat_bubble.png';
 import Button from 'components/common/form/Button';
 import Title from 'components/common/Title';
 import strings from 'locale';
+import useGPSLocation from 'hooks/useGPSLocation';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
 import styles from './styles';
 
@@ -18,6 +18,14 @@ const Main = ({ navigation }) => {
 
   useNavigateOnLogoutEffect(navigation);
 
+  const { currentLocation, requestLocation, startTracking } = useGPSLocation();
+
+  requestLocation();
+
+  /* useEffect(() => {
+    startTracking();
+  }, []); */
+
   return (
     <>
       <Title
@@ -25,7 +33,13 @@ const Main = ({ navigation }) => {
         leftIcon={profileIcon}
         rightIcon={chatBubble}
       />
-      <MapView style={styles.map} />
+      <MapView
+        style={styles.map}
+        showUserLocation
+        followUserLocation
+        loadingEnabled
+        region={currentLocation}
+      />
       {/* TODO delete this logout (just leaving it for testing) */}
       <Button title="Log Out (temp)" onPress={handleLogout} />
     </>
