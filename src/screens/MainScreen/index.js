@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 
 import { logout } from 'actions/userActions';
@@ -34,6 +34,7 @@ const Main = ({ navigation }) => {
         rightIcon={chatBubble}
       />
       <MapView
+        provider={PROVIDER_GOOGLE}
         style={styles.map}
         showUserLocation
         followUserLocation
