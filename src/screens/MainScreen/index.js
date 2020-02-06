@@ -3,11 +3,7 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 
 import { logout } from 'actions/userActions';
-import profileIcon from 'assets/images/profile.png';
-import chatBubble from 'assets/images/chat_bubble.png';
 import Button from 'components/common/form/Button';
-import Title from 'components/common/Title';
-import strings from 'locale';
 import useGPSLocation from 'hooks/useGPSLocation';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
 import styles from './styles';
@@ -24,11 +20,6 @@ const Main = ({ navigation }) => {
 
   return (
     <>
-      <Title
-        title={strings.TITLE.main}
-        leftIcon={profileIcon}
-        rightIcon={chatBubble}
-      />
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
