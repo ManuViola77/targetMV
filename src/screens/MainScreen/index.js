@@ -18,13 +18,9 @@ const Main = ({ navigation }) => {
 
   useNavigateOnLogoutEffect(navigation);
 
-  const { currentLocation, requestLocation, startTracking } = useGPSLocation();
+  const { currentLocation, requestLocation } = useGPSLocation();
 
   requestLocation();
-
-  /* useEffect(() => {
-    startTracking();
-  }, []); */
 
   return (
     <>
