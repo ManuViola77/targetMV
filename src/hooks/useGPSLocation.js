@@ -18,13 +18,13 @@ const useGPSLocation = () => {
   });
 
   const updateLocation = location => {
-    location
-      ? setCurrentLocation({
-          ...currentLocation,
-          latitude: location.coords.latitude,
-          longitude: location.coords.longitude,
-        })
-      : null;
+    if (location) {
+      setCurrentLocation({
+        ...currentLocation,
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+      });
+    }
   };
 
   const useWatchLocation = () => {
