@@ -20,6 +20,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* targetMVTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* targetMVTests.m */; };
 		9C80ED9EFE28925CE7AE26D4 /* libPods-targetMV-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B9350B9133470F7C060070 /* libPods-targetMV-tvOSTests.a */; };
+		9E0E16C13DB490E233EED976 /* libPods-targetMV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 645CF6E62A7D485DAB9E5AB6 /* libPods-targetMV.a */; };
 		C69A76B57AE6940B0868F945 /* libPods-targetMVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BA6A7ECDF6CD06767800DE /* libPods-targetMVTests.a */; };
 		CDD4073600DE87505D951568 /* libPods-targetMV-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4363CAF249F896772C5BC01E /* libPods-targetMV-tvOS.a */; };
 /* End PBXBuildFile section */
@@ -103,6 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E0E16C13DB490E233EED976 /* libPods-targetMV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

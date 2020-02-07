@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 
@@ -14,9 +14,9 @@ const Main = ({ navigation }) => {
 
   useNavigateOnLogoutEffect(navigation);
 
-  const { currentLocation, requestLocation } = useGPSLocation();
+  const { currentLocation, useWatchLocation } = useGPSLocation();
 
-  requestLocation();
+  useWatchLocation();
 
   return (
     <>

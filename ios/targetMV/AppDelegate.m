@@ -6,6 +6,7 @@
  */
 
 #import "AppDelegate.h"
+#import "ReactNativeConfig.h"
 
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
@@ -28,7 +29,7 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [GMSServices provideAPIKey:@"AIzaSyCetlQb2ntZz8yXbxRXZYxu0bayBzjY8-I"];
+  [GMSServices provideAPIKey:[ReactNativeConfig envFor:@"GOOGLE_KEY"]];
   return YES;
 }
 

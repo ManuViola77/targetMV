@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import GetLocation from 'react-native-get-location';
+import { useState, useEffect } from 'react';
+import Geolocation from 'react-native-geolocation-service';
 
 import {
   INITIAL_LATITUDE,
@@ -17,30 +17,37 @@ const useGPSLocation = () => {
     longitudeDelta: LONGITUDE_DELTA,
   });
 
-  const requestLocation = () => {
-    GetLocation.getCurrentPosition({
-      enableHighAccuracy: true,
-      timeout: TIMEOUT,
-    })
-      .then(location => {
-        location.latitude !== currentLocation.latitude ||
-        location.longitude !== currentLocation.longitude
-          ? setCurrentLocation({
-              ...currentLocation,
-              latitude: location.latitude,
-              longitude: location.longitude,
-            })
-          : null;
-      })
-      .catch(error => {
-        const { code, message } = error;
-        console.warn(code, message);
-      });
+  const updateLocation = location => {
+    location
+      ? setCurrentLocation({
+          ...currentLocation,
+          latitude: location.coords.latitude,
+          longitude: location.coords.longitude,
+        })
+      : null;
+  };
+
+  const useWatchLocation = () => {
+    useEffect(() => {
+      Geolocation.watchPosition(
+        location => updateLocation(location),
+        error => console.warn('error: ', error),
+        {
+          enableHighAccuracy: true,
+          distanceFilter: 0,
+          interval: 5000,
+          fastestInterval: 2000,
+        },
+      );
+      return () => {
+        Geolocation.stopObserving();
+      };
+    }, []);
   };
 
   return {
     currentLocation,
-    requestLocation,
+    useWatchLocation,
   };
 };
 
