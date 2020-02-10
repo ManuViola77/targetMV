@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { PermissionsAndroid, Platform } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 
 import {
@@ -8,6 +7,7 @@ import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
 } from 'constants/map';
+import requestPermission from 'hooks/useLocationPermission';
 
 const useGPSLocation = () => {
   const [currentLocation, setCurrentLocation] = useState({
@@ -29,14 +29,6 @@ const useGPSLocation = () => {
         longitude: location.coords.longitude,
       });
     }
-  };
-
-  const requestPermission = () => {
-    Platform.OS === 'android'
-      ? PermissionsAndroid.request(
-          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        )
-      : Geolocation.requestAuthorization();
   };
 
   const useWatchLocation = () => {
