@@ -14,13 +14,18 @@ const Picker = ({
   errorMessage,
 }) => {
   var stylePicker = errorMessage
-    ? { ...styles, inputIOS: styles.pickerError }
+    ? {
+        ...styles,
+        inputIOS: styles.pickerError,
+        inputAndroid: styles.pickerError,
+      }
     : { ...styles };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <RNPickerSelect
+        useNativeAndroidPickerStyle={false}
         placeholder={placeholder}
         items={options}
         onValueChange={callback}

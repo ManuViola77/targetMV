@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { PermissionsAndroid, Platform } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 
 import {
@@ -6,7 +7,6 @@ import {
   INITIAL_LONGITUDE,
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
-  TIMEOUT,
 } from 'constants/map';
 
 const useGPSLocation = () => {
@@ -18,7 +18,11 @@ const useGPSLocation = () => {
   });
 
   const updateLocation = location => {
-    if (location) {
+    if (
+      location &&
+      (location.coords.latitude !== currentLocation.latitude ||
+        location.coords.longitude !== currentLocation.longitude)
+    ) {
       setCurrentLocation({
         ...currentLocation,
         latitude: location.coords.latitude,
@@ -27,9 +31,18 @@ const useGPSLocation = () => {
     }
   };
 
+  const requestPermission = () => {
+    Platform.OS === 'android'
+      ? PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        )
+      : Geolocation.requestAuthorization();
+  };
+
   const useWatchLocation = () => {
     useEffect(() => {
-      Geolocation.watchPosition(
+      requestPermission();
+      const watchId = Geolocation.watchPosition(
         location => updateLocation(location),
         error => console.warn('error: ', error),
         {
@@ -40,9 +53,10 @@ const useGPSLocation = () => {
         },
       );
       return () => {
+        Geolocation.clearWatch(watchId);
         Geolocation.stopObserving();
       };
-    }, []);
+    }, [currentLocation]);
   };
 
   return {

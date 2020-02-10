@@ -12,11 +12,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 
-  container: {
-    alignItems: 'center',
-    flex: 1,
-  },
-
   image: {
     flex: 1,
     height: 260,

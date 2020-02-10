@@ -13,6 +13,15 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 
+  inputAndroid: {
+    alignSelf: 'center',
+    borderWidth: 1,
+    fontSize: 16,
+    height: 40,
+    textAlign: 'center',
+    width: 220,
+  },
+
   inputIOS: {
     alignSelf: 'center',
     borderWidth: 1,
@@ -24,12 +33,12 @@ const styles = StyleSheet.create({
 
   pickerError: {
     alignSelf: 'center',
+    borderColor: RED,
     borderWidth: 1,
     fontSize: 16,
     height: 40,
     textAlign: 'center',
     width: 220,
-    borderColor: RED,
   },
 
   title: {
