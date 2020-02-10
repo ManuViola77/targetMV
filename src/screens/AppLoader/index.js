@@ -9,11 +9,7 @@ import styles from './styles';
 export default function AppLoader({ navigation }) {
   useSessionChangeEffect(
     ({ user, info }) => {
-      if (user && info) {
-        navigation.navigate(MAIN_SCREEN);
-      } else {
-        navigation.navigate(LOGIN_SCREEN);
-      }
+      navigation.navigate(user && info ? MAIN_SCREEN : LOGIN_SCREEN);
     },
     [navigation],
   );

@@ -1,8 +1,22 @@
 export default {
+  API: {
+    errorMessage: 'No se obtuvo ninguna respuesta',
+    errorNotJSON: 'La respuesta no es JSON',
+  },
+
   COMMON: {
     headerTitle: 'Target MV',
     loading: 'Cargando',
     somethingWentWrong: 'Ocurrió un error',
+  },
+
+  GENDER: {
+    placeholder: { label: 'Seleccione su género', value: '' },
+    options: [
+      { label: 'Hombre', value: 'male' },
+      { label: 'Mujer', value: 'female' },
+      { label: 'Otro', value: 'other' },
+    ],
   },
 
   LOGIN: {
@@ -41,17 +55,8 @@ export default {
     helpPassword: 'MIN. 6 CARACTERES',
   },
 
-  GENDER: {
-    placeholder: { label: 'Seleccione su género', value: '' },
-    options: [
-      { label: 'Hombre', value: 'male' },
-      { label: 'Mujer', value: 'female' },
-      { label: 'Otro', value: 'other' },
-    ],
-  },
-
-  API: {
-    errorMessage: 'No se obtuvo ninguna respuesta',
-    errorNotJSON: 'La respuesta no es JSON',
+  TITLE: {
+    main: 'Puntos Target',
+    profile: 'Perfil',
   },
 };

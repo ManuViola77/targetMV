@@ -1,23 +1,34 @@
 import React, { useCallback } from 'react';
-import { Text } from 'react-native';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 
-// TODO: import styles from './styles';
-import Button from 'components/common/form/Button';
 import { logout } from 'actions/userActions';
+import Button from 'components/common/form/Button';
+import useGPSLocation from 'hooks/useGPSLocation';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
+import styles from './styles';
 
-// TODO: Make the real Main Screen
-// The logout button is just to test easier the login and sign up feature
 const Main = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
 
   useNavigateOnLogoutEffect(navigation);
 
+  const { currentLocation, useWatchLocation } = useGPSLocation();
+
+  useWatchLocation();
+
   return (
     <>
-      <Text>This is Main Screen to be implemented later</Text>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+        showUserLocation
+        followUserLocation
+        loadingEnabled
+        region={currentLocation}
+      />
+      {/* TODO delete this logout (just leaving it for testing) */}
       <Button title="Log Out (temp)" onPress={handleLogout} />
     </>
   );

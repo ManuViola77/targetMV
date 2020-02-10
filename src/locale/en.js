@@ -1,8 +1,22 @@
 export default {
+  API: {
+    errorMessage: 'No response returned from fetch',
+    errorNotJSON: 'Response not JSON',
+  },
+
   COMMON: {
     headerTitle: 'Target MV',
     loading: 'Loading',
     somethingWentWrong: 'Something Went Wrong',
+  },
+
+  GENDER: {
+    placeholder: { label: 'Select your gender', value: '' },
+    options: [
+      { label: 'Male', value: 'male' },
+      { label: 'Female', value: 'female' },
+      { label: 'Other', value: 'other' },
+    ],
   },
 
   LOGIN: {
@@ -41,17 +55,8 @@ export default {
     helpPassword: 'MIN. 6 CHARACTERS LONG',
   },
 
-  GENDER: {
-    placeholder: { label: 'Select your gender', value: '' },
-    options: [
-      { label: 'Male', value: 'male' },
-      { label: 'Female', value: 'female' },
-      { label: 'Other', value: 'other' },
-    ],
-  },
-
-  API: {
-    errorMessage: 'No response returned from fetch',
-    errorNotJSON: 'Response not JSON',
+  TITLE: {
+    main: 'Target Points',
+    profile: 'Profile',
   },
 };

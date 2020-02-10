@@ -1,9 +1,12 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  map: {
-    flex: 1,
-    marginBottom: 10,
+  leftIcon: {
+    marginLeft: 10,
+  },
+
+  rightIcon: {
+    marginRight: 10,
   },
 });
 

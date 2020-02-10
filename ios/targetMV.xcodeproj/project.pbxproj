@@ -20,9 +20,9 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* targetMVTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* targetMVTests.m */; };
 		9C80ED9EFE28925CE7AE26D4 /* libPods-targetMV-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 21B9350B9133470F7C060070 /* libPods-targetMV-tvOSTests.a */; };
+		9E0E16C13DB490E233EED976 /* libPods-targetMV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 645CF6E62A7D485DAB9E5AB6 /* libPods-targetMV.a */; };
 		C69A76B57AE6940B0868F945 /* libPods-targetMVTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D3BA6A7ECDF6CD06767800DE /* libPods-targetMVTests.a */; };
 		CDD4073600DE87505D951568 /* libPods-targetMV-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4363CAF249F896772C5BC01E /* libPods-targetMV-tvOS.a */; };
-		E2030A30B9B009E87944CCAC /* libPods-targetMV.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 645CF6E62A7D485DAB9E5AB6 /* libPods-targetMV.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +104,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E2030A30B9B009E87944CCAC /* libPods-targetMV.a in Frameworks */,
+				9E0E16C13DB490E233EED976 /* libPods-targetMV.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +211,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		66797AA907054BC4BBF3AE79 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,14 +253,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		66797AA907054BC4BBF3AE79 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -522,6 +521,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-targetMV/Pods-targetMV-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
@@ -541,6 +541,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
@@ -738,6 +739,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"HAVE_GOOGLE_MAPS=1",
+				);
 				INFOPLIST_FILE = targetMV/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
