@@ -1,3 +1,15 @@
+import art from 'assets/images/art.png';
+import christmas from 'assets/images/christmas.png';
+import dating from 'assets/images/dating.png';
+import food from 'assets/images/food.png';
+import football from 'assets/images/football.png';
+import movies from 'assets/images/movies.png';
+import music from 'assets/images/music.png';
+import pokemongo from 'assets/images/pokemongo.png';
+import politics from 'assets/images/politics.png';
+import series from 'assets/images/series.png';
+import travel from 'assets/images/travel.png';
+
 export default {
   API: {
     errorMessage: 'No response returned from fetch',
@@ -58,5 +70,57 @@ export default {
   TITLE: {
     main: 'Target Points',
     profile: 'Profile',
+  },
+
+  // usage strings.TOPICS.topics[0].icon
+  // import strings from 'locale';
+  // <Image source={strings.TOPICS.topics[0].icon} />
+  TOPICS: {
+    topics: [
+      {
+        icon: christmas,
+        name: 'Christmas',
+      },
+      {
+        icon: pokemongo,
+        name: 'PokemonGo',
+      },
+      {
+        icon: football,
+        name: 'Football',
+      },
+      {
+        icon: travel,
+        name: 'Travel',
+      },
+      {
+        icon: politics,
+        name: 'Politics',
+      },
+      {
+        icon: art,
+        name: 'Art',
+      },
+      {
+        icon: dating,
+        name: 'Dating',
+      },
+      {
+        icon: music,
+        name: 'Music',
+      },
+      {
+        icon: movies,
+        name: 'Movies',
+      },
+      {
+        icon: series,
+        name: 'Series',
+      },
+      {
+        icon: food,
+        name: 'Food',
+      },
+    ],
   },
 };

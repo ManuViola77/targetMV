@@ -1,3 +1,15 @@
+import art from 'assets/images/art.png';
+import christmas from 'assets/images/christmas.png';
+import dating from 'assets/images/dating.png';
+import food from 'assets/images/food.png';
+import football from 'assets/images/football.png';
+import movies from 'assets/images/movies.png';
+import music from 'assets/images/music.png';
+import pokemongo from 'assets/images/pokemongo.png';
+import politics from 'assets/images/politics.png';
+import series from 'assets/images/series.png';
+import travel from 'assets/images/travel.png';
+
 export default {
   API: {
     errorMessage: 'No se obtuvo ninguna respuesta',
@@ -59,4 +71,51 @@ export default {
     main: 'Puntos Target',
     profile: 'Perfil',
   },
+
+  TOPICS: [
+    {
+      icon: christmas,
+      name: 'Navidad',
+    },
+    {
+      icon: pokemongo,
+      name: 'PokemonGo',
+    },
+    {
+      icon: football,
+      name: 'Fútbol',
+    },
+    {
+      icon: travel,
+      name: 'Viajar',
+    },
+    {
+      icon: politics,
+      name: 'Política',
+    },
+    {
+      icon: art,
+      name: 'Arte',
+    },
+    {
+      icon: dating,
+      name: 'Citas',
+    },
+    {
+      icon: music,
+      name: 'Música',
+    },
+    {
+      icon: movies,
+      name: 'Películas',
+    },
+    {
+      icon: series,
+      name: 'Series',
+    },
+    {
+      icon: food,
+      name: 'Comida',
+    },
+  ],
 };
