@@ -6,12 +6,12 @@ import { WHITE, YELLOW } from 'constants/colors';
 import { CIRCLE_RADIUS, CIRCLE_BORDER_WIDTH } from 'constants/map';
 import { bool, number, object } from 'prop-types';
 
-const Marker = ({ location, icon, showCircle }) => (
+const Marker = ({ icon, location, markerKey, showCircle }) => (
   <>
-    <MapMarker key={0} coordinate={location}>
+    <MapMarker key={markerKey} coordinate={location}>
       <Image source={icon} />
     </MapMarker>
-    {showCircle ? (
+    {showCircle && (
       <MapView.Circle
         center={location}
         radius={CIRCLE_RADIUS}
@@ -19,13 +19,14 @@ const Marker = ({ location, icon, showCircle }) => (
         strokeColor={YELLOW}
         fillColor={WHITE}
       />
-    ) : null}
+    )}
   </>
 );
 
 Marker.propTypes = {
-  location: object.isRequired,
   icon: number.isRequired,
+  location: object.isRequired,
+  markerKey: number.isRequired,
   showCircle: bool,
 };
 

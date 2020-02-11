@@ -30,9 +30,10 @@ const Main = ({ navigation }) => {
         loadingEnabled
         region={currentLocation}>
         <Marker
-          location={currentLocation}
           icon={location_marker}
-          showCircle={true}
+          location={currentLocation}
+          markerKey={0}
+          showCircle
         />
       </MapView>
       {/* TODO delete this logout (just leaving it for testing) */}
