@@ -6,8 +6,8 @@ import {
   INITIAL_LONGITUDE,
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
-  TIMEOUT,
 } from 'constants/map';
+import requestPermission from 'hooks/useLocationPermission';
 
 const useGPSLocation = () => {
   const [currentLocation, setCurrentLocation] = useState({
@@ -18,7 +18,11 @@ const useGPSLocation = () => {
   });
 
   const updateLocation = location => {
-    if (location) {
+    if (
+      location &&
+      (location.coords.latitude !== currentLocation.latitude ||
+        location.coords.longitude !== currentLocation.longitude)
+    ) {
       setCurrentLocation({
         ...currentLocation,
         latitude: location.coords.latitude,
@@ -29,7 +33,8 @@ const useGPSLocation = () => {
 
   const useWatchLocation = () => {
     useEffect(() => {
-      Geolocation.watchPosition(
+      requestPermission();
+      const watchId = Geolocation.watchPosition(
         location => updateLocation(location),
         error => console.warn('error: ', error),
         {
@@ -40,9 +45,10 @@ const useGPSLocation = () => {
         },
       );
       return () => {
+        Geolocation.clearWatch(watchId);
         Geolocation.stopObserving();
       };
-    }, []);
+    }, [currentLocation]);
   };
 
   return {

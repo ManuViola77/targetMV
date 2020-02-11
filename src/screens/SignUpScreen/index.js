@@ -96,13 +96,14 @@ const SignUp = ({ navigation }) => {
             title={status === LOADING ? COMMON.loading : SIGN_UP.button}
             onPress={() => handleAuth(signUpValidations)}
           />
+
+          <View style={styles.allLeftSpace}>
+            <View style={styles.lineStyle} />
+            <TouchableOpacity onPress={signIn}>
+              <Text style={styles.link}>{SIGN_UP.signIn}</Text>
+            </TouchableOpacity>
+          </View>
         </KeyboardAwareScrollView>
-        <View style={styles.allLeftSpace}>
-          <View style={styles.lineStyle} />
-          <TouchableOpacity onPress={signIn}>
-            <Text style={styles.link}>{SIGN_UP.signIn}</Text>
-          </TouchableOpacity>
-        </View>
       </SafeAreaView>
     </ImageBackground>
   );
