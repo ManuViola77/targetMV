@@ -5,3 +5,6 @@ export const INITIAL_LATITUDE = 0;
 export const INITIAL_LONGITUDE = 0;
 
 export const TIMEOUT = 15000;
+
+export const CIRCLE_RADIUS = 51;
+export const CIRCLE_BORDER_WIDTH = 2;
