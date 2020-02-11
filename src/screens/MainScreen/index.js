@@ -3,7 +3,9 @@ import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch } from 'react-redux';
 
 import { logout } from 'actions/userActions';
+import location_marker from 'assets/images/location_marker.png';
 import Button from 'components/common/form/Button';
+import Marker from 'components/common/Marker';
 import useGPSLocation from 'hooks/useGPSLocation';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
 import styles from './styles';
@@ -26,8 +28,14 @@ const Main = ({ navigation }) => {
         showUserLocation
         followUserLocation
         loadingEnabled
-        region={currentLocation}
-      />
+        region={currentLocation}>
+        <Marker
+          icon={location_marker}
+          location={currentLocation}
+          markerKey={0}
+          showCircle
+        />
+      </MapView>
       {/* TODO delete this logout (just leaving it for testing) */}
       <Button title="Log Out (temp)" onPress={handleLogout} />
     </>
