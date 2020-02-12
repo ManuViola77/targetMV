@@ -14,7 +14,7 @@ import styles from './styles';
 {
   /* TODO delete this import (just leaving it for testing) */
 }
-import List from 'components/common/List';
+import List from 'components/TopicList';
 
 const Main = ({ navigation }) => {
   const dispatch = useDispatch();

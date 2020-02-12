@@ -4,7 +4,7 @@ import { object } from 'prop-types';
 
 import styles from './styles';
 
-const ListItem = ({ item }) => (
+const TopicListItem = ({ item }) => (
   <TouchableOpacity
     style={styles.horizontalContainer}
     onPress={() => console.log('iteeem: ', item)}>
@@ -13,8 +13,8 @@ const ListItem = ({ item }) => (
   </TouchableOpacity>
 );
 
-ListItem.propTypes = {
+TopicListItem.propTypes = {
   item: object.isRequired,
 };
 
-export default ListItem;
+export default TopicListItem;

@@ -2,10 +2,10 @@ import React from 'react';
 import { FlatList, View } from 'react-native';
 import { array } from 'prop-types';
 
-import ListItem from 'components/common/ListItem';
+import ListItem from 'components/TopicListItem';
 import styles from './styles';
 
-const List = ({ list }) => {
+const TopicList = ({ list }) => {
   return (
     <FlatList
       style={styles.flatList}
@@ -17,8 +17,8 @@ const List = ({ list }) => {
   );
 };
 
-List.propTypes = {
+TopicList.propTypes = {
   list: array.isRequired,
 };
 
-export default List;
+export default TopicList;
