@@ -12,7 +12,7 @@ const List = ({ list }) => {
       ItemSeparatorComponent={() => <View style={styles.separator} />}
       data={list}
       renderItem={({ item }) => <ListItem item={item} />}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={item => item.id.toString()}
     />
   );
 };

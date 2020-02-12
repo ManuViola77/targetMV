@@ -78,46 +78,57 @@ export default {
   TOPICS: {
     topics: [
       {
+        id: 1,
         icon: christmas,
         name: 'Christmas',
       },
       {
+        id: 2,
         icon: pokemongo,
         name: 'PokemonGo',
       },
       {
+        id: 3,
         icon: football,
         name: 'Football',
       },
       {
+        id: 4,
         icon: travel,
         name: 'Travel',
       },
       {
+        id: 5,
         icon: politics,
         name: 'Politics',
       },
       {
+        id: 6,
         icon: art,
         name: 'Art',
       },
       {
+        id: 7,
         icon: dating,
         name: 'Dating',
       },
       {
+        id: 8,
         icon: music,
         name: 'Music',
       },
       {
+        id: 9,
         icon: movies,
         name: 'Movies',
       },
       {
+        id: 10,
         icon: series,
         name: 'Series',
       },
       {
+        id: 11,
         icon: food,
         name: 'Food',
       },
