@@ -22,6 +22,23 @@ export default {
     somethingWentWrong: 'Ocurrió un error',
   },
 
+  CREATE_TARGET: {
+    area: 'Especificar largo del área',
+    button: 'Guardar target',
+    helpTitle: 'Elegir título para el target',
+    helpTopic: '¿De qué querés hablar?',
+    title: 'Título del target',
+    topic: 'Seleccionar un tema',
+  },
+
+  CREATE_TARGET_ERROR: {
+    emptyArea: 'Area no puede ser vacío',
+    emptyLatitude: 'Latitude no puede ser vacío',
+    emptyLongitude: 'Longitude no puede ser vacío',
+    emptyTitle: 'Title no puede ser vacío',
+    emptyTopic: 'Topic no puede ser vacío',
+  },
+
   GENDER: {
     placeholder: { label: 'Seleccione su género', value: '' },
     options: [
@@ -68,6 +85,7 @@ export default {
   },
 
   TITLE: {
+    createTarget: 'Crear Nuevo Target',
     main: 'Puntos Target',
     profile: 'Perfil',
   },

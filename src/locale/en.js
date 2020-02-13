@@ -22,6 +22,23 @@ export default {
     somethingWentWrong: 'Something Went Wrong',
   },
 
+  CREATE_TARGET: {
+    area: 'Specify area lenght',
+    button: 'Save target',
+    helpTitle: 'Choose a title for your target',
+    helpTopic: 'What do you want to talk about?',
+    title: 'Target title',
+    topic: 'Select a topic',
+  },
+
+  CREATE_TARGET_ERROR: {
+    emptyArea: "Area can't be blank",
+    emptyLatitude: "Latitude can't be blank",
+    emptyLongitude: "Longitude can't be blank",
+    emptyTitle: "Title can't be blank",
+    emptyTopic: "Topic can't be blank",
+  },
+
   GENDER: {
     placeholder: { label: 'Select your gender', value: '' },
     options: [
@@ -68,6 +85,7 @@ export default {
   },
 
   TITLE: {
+    createTarget: 'Create New Target',
     main: 'Target Points',
     profile: 'Profile',
   },

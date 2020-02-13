@@ -29,6 +29,7 @@ const useAuthStates = onSubmit => {
     handleChange,
     handleAuth,
     resetState,
+    setValues,
   };
 };
 

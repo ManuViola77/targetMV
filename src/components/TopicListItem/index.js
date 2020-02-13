@@ -4,12 +4,12 @@ import { object } from 'prop-types';
 
 import styles from './styles';
 
-const TopicListItem = ({ item }) => (
+const TopicListItem = ({ item, onPress }) => (
   <TouchableOpacity
     style={styles.horizontalContainer}
-    onPress={() => console.log('iteeem: ', item)}>
-    <Image source={item.icon} style={styles.icon} />
-    <Text style={styles.name}>{item.name} </Text>
+    onPress={() => onPress(false)}>
+    <Image source={{ uri: item.icon }} style={styles.icon} />
+    <Text style={styles.name}>{item.label} </Text>
   </TouchableOpacity>
 );
 

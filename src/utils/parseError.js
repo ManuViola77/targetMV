@@ -6,18 +6,37 @@ import {
   confirmPassword,
   gender,
   errorMsg,
-} from '../constants/fields';
+  title,
+  latitude,
+  longitude,
+  radius,
+  topic_id,
+  topicError,
+} from 'constants/fields';
 
 const parseError = errors => {
   if (errors) {
-    const fields = [name, email, password, confirmPassword, gender];
+    const fields = [
+      name,
+      email,
+      password,
+      confirmPassword,
+      gender,
+      title,
+      latitude,
+      longitude,
+      radius,
+      topic_id,
+      topicError,
+    ];
     const errorMessages = {};
 
     // return messages for each field
     for (const key in errors) {
       if (fields.includes(key)) {
         const field = key.charAt(0).toUpperCase() + key.slice(1);
-        errorMessages[key] = errors[key].map(value => `${field} ${value}`);
+        key === topicError ? (errorKey = topic_id) : (errorKey = key);
+        errorMessages[errorKey] = errors[key].map(value => `${field} ${value}`);
       }
     }
 
@@ -40,7 +59,7 @@ export default data => {
 
   const { error, errors } = data;
 
-  if (error) return error;
+  if (error) return { [errorMsg]: error };
 
   return parseError(errors);
 };

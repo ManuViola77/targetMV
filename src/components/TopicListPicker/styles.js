@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
-import { RED, BLACK } from 'constants/colors';
+
+import { GREY, RED, BLACK, WHITE } from 'constants/colors';
+import { TOPICS_HEIGHT } from 'constants/targetActions';
 
 const styles = StyleSheet.create({
   container: {
@@ -8,7 +10,20 @@ const styles = StyleSheet.create({
     height: 95,
   },
 
-  input: {
+  hint: {
+    color: GREY,
+  },
+
+  subView: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: WHITE,
+    height: TOPICS_HEIGHT,
+  },
+
+  text: {
     borderColor: BLACK,
     borderWidth: 1,
     fontSize: 16,
@@ -18,7 +33,7 @@ const styles = StyleSheet.create({
     width: 260,
   },
 
-  inputError: {
+  textError: {
     borderColor: RED,
   },
 
