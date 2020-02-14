@@ -1,4 +1,4 @@
-import { title, latitude, longitude, radius, topic_id } from 'constants/fields';
+import { title, latitude, longitude, radius, topicId } from 'constants/fields';
 import strings from 'locale';
 
 const { CREATE_TARGET_ERROR } = strings;
@@ -37,7 +37,7 @@ const createTargetValidations = {
     },
   },
 
-  [topic_id]: {
+  [topicId]: {
     presence: {
       value: true,
       message: CREATE_TARGET_ERROR.emptyTopic,

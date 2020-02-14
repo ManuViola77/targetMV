@@ -47,7 +47,7 @@ const LoginScreen = ({ navigation }) => {
 
   const cleanUp = () => {
     dispatch(LOGIN_RESET);
-    resetState();
+    resetState({}, {});
   };
 
   useEffect(() => {

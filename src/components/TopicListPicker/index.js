@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { useStatus } from '@rootstrap/redux-tools';
 import { array, func, object, string } from 'prop-types';
 
-import { topics } from 'actions/targetActions';
+import { getTopics } from 'actions/targetActions';
 import ErrorView from 'components/common/form/ErrorView';
 import TopicList from 'components/TopicList';
 import styles from './styles';
 
 const TopicListPicker = ({
   title,
-  topic_selected,
+  topicSelected,
   callback,
   errorMessage,
   help,
@@ -21,22 +21,20 @@ const TopicListPicker = ({
   const dispatch = useDispatch();
 
   const topicsRequest = useCallback(() => {
-    topicsList = dispatch(topics());
+    topicsList = dispatch(getTopics());
   }, [dispatch]);
 
   useEffect(() => {
     topicsRequest();
   }, []);
 
-  const { error } = useStatus(topics);
-  var topicsList = error;
+  const { error } = useStatus(getTopics);
+  let topicsList = error;
 
   const onPressTopic = (item, isHidden) => {
     callback(item);
     toggleSubview(isHidden);
   };
-
-  console.log('in index, topic_selected: ', topic_selected);
 
   return (
     <>
@@ -44,12 +42,13 @@ const TopicListPicker = ({
         <Text style={styles.title}>{title}</Text>
         <TouchableOpacity
           onPress={() => toggleSubview(subViewState.isHidden)}
-          style={[styles.box, errorMessage ? styles.error : {}]}>
-          {topic_selected && (
-            <Image source={{ uri: topic_selected.icon }} style={styles.icon} />
+          style={[styles.box, errorMessage ? styles.error : {}]}
+        >
+          {topicSelected && (
+            <Image source={{ uri: topicSelected.icon }} style={styles.icon} />
           )}
-          <Text style={[styles.text, topic_selected ? {} : styles.hint]}>
-            {topic_selected ? topic_selected.label : help}
+          <Text style={[styles.text, topicSelected ? {} : styles.hint]}>
+            {topicSelected ? topicSelected.label : help}
           </Text>
         </TouchableOpacity>
         {!!errorMessage && <ErrorView error={errorMessage[0]} />}
@@ -58,7 +57,8 @@ const TopicListPicker = ({
         style={[
           styles.subView,
           { transform: [{ translateY: subViewState.bounceValue }] },
-        ]}>
+        ]}
+      >
         {!subViewState.isHidden && (
           <TopicList
             list={topicsList}
@@ -73,7 +73,7 @@ const TopicListPicker = ({
 
 TopicListPicker.propTypes = {
   title: string.isRequired,
-  topic_selected: object.isRequired,
+  topicSelected: object.isRequired,
   callback: func.isRequired,
   errorMessage: array,
   help: string,
@@ -83,7 +83,7 @@ TopicListPicker.propTypes = {
 
 TopicListPicker.defaultProps = {
   title: '',
-  topic_selected: null,
+  topicSelected: null,
   errorMessage: null,
   help: '',
   subViewState: null,

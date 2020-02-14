@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Keyboard } from 'react-native';
 
-import { topic_id, topic_selected } from 'constants/fields';
+import { topicId, topicSelected } from 'constants/fields';
 import validate from 'validations';
 
 const useFormStates = onSubmit => {
@@ -9,9 +9,9 @@ const useFormStates = onSubmit => {
   const [errors, setErrors] = useState({});
 
   const handleChange = (key, value) => {
-    if (key === topic_selected) {
-      setValues({ ...values, [key]: value, [topic_id]: value.id });
-      setErrors({ ...errors, [key]: null, [topic_id]: null });
+    if (key === topicSelected) {
+      setValues({ ...values, [key]: value, [topicId]: value.id });
+      setErrors({ ...errors, [key]: null, [topicId]: null });
     } else {
       setValues({ ...values, [key]: value });
       setErrors({ ...errors, [key]: null });
@@ -24,9 +24,9 @@ const useFormStates = onSubmit => {
     errorMessages ? setErrors(errorMessages) : onSubmit(values);
   };
 
-  const resetState = () => {
-    setValues({});
-    setErrors({});
+  const resetState = (values, errors) => {
+    setValues(values);
+    setErrors(errors);
   };
 
   return {

@@ -10,7 +10,7 @@ import {
   latitude,
   longitude,
   radius,
-  topic_id,
+  topicId,
   topicError,
 } from 'constants/fields';
 
@@ -26,7 +26,7 @@ const parseError = errors => {
       latitude,
       longitude,
       radius,
-      topic_id,
+      topicId,
       topicError,
     ];
     const errorMessages = {};
@@ -35,7 +35,7 @@ const parseError = errors => {
     for (const key in errors) {
       if (fields.includes(key)) {
         const field = key.charAt(0).toUpperCase() + key.slice(1);
-        key === topicError ? (errorKey = topic_id) : (errorKey = key);
+        key === topicError ? (errorKey = topicId) : (errorKey = key);
         errorMessages[errorKey] = errors[key].map(value => `${field} ${value}`);
       }
     }

@@ -18,20 +18,18 @@ export const createTarget = createThunk(
   },
 );
 
-export const targets = createThunk(TARGETS, async () => {
-  console.log('getting targets');
+export const getTargets = createThunk(TARGETS, async () => {
   try {
     const {
       data: { targets },
     } = await targetService.targets();
-    console.log('targets: ', targets);
     return targets;
   } catch ({ data }) {
     throw parseError(data);
   }
 });
 
-export const topics = createThunk(TOPICS, async () => {
+export const getTopics = createThunk(TOPICS, async () => {
   try {
     const {
       data: { topics },

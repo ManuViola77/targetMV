@@ -8,14 +8,10 @@ const useAnimateCreateTarget = height => {
   });
 
   const toggleSubview = isHidden => {
-    var toValue = height;
+    const toValue = isHidden ? 0 : height;
 
-    if (isHidden) {
-      toValue = 0;
-    }
-
-    //This will animate the transalteY of the subview between 0 & 400 depending on its current state
-    //400 comes from the style, which is the height of the subview.
+    //This will animate the transalteY of the subview between 0 & height depending on its current state
+    //height is the total height of the subview.
     Animated.spring(subViewState.bounceValue, {
       toValue: toValue,
       velocity: 3,

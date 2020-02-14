@@ -11,9 +11,9 @@ import {
   latitude,
   longitude,
   radius,
-  topic_id,
+  topicId,
   errorMsg,
-  topic_selected,
+  topicSelected,
 } from 'constants/fields';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
@@ -65,8 +65,7 @@ const CreateTargetForm = ({
   // reset states when this form is hidden/unhidden
   useEffect(() => {
     dispatch(CREATE_TARGET_RESET);
-    resetState();
-    setInitialState();
+    resetState(initialState, {});
   }, [currentSubViewState]);
 
   return (
@@ -86,9 +85,9 @@ const CreateTargetForm = ({
       />
       <TopicListPicker
         title={CREATE_TARGET.topic}
-        topic_selected={values[topic_selected]}
-        callback={newValue => handleChange(topic_selected, newValue)}
-        errorMessage={errorMessages[topic_id]}
+        topicSelected={values[topicSelected]}
+        callback={newValue => handleChange(topicSelected, newValue)}
+        errorMessage={errorMessages[topicId]}
         help={CREATE_TARGET.helpTopic}
         subViewState={topicListState}
         toggleSubview={toggleTopicListView}

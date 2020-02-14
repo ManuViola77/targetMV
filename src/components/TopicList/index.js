@@ -5,19 +5,15 @@ import { array, func } from 'prop-types';
 import ListItem from 'components/TopicListItem';
 import styles from './styles';
 
-const TopicList = ({ list, onPress }) => {
-  return (
-    <FlatList
-      style={styles.flatList}
-      ItemSeparatorComponent={() => <View style={styles.separator} />}
-      data={list}
-      renderItem={({ item }) => (
-        <ListItem item={item.topic} onPress={onPress} />
-      )}
-      keyExtractor={item => item.topic.id.toString()}
-    />
-  );
-};
+const TopicList = ({ list, onPress }) => (
+  <FlatList
+    style={styles.flatList}
+    ItemSeparatorComponent={() => <View style={styles.separator} />}
+    data={list}
+    renderItem={({ item }) => <ListItem item={item.topic} onPress={onPress} />}
+    keyExtractor={({ topic: { id } }) => id.toString()}
+  />
+);
 
 TopicList.propTypes = {
   list: array.isRequired,

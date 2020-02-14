@@ -44,7 +44,8 @@ const Main = ({ navigation }) => {
             ? toggleTopicListView(topicListState.isHidden)
             : !createTargetState.isHidden &&
               toggleCreateTargetView(createTargetState.isHidden)
-        }>
+        }
+      >
         <Marker
           icon={location_marker}
           location={currentLocation}
@@ -54,7 +55,8 @@ const Main = ({ navigation }) => {
       </MapView>
       <TouchableOpacity
         style={styles.newTarget}
-        onPress={() => toggleCreateTargetView(createTargetState.isHidden)}>
+        onPress={() => toggleCreateTargetView(createTargetState.isHidden)}
+      >
         <Image source={target} />
         <Text style={styles.text}>{strings.TITLE.createTarget}</Text>
       </TouchableOpacity>
@@ -62,7 +64,8 @@ const Main = ({ navigation }) => {
         style={[
           styles.subView,
           { transform: [{ translateY: createTargetState.bounceValue }] },
-        ]}>
+        ]}
+      >
         <CreateTargetForm
           currentLocation={currentLocation}
           onPressButton={toggleCreateTargetView}
