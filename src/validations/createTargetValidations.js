@@ -23,6 +23,11 @@ const createTargetValidations = {
       value: true,
       message: CREATE_TARGET_ERROR.emptyArea,
     },
+
+    numericality: {
+      greaterThan: 0,
+      message: CREATE_TARGET_ERROR.areaNumeric,
+    },
   },
 
   [title]: {

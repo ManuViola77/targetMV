@@ -20,6 +20,7 @@ export default {
   },
 
   CREATE_TARGET_ERROR: {
+    areaNumeric: 'Area must be numeric',
     emptyArea: "Area can't be blank",
     emptyLatitude: "Latitude can't be blank",
     emptyLongitude: "Longitude can't be blank",

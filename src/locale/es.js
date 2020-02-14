@@ -11,6 +11,7 @@ export default {
   },
 
   CREATE_TARGET: {
+    areaNumeric: 'El área debe ser numérico',
     area: 'Especificar largo del área',
     button: 'Guardar target',
     helpTitle: 'Elegir título para el target',
