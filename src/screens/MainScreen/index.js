@@ -8,7 +8,13 @@ import Button from 'components/common/form/Button';
 import Marker from 'components/common/Marker';
 import useGPSLocation from 'hooks/useGPSLocation';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
+import strings from 'locale';
 import styles from './styles';
+
+{
+  /* TODO delete this import (just leaving it for testing) */
+}
+import List from 'components/TopicList';
 
 const Main = ({ navigation }) => {
   const dispatch = useDispatch();
@@ -36,7 +42,8 @@ const Main = ({ navigation }) => {
           showCircle
         />
       </MapView>
-      {/* TODO delete this logout (just leaving it for testing) */}
+      {/* TODO delete logout and list (just leaving it for testing) */}
+      <List list={strings.TOPICS.topics} />
       <Button title="Log Out (temp)" onPress={handleLogout} />
     </>
   );
