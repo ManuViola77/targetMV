@@ -7,15 +7,12 @@ import parseError from 'utils/parseError';
 export const createTarget = createThunk(
   CREATE_TARGET,
   async (target, postAction, isHidden) => {
-    console.log('creating target: ', target);
     try {
       const {
         data: { target: createdTarget },
       } = await targetService.createTarget({ target });
-      console.log('createdTarget: ', createdTarget);
       postAction && postAction(isHidden);
     } catch ({ data }) {
-      console.log('error data: ', data);
       throw parseError(data);
     }
   },
@@ -35,12 +32,10 @@ export const targets = createThunk(TARGETS, async () => {
 });
 
 export const topics = createThunk(TOPICS, async () => {
-  console.log('getting topics');
   try {
     const {
       data: { topics },
     } = await targetService.topics();
-    console.log('topics: ', topics);
     return topics;
   } catch ({ data }) {
     throw parseError(data);

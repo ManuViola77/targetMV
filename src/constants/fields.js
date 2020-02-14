@@ -12,3 +12,4 @@ export const longitude = 'lng';
 export const radius = 'radius';
 export const topic_id = 'topic_id';
 export const topicError = 'topic';
+export const topic_selected = 'topic_selected';

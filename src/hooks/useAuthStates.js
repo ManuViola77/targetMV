@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Keyboard } from 'react-native';
 
+import { topic_id, topic_selected } from 'constants/fields';
 import validate from 'validations';
 
 const useAuthStates = onSubmit => {
@@ -8,8 +9,13 @@ const useAuthStates = onSubmit => {
   const [errors, setErrors] = useState({});
 
   const handleChange = (key, value) => {
-    setValues({ ...values, [key]: value });
-    setErrors({ ...errors, [key]: null });
+    if (key === topic_selected) {
+      setValues({ ...values, [key]: value, [topic_id]: value.id });
+      setErrors({ ...errors, [key]: null, [topic_id]: null });
+    } else {
+      setValues({ ...values, [key]: value });
+      setErrors({ ...errors, [key]: null });
+    }
   };
 
   const handleAuth = constraints => {

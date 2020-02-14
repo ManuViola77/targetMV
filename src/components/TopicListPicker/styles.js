@@ -4,14 +4,34 @@ import { GREY, RED, BLACK, WHITE } from 'constants/colors';
 import { TOPICS_HEIGHT } from 'constants/targetActions';
 
 const styles = StyleSheet.create({
+  box: {
+    borderColor: BLACK,
+    borderWidth: 1,
+    flexDirection: 'row',
+    height: 40,
+    justifyContent: 'center',
+    width: 260,
+  },
+
   container: {
     alignItems: 'center',
     justifyContent: 'flex-start',
     height: 95,
   },
 
+  error: {
+    borderColor: RED,
+  },
+
   hint: {
     color: GREY,
+  },
+
+  icon: {
+    alignSelf: 'center',
+    height: 20,
+    padding: 5,
+    width: 20,
   },
 
   subView: {
@@ -24,17 +44,9 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    borderColor: BLACK,
-    borderWidth: 1,
     fontSize: 16,
-    height: 40,
-    padding: 5,
+    padding: 8,
     textAlign: 'center',
-    width: 260,
-  },
-
-  textError: {
-    borderColor: RED,
   },
 
   title: {

@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
-import { topics, targets, createTarget } from 'actions/targetActions';
+import { createTarget } from 'actions/targetActions';
 import { CREATE_TARGET_RESET } from 'constants/targetActions';
 import {
   title,
@@ -12,19 +12,16 @@ import {
   radius,
   topic_id,
   errorMsg,
+  topic_selected,
 } from 'constants/fields';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import TopicListPicker from 'components/TopicListPicker';
-import { TOPICS_HEIGHT } from 'constants/targetActions';
-import useAnimateCreateTarget from 'hooks/useAnimateCreateTarget';
 import useAuthStates from 'hooks/useAuthStates';
 import strings from 'locale';
 import createTargetValidations from 'validations/createTargetValidations';
 import styles from './styles';
-
-import { Image } from 'react-native';
 
 const CreateTargetForm = ({
   currentLocation,
@@ -36,8 +33,6 @@ const CreateTargetForm = ({
   const { COMMON, CREATE_TARGET } = strings;
 
   const dispatch = useDispatch();
-  const topicsRequest = useCallback(() => dispatch(topics()), [dispatch]);
-  const targetsRequest = useCallback(() => dispatch(targets()), [dispatch]);
   const createTargetRequest = useCallback(
     target => dispatch(createTarget(target, onPressButton, false)),
     [dispatch],
@@ -74,7 +69,7 @@ const CreateTargetForm = ({
   }, [currentSubViewState]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <Input
         title={CREATE_TARGET.area}
         text={values[radius]}
@@ -88,20 +83,10 @@ const CreateTargetForm = ({
         errorMessage={errorMessages[title]}
         help={CREATE_TARGET.helpTitle}
       />
-      {/* <Input
-        title={CREATE_TARGET.topic}
-        text={values[topic_id]}
-        callback={newValue => handleChange(topic_id, newValue)}
-        errorMessage={errorMessages[topic_id]}
-        help={CREATE_TARGET.helpTopic}
-        onPress={() => {
-          console.log('fui apretado oh');
-        }}
-      /> */}
       <TopicListPicker
         title={CREATE_TARGET.topic}
-        text={values[topic_id]}
-        callback={newValue => handleChange(topic_id, newValue)}
+        topic_selected={values[topic_selected]}
+        callback={newValue => handleChange(topic_selected, newValue)}
         errorMessage={errorMessages[topic_id]}
         help={CREATE_TARGET.helpTopic}
         subViewState={topicListState}

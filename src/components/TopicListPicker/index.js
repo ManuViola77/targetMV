@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Animated, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus } from '@rootstrap/redux-tools';
 
@@ -10,12 +10,9 @@ import styles from './styles';
 
 const TopicListPicker = ({
   title,
-  secureTextEntry,
-  text,
+  topic_selected,
   callback,
   errorMessage,
-  autoCapitalize,
-  autoCorrect,
   help,
   subViewState,
   toggleSubview,
@@ -24,7 +21,6 @@ const TopicListPicker = ({
 
   const topicsRequest = useCallback(() => {
     topicsList = dispatch(topics());
-    console.log(' EN topicsRequest!!!, topicsList: ', topicsList);
   }, [dispatch]);
 
   useEffect(() => {
@@ -34,22 +30,24 @@ const TopicListPicker = ({
   const { error } = useStatus(topics);
   var topicsList = error;
 
-  console.log('in TOPICLISTPICKER error: ', error);
+  const onPressTopic = (item, isHidden) => {
+    callback(item);
+    toggleSubview(isHidden);
+  };
 
-  console.log('in TOPICLISTPICKER topicsList: ', topicsList);
-
+  console.log('topic_selected: ', topic_selected);
   return (
     <>
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
-        <TouchableOpacity onPress={() => toggleSubview(subViewState.isHidden)}>
-          <Text
-            style={[
-              styles.text,
-              errorMessage ? styles.textError : {},
-              text ? {} : styles.hint,
-            ]}>
-            {text ? text : help}
+        <TouchableOpacity
+          onPress={() => toggleSubview(subViewState.isHidden)}
+          style={[styles.box, errorMessage ? styles.error : {}]}>
+          {topic_selected && (
+            <Image source={{ uri: topic_selected.icon }} style={styles.icon} />
+          )}
+          <Text style={[styles.text, topic_selected ? {} : styles.hint]}>
+            {topic_selected ? topic_selected.label : help}
           </Text>
         </TouchableOpacity>
         {!!errorMessage && <ErrorView error={errorMessage[0]} />}
@@ -62,7 +60,7 @@ const TopicListPicker = ({
         {!subViewState.isHidden && (
           <TopicList
             list={topicsList}
-            onPress={toggleSubview}
+            onPress={onPressTopic}
             currentSubViewState={subViewState}
           />
         )}
