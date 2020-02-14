@@ -36,6 +36,8 @@ const TopicListPicker = ({
     toggleSubview(isHidden);
   };
 
+  console.log('in index, topic_selected: ', topic_selected);
+
   return (
     <>
       <View style={styles.container}>
@@ -81,10 +83,10 @@ TopicListPicker.propTypes = {
 
 TopicListPicker.defaultProps = {
   title: '',
-  topic_selected: {},
+  topic_selected: null,
   errorMessage: null,
   help: '',
-  subViewState: {},
+  subViewState: null,
 };
 
 export default TopicListPicker;
