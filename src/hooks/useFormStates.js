@@ -4,7 +4,7 @@ import { Keyboard } from 'react-native';
 import { topic_id, topic_selected } from 'constants/fields';
 import validate from 'validations';
 
-const useAuthStates = onSubmit => {
+const useFormStates = onSubmit => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
 
@@ -18,7 +18,7 @@ const useAuthStates = onSubmit => {
     }
   };
 
-  const handleAuth = constraints => {
+  const handleConfirmForm = constraints => {
     Keyboard.dismiss();
     const errorMessages = validate(values, constraints);
     errorMessages ? setErrors(errorMessages) : onSubmit(values);
@@ -33,10 +33,10 @@ const useAuthStates = onSubmit => {
     values,
     errors,
     handleChange,
-    handleAuth,
+    handleConfirmForm,
     resetState,
     setValues,
   };
 };
 
-export default useAuthStates;
+export default useFormStates;

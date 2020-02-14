@@ -18,7 +18,7 @@ import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import TopicListPicker from 'components/TopicListPicker';
-import useAuthStates from 'hooks/useAuthStates';
+import useFormStates from 'hooks/useFormStates';
 import strings from 'locale';
 import createTargetValidations from 'validations/createTargetValidations';
 import styles from './styles';
@@ -43,10 +43,10 @@ const CreateTargetForm = ({
     values,
     errors,
     handleChange,
-    handleAuth,
+    handleConfirmForm,
     resetState,
     setValues,
-  } = useAuthStates(createTargetRequest);
+  } = useFormStates(createTargetRequest);
 
   const errorMessages = { ...errors, ...error };
 
@@ -96,7 +96,7 @@ const CreateTargetForm = ({
       {topicListState.isHidden && (
         <Button
           title={status === LOADING ? COMMON.loading : CREATE_TARGET.button}
-          onPress={() => handleAuth(createTargetValidations)}
+          onPress={() => handleConfirmForm(createTargetValidations)}
         />
       )}
     </View>

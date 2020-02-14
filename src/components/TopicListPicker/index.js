@@ -35,7 +35,6 @@ const TopicListPicker = ({
     toggleSubview(isHidden);
   };
 
-  console.log('topic_selected: ', topic_selected);
   return (
     <>
       <View style={styles.container}>

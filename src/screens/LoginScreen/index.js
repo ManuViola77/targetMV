@@ -18,7 +18,7 @@ import Header from 'components/common/Header';
 import { email, password, errorMsg } from 'constants/fields';
 import { SIGN_UP_SCREEN } from 'constants/screens';
 import { LOGIN_RESET } from 'constants/userActions';
-import useAuthStates from 'hooks/useAuthStates';
+import useFormStates from 'hooks/useFormStates';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 import strings from 'locale';
 import signInValidations from 'validations/signInValidations';
@@ -39,9 +39,9 @@ const LoginScreen = ({ navigation }) => {
     values,
     errors,
     handleChange,
-    handleAuth,
+    handleConfirmForm,
     resetState,
-  } = useAuthStates(loginRequest);
+  } = useFormStates(loginRequest);
 
   const errorMessages = { ...errors, ...error };
 
@@ -82,7 +82,7 @@ const LoginScreen = ({ navigation }) => {
         <ErrorView error={errorMessages[errorMsg]} />
         <Button
           title={status === LOADING ? COMMON.loading : LOGIN.button}
-          onPress={() => handleAuth(signInValidations)}
+          onPress={() => handleConfirmForm(signInValidations)}
         />
         <View style={styles.container}>
           <TouchableOpacity>

@@ -26,7 +26,7 @@ import {
   errorMsg,
 } from 'constants/fields';
 import { SIGNUP_RESET } from 'constants/userActions';
-import useAuthStates from 'hooks/useAuthStates';
+import useFormStates from 'hooks/useFormStates';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 import strings from 'locale';
 import signUpValidations from 'validations/signUpValidations';
@@ -43,7 +43,7 @@ const SignUp = ({ navigation }) => {
   const dispatch = useDispatch();
   const signUpRequest = useCallback(user => dispatch(signUp(user)), [dispatch]);
   const { error, status } = useStatus(signUp);
-  const { values, errors, handleChange, handleAuth } = useAuthStates(
+  const { values, errors, handleChange, handleConfirmForm } = useFormStates(
     signUpRequest,
   );
   const errorMessages = { ...errors, ...error };
@@ -94,7 +94,7 @@ const SignUp = ({ navigation }) => {
           <ErrorView error={errorMessages[errorMsg]} />
           <Button
             title={status === LOADING ? COMMON.loading : SIGN_UP.button}
-            onPress={() => handleAuth(signUpValidations)}
+            onPress={() => handleConfirmForm(signUpValidations)}
           />
 
           <View style={styles.allLeftSpace}>
