@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { array } from 'prop-types';
+import { array, func } from 'prop-types';
 
 import ListItem from 'components/TopicListItem';
 import styles from './styles';
@@ -21,6 +21,11 @@ const TopicList = ({ list, onPress }) => {
 
 TopicList.propTypes = {
   list: array.isRequired,
+  onPress: func.isRequired,
+};
+
+TopicList.defaultProps = {
+  list: [],
 };
 
 export default TopicList;

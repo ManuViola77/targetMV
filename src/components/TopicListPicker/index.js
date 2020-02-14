@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus } from '@rootstrap/redux-tools';
+import { array, func, object, string } from 'prop-types';
 
 import { topics } from 'actions/targetActions';
 import ErrorView from 'components/common/form/ErrorView';
@@ -66,6 +67,24 @@ const TopicListPicker = ({
       </Animated.View>
     </>
   );
+};
+
+TopicListPicker.propTypes = {
+  title: string.isRequired,
+  topic_selected: object.isRequired,
+  callback: func.isRequired,
+  errorMessage: array,
+  help: string,
+  subViewState: object.isRequired,
+  toggleSubview: func.isRequired,
+};
+
+TopicListPicker.defaultProps = {
+  title: '',
+  topic_selected: {},
+  errorMessage: null,
+  help: '',
+  subViewState: {},
 };
 
 export default TopicListPicker;

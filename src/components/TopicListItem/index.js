@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { object } from 'prop-types';
+import { object, func } from 'prop-types';
 
 import styles from './styles';
 
@@ -17,6 +17,11 @@ const TopicListItem = ({ item, onPress }) => {
 
 TopicListItem.propTypes = {
   item: object.isRequired,
+  onPress: func.isRequired,
+};
+
+TopicListItem.defaultProps = {
+  item: {},
 };
 
 export default TopicListItem;

@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
+import { func, object } from 'prop-types';
 
 import { createTarget } from 'actions/targetActions';
 import { CREATE_TARGET_RESET } from 'constants/targetActions';
@@ -101,6 +102,20 @@ const CreateTargetForm = ({
       )}
     </View>
   );
+};
+
+CreateTargetForm.propTypes = {
+  currentLocation: object.isRequired,
+  onPressButton: func.isRequired,
+  currentSubViewState: object.isRequired,
+  topicListState: object.isRequired,
+  toggleTopicListView: func.isRequired,
+};
+
+CreateTargetForm.defaultProps = {
+  currentLocation: {},
+  currentSubViewState: {},
+  topicListState: {},
 };
 
 export default CreateTargetForm;
