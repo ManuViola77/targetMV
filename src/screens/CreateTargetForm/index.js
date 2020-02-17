@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
-import { func, object } from 'prop-types';
+import { array, func, object } from 'prop-types';
 
 import { createTarget } from 'actions/targetActions';
 import { CREATE_TARGET_RESET } from 'constants/targetActions';
@@ -30,6 +30,7 @@ const CreateTargetForm = ({
   currentSubViewState,
   topicListState,
   toggleTopicListView,
+  topicsList,
 }) => {
   const { COMMON, CREATE_TARGET } = strings;
 
@@ -91,6 +92,7 @@ const CreateTargetForm = ({
         help={CREATE_TARGET.helpTopic}
         subViewState={topicListState}
         toggleSubview={toggleTopicListView}
+        topicsList={topicsList}
       />
       <ErrorView error={errorMessages[errorMsg]} />
       {topicListState.isHidden && (
@@ -109,12 +111,14 @@ CreateTargetForm.propTypes = {
   currentSubViewState: object.isRequired,
   topicListState: object.isRequired,
   toggleTopicListView: func.isRequired,
+  topicsList: array.isRequired,
 };
 
 CreateTargetForm.defaultProps = {
   currentLocation: {},
   currentSubViewState: {},
   topicListState: {},
+  topicsList: [],
 };
 
 export default CreateTargetForm;

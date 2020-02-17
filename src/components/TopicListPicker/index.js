@@ -1,10 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
-import { useDispatch } from 'react-redux';
-import { useStatus } from '@rootstrap/redux-tools';
 import { array, func, object, string } from 'prop-types';
 
-import { getTopics } from 'actions/targetActions';
 import ErrorView from 'components/common/form/ErrorView';
 import TopicList from 'components/TopicList';
 import styles from './styles';
@@ -17,20 +14,8 @@ const TopicListPicker = ({
   help,
   subViewState,
   toggleSubview,
+  topicsList,
 }) => {
-  const dispatch = useDispatch();
-
-  const topicsRequest = useCallback(() => {
-    topicsList = dispatch(getTopics());
-  }, [dispatch]);
-
-  useEffect(() => {
-    topicsRequest();
-  }, []);
-
-  const { error } = useStatus(getTopics);
-  let topicsList = error;
-
   const onPressTopic = (item, isHidden) => {
     callback(item);
     toggleSubview(isHidden);
@@ -79,6 +64,7 @@ TopicListPicker.propTypes = {
   help: string,
   subViewState: object.isRequired,
   toggleSubview: func.isRequired,
+  topicsList: array.isRequired,
 };
 
 TopicListPicker.defaultProps = {
@@ -87,6 +73,7 @@ TopicListPicker.defaultProps = {
   errorMessage: null,
   help: '',
   subViewState: null,
+  topicsList: [],
 };
 
 export default TopicListPicker;
