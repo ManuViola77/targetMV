@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native';
 
+import { YELLOW_TRANSPARENT } from 'constants/colors';
+
 const styles = StyleSheet.create({
-  icon: {
-    height: 20,
-    height: 20,
-    backgroundColor: 'transparent',
+  uriIconContainer: {
+    backgroundColor: YELLOW_TRANSPARENT,
   },
 });
 

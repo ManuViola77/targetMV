@@ -64,8 +64,6 @@ const Main = ({ navigation }) => {
     });
   }
 
-  console.log('targetsList: ', targetsList);
-
   return (
     <>
       <MapView
@@ -90,18 +88,16 @@ const Main = ({ navigation }) => {
           draggable
         />
         {targetsList &&
-          targetsList.map(target => {
-            return (
-              <Marker
-                icon={location_marker}
-                uriIcon={target.topic ? target.topic.icon : null}
-                location={{ latitude: target.lat, longitude: target.lng }}
-                markerKey={target.id}
-                showCircle
-                radius={target.radius}
-              />
-            );
-          })}
+          targetsList.map(target => (
+            <Marker
+              icon={location_marker}
+              uriIcon={target.topic ? target.topic.icon : null}
+              location={{ latitude: target.lat, longitude: target.lng }}
+              markerKey={target.id}
+              showCircle
+              radius={target.radius}
+            />
+          ))}
       </MapView>
       <TouchableOpacity
         style={styles.newTarget}
