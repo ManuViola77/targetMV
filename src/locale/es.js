@@ -1,15 +1,3 @@
-import art from 'assets/images/art.png';
-import christmas from 'assets/images/christmas.png';
-import dating from 'assets/images/dating.png';
-import food from 'assets/images/food.png';
-import football from 'assets/images/football.png';
-import movies from 'assets/images/movies.png';
-import music from 'assets/images/music.png';
-import pokemongo from 'assets/images/pokemongo.png';
-import politics from 'assets/images/politics.png';
-import series from 'assets/images/series.png';
-import travel from 'assets/images/travel.png';
-
 export default {
   API: {
     errorMessage: 'No se obtuvo ninguna respuesta',
@@ -20,6 +8,24 @@ export default {
     headerTitle: 'Target MV',
     loading: 'Cargando',
     somethingWentWrong: 'Ocurrió un error',
+  },
+
+  CREATE_TARGET: {
+    areaNumeric: 'El área debe ser numérico',
+    area: 'Especificar largo del área',
+    button: 'Guardar target',
+    helpTitle: 'Elegir título para el target',
+    helpTopic: '¿De qué querés hablar?',
+    title: 'Título del target',
+    topic: 'Seleccionar un tema',
+  },
+
+  CREATE_TARGET_ERROR: {
+    emptyArea: 'Area no puede ser vacío',
+    emptyLatitude: 'Latitude no puede ser vacío',
+    emptyLongitude: 'Longitude no puede ser vacío',
+    emptyTitle: 'Title no puede ser vacío',
+    emptyTopic: 'Topic no puede ser vacío',
   },
 
   GENDER: {
@@ -68,65 +74,8 @@ export default {
   },
 
   TITLE: {
+    createTarget: 'Crear Nuevo Target',
     main: 'Puntos Target',
     profile: 'Perfil',
   },
-
-  TOPICS: [
-    {
-      id: 1,
-      icon: christmas,
-      name: 'Navidad',
-    },
-    {
-      id: 2,
-      icon: pokemongo,
-      name: 'PokemonGo',
-    },
-    {
-      id: 3,
-      icon: football,
-      name: 'Fútbol',
-    },
-    {
-      id: 4,
-      icon: travel,
-      name: 'Viajar',
-    },
-    {
-      id: 5,
-      icon: politics,
-      name: 'Política',
-    },
-    {
-      id: 6,
-      icon: art,
-      name: 'Arte',
-    },
-    {
-      id: 7,
-      icon: dating,
-      name: 'Citas',
-    },
-    {
-      id: 8,
-      icon: music,
-      name: 'Música',
-    },
-    {
-      id: 9,
-      icon: movies,
-      name: 'Películas',
-    },
-    {
-      id: 10,
-      icon: series,
-      name: 'Series',
-    },
-    {
-      id: 11,
-      icon: food,
-      name: 'Comida',
-    },
-  ],
 };

@@ -5,3 +5,11 @@ export const confirmPassword = 'password_confirmation';
 export const gender = 'gender';
 
 export const errorMsg = 'error';
+
+export const title = 'title';
+export const latitude = 'lat';
+export const longitude = 'lng';
+export const radius = 'radius';
+export const topicId = 'topic_id';
+export const topicError = 'topic';
+export const topicSelected = 'topic_selected';

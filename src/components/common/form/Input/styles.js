@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     height: 40,
     padding: 5,
     textAlign: 'center',
-    width: 220,
+    width: 260,
   },
 
   inputError: {
