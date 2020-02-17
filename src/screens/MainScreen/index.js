@@ -1,13 +1,14 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Animated, Image, Text, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
-import { useDispatch } from 'react-redux';
-import { useStatus } from '@rootstrap/redux-tools';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { getTargets, getTopics } from 'actions/targetActions';
+import { getTargets } from 'actions/targetActions';
+import { getTopics } from 'actions/topicActions';
 import location_marker from 'assets/images/location_marker.png';
 import target from 'assets/images/target.png';
-import { SUB_VIEW_HEIGHT, TOPICS_HEIGHT } from 'constants/targetActions';
+import { SUB_VIEW_HEIGHT } from 'constants/targetActions';
+import { TOPICS_HEIGHT } from 'constants/topicActions';
 import Marker from 'components/common/Marker';
 import useAnimateCreateTarget from 'hooks/useAnimateCreateTarget';
 import useGPSLocation from 'hooks/useGPSLocation';
@@ -36,33 +37,28 @@ const Main = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const getTargetsAndTopics = useCallback(() => {
-    topicsList = dispatch(getTopics());
-    targetsList = dispatch(getTargets());
+    dispatch(getTopics());
+    dispatch(getTargets());
   }, [dispatch]);
 
   useEffect(() => {
     createTargetState.isHidden && getTargetsAndTopics();
   }, [createTargetState]);
 
-  let { error: targetsList } = useStatus(getTargets);
-  let { error: topicsList } = useStatus(getTopics);
+  const apiTargetsList = useSelector(state => state.targets.targetsList);
+  const topicsList = useSelector(state => state.topics.topicsList);
 
-  if (targetsList && topicsList) {
-    targetsList = targetsList.map(({ target }) => {
-      let found = false;
-      let index = 0;
-      let newTarget = target;
-      while (!found && index < topicsList.length) {
-        let { topic } = topicsList[index];
-        if (topic.id === target.topicId) {
-          newTarget = { ...newTarget, topic };
-          found = true;
-        }
-        index++;
-      }
-      return newTarget;
-    });
-  }
+  let targetsList = useMemo(() => {
+    if (apiTargetsList && topicsList) {
+      return (targetsList = apiTargetsList.map(({ target }) => {
+        const { topicId } = target;
+        return {
+          ...target,
+          topic: topicsList.find(({ topic: { id } }) => id === topicId).topic,
+        };
+      }));
+    }
+  }, [topicsList, apiTargetsList]);
 
   return (
     <>

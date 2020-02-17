@@ -5,12 +5,8 @@ class TargetService {
     return api.post('/targets', target);
   }
 
-  targets(user) {
+  getTargets(user) {
     return api.get('/targets', user);
-  }
-
-  topics() {
-    return api.get('/topics');
   }
 }
 

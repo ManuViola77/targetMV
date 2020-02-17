@@ -58,7 +58,7 @@ const TopicListPicker = ({
 
 TopicListPicker.propTypes = {
   title: string.isRequired,
-  topicSelected: object.isRequired,
+  topicSelected: object,
   callback: func.isRequired,
   errorMessage: array,
   help: string,
