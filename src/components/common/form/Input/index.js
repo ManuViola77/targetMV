@@ -14,6 +14,7 @@ const Input = ({
   autoCapitalize,
   autoCorrect,
   help,
+  editable,
 }) => {
   return (
     <View style={styles.container}>
@@ -26,6 +27,7 @@ const Input = ({
         autoCapitalize={autoCapitalize}
         autoCorrect={autoCorrect}
         placeholder={help}
+        editable={editable}
       />
       {!!errorMessage && <ErrorView error={errorMessage[0]} />}
     </View>
@@ -41,6 +43,7 @@ Input.propTypes = {
   autoCapitalize: string,
   autoCorrect: bool,
   help: string,
+  editable: bool,
 };
 
 Input.defaultProps = {
@@ -50,6 +53,7 @@ Input.defaultProps = {
   autoCapitalize: 'none',
   autoCorrect: false,
   help: '',
+  editable: true,
 };
 
 export default Input;

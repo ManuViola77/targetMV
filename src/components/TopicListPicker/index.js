@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
-import { array, func, object, string } from 'prop-types';
+import { array, func, object, string, bool } from 'prop-types';
 
 import ErrorView from 'components/common/form/ErrorView';
 import TopicList from 'components/TopicList';
@@ -15,6 +15,7 @@ const TopicListPicker = ({
   subViewState,
   toggleSubview,
   topicsList,
+  editable,
 }) => {
   const onPressTopic = (item, isHidden) => {
     callback(item);
@@ -28,6 +29,7 @@ const TopicListPicker = ({
         <TouchableOpacity
           onPress={() => toggleSubview(subViewState.isHidden)}
           style={[styles.box, errorMessage ? styles.error : {}]}
+          disabled={!editable}
         >
           {topicSelected && (
             <Image source={{ uri: topicSelected.icon }} style={styles.icon} />
@@ -65,6 +67,7 @@ TopicListPicker.propTypes = {
   subViewState: object.isRequired,
   toggleSubview: func.isRequired,
   topicsList: array.isRequired,
+  editable: bool,
 };
 
 TopicListPicker.defaultProps = {
@@ -74,6 +77,7 @@ TopicListPicker.defaultProps = {
   help: '',
   subViewState: null,
   topicsList: [],
+  editable: true,
 };
 
 export default TopicListPicker;
