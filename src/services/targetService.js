@@ -5,8 +5,12 @@ class TargetService {
     return api.post('/targets', target);
   }
 
-  getTargets(user) {
-    return api.get('/targets', user);
+  getTargets() {
+    return api.get('/targets');
+  }
+
+  deleteTarget(idTarget) {
+    return api.delete(`/targets/${idTarget}`);
   }
 }
 

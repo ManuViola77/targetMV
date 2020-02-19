@@ -79,7 +79,7 @@ const CreateTargetForm = ({
   // reset states when this form is hidden/unhidden
   useEffect(() => {
     dispatch(CREATE_TARGET_RESET);
-    resetState(initialState, {});
+    setInitialState();
   }, [currentSubViewState]);
 
   const { isModalVisible, setIsModalVisible } = useModalState();
@@ -127,6 +127,7 @@ const CreateTargetForm = ({
             isModalVisible={isModalVisible}
             closeModal={closeModal}
             target={selectedTarget}
+            toggleCreateTargetView={onPressButton}
           />
         </>
       ) : (
