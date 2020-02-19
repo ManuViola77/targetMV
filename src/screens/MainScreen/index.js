@@ -13,6 +13,7 @@ import Marker from 'components/common/Marker';
 import useAnimateCreateTarget from 'hooks/useAnimateCreateTarget';
 import useGPSLocation from 'hooks/useGPSLocation';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
+import useTargetState from 'hooks/useTargetState';
 import strings from 'locale';
 import CreateTargetForm from 'screens/CreateTargetForm';
 import styles from './styles';
@@ -56,6 +57,22 @@ const Main = ({ navigation }) => {
     }
   }, [topicsList, apiTargetsList]);
 
+  const {
+    resetSelectedTarget,
+    selectedTarget,
+    setSelectedTarget,
+  } = useTargetState();
+
+  const toggleDeleteTarget = selTarget => {
+    setSelectedTarget(selTarget);
+    toggleCreateTargetView(true);
+  };
+
+  const closeSubView = () => {
+    resetSelectedTarget();
+    toggleCreateTargetView(createTargetState.isHidden);
+  };
+
   return (
     <>
       <MapView
@@ -64,30 +81,32 @@ const Main = ({ navigation }) => {
         showUserLocation
         followUserLocation
         loadingEnabled
-        region={currentLocation}
+        region={selectedTarget.id ? selectedTarget.location : currentLocation}
         onPress={() =>
           !topicListState.isHidden
             ? toggleTopicListView(topicListState.isHidden)
-            : !createTargetState.isHidden &&
-              toggleCreateTargetView(createTargetState.isHidden)
+            : !createTargetState.isHidden && closeSubView()
         }
       >
         <Marker
           icon={location_marker}
           location={currentLocation}
-          markerKey={0}
+          id={0}
           showCircle
           draggable
         />
         {targetsList &&
-          targetsList.map(({ id, lat, lng, radius, topic }) => (
+          targetsList.map(target => (
             <Marker
               icon={location_marker}
-              uriIcon={topic ? topic.icon : null}
-              location={{ latitude: lat, longitude: lng }}
-              markerKey={id}
+              uriIcon={topic ? target.topic.icon : null}
+              location={{ latitude: target.lat, longitude: target.lng }}
+              id={target.id}
+              onPress={toggleDeleteTarget}
               showCircle
-              radius={radius}
+              radius={target.radius}
+              deleteMode={selectedTarget.id === target.id}
+              target={target}
             />
           ))}
       </MapView>
@@ -111,6 +130,7 @@ const Main = ({ navigation }) => {
           topicsList={topicsList}
           topicListState={topicListState}
           toggleTopicListView={toggleTopicListView}
+          selectedTarget={selectedTarget}
         />
       </Animated.View>
     </>

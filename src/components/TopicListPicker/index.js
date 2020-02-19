@@ -15,6 +15,7 @@ const TopicListPicker = ({
   subViewState,
   toggleSubview,
   topicsList,
+  editable,
 }) => {
   const onPressTopic = (item, isHidden) => {
     callback(item);
@@ -28,6 +29,7 @@ const TopicListPicker = ({
         <TouchableOpacity
           onPress={() => toggleSubview(subViewState.isHidden)}
           style={[styles.box, errorMessage ? styles.error : {}]}
+          disabled={!editable}
         >
           {topicSelected && (
             <Image source={{ uri: topicSelected.icon }} style={styles.icon} />
@@ -80,6 +82,7 @@ TopicListPicker.propTypes = {
       }),
     }),
   ).isRequired,
+  editable: bool,
 };
 
 TopicListPicker.defaultProps = {
@@ -89,6 +92,7 @@ TopicListPicker.defaultProps = {
   help: '',
   subViewState: null,
   topicsList: [],
+  editable: true,
 };
 
 export default TopicListPicker;

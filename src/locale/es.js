@@ -28,6 +28,14 @@ export default {
     emptyTopic: 'Topic no puede ser vacío',
   },
 
+  DELETE_TARGET: {
+    button: 'Eliminar',
+    cancel: 'Cancelar',
+    confirmText: '¿Seguro que desea eliminar este target?',
+    rememberText:
+      'Recuerda que si lo elimina, ya no podrá chatear con sus coincidencias',
+  },
+
   GENDER: {
     placeholder: { label: 'Seleccione su género', value: '' },
     options: [
