@@ -68,9 +68,10 @@ const Main = ({ navigation }) => {
     toggleCreateTargetView(true);
   };
 
-  const closeSubView = () => {
+  const closeSubView = isHidden => {
+    console.log('in closeSubView: isHidden:  ', isHidden);
     resetSelectedTarget();
-    toggleCreateTargetView(createTargetState.isHidden);
+    toggleCreateTargetView(isHidden);
   };
 
   return (
@@ -85,7 +86,8 @@ const Main = ({ navigation }) => {
         onPress={() =>
           !topicListState.isHidden
             ? toggleTopicListView(topicListState.isHidden)
-            : !createTargetState.isHidden && closeSubView()
+            : !createTargetState.isHidden &&
+              closeSubView(createTargetState.isHidden)
         }
       >
         <Marker
@@ -125,7 +127,7 @@ const Main = ({ navigation }) => {
       >
         <CreateTargetForm
           currentLocation={currentLocation}
-          onPressButton={toggleCreateTargetView}
+          onPressButton={closeSubView}
           currentSubViewState={createTargetState}
           topicsList={topicsList}
           topicListState={topicListState}
