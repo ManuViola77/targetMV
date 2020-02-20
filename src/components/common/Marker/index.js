@@ -38,7 +38,6 @@ const Marker = ({
       <MapMarker
         key={markerKey}
         coordinate={location}
-        onLoad={() => this.forceUpdate()}
         draggable
         anchor={uriIcon ? { x: 0.5, y: 0.5 } : { x: 0.5, y: 1 }}
       >

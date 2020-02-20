@@ -36,14 +36,10 @@ const Main = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  const getTargetsAndTopics = useCallback(() => {
+  useEffect(() => {
     dispatch(getTopics());
     dispatch(getTargets());
-  }, [dispatch]);
-
-  useEffect(() => {
-    createTargetState.isHidden && getTargetsAndTopics();
-  }, [createTargetState]);
+  }, [dispatch, createTargetState]);
 
   const apiTargetsList = useSelector(state => state.targets.targetsList);
   const topicsList = useSelector(state => state.topics.topicsList);
