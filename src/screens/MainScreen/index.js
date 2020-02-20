@@ -84,14 +84,14 @@ const Main = ({ navigation }) => {
           draggable
         />
         {targetsList &&
-          targetsList.map(target => (
+          targetsList.map(({ id, lat, lng, radius, topic }) => (
             <Marker
               icon={location_marker}
-              uriIcon={target.topic ? target.topic.icon : null}
-              location={{ latitude: target.lat, longitude: target.lng }}
-              markerKey={target.id}
+              uriIcon={topic ? topic.icon : null}
+              location={{ latitude: lat, longitude: lng }}
+              markerKey={id}
               showCircle
-              radius={target.radius}
+              radius={radius}
             />
           ))}
       </MapView>
