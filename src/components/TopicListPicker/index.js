@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
-import { array, func, object, string } from 'prop-types';
+import { arrayOf, bool, func, number, object, shape, string } from 'prop-types';
 
 import ErrorView from 'components/common/form/ErrorView';
 import TopicList from 'components/TopicList';
@@ -58,13 +58,28 @@ const TopicListPicker = ({
 
 TopicListPicker.propTypes = {
   title: string.isRequired,
-  topicSelected: object,
+  topicSelected: shape({
+    icon: string,
+    id: number,
+    label: string,
+  }),
   callback: func.isRequired,
-  errorMessage: array,
+  errorMessage: arrayOf(string),
   help: string,
-  subViewState: object.isRequired,
+  subViewState: shape({
+    bounceValue: object,
+    isHidden: bool,
+  }).isRequired,
   toggleSubview: func.isRequired,
-  topicsList: array.isRequired,
+  topicsList: arrayOf(
+    shape({
+      topic: shape({
+        icon: string,
+        id: number,
+        label: string,
+      }),
+    }),
+  ).isRequired,
 };
 
 TopicListPicker.defaultProps = {

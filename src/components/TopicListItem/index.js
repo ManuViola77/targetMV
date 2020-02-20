@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
-import { object, func } from 'prop-types';
+import { func, number, shape, string } from 'prop-types';
 
 import styles from './styles';
 
@@ -15,7 +15,11 @@ const TopicListItem = ({ item, onPress }) => (
 );
 
 TopicListItem.propTypes = {
-  item: object.isRequired,
+  item: shape({
+    icon: string,
+    id: number,
+    label: string,
+  }).isRequired,
   onPress: func.isRequired,
 };
 

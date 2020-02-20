@@ -2,7 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
-import { array, func, object } from 'prop-types';
+import { arrayOf, bool, func, number, object, shape, string } from 'prop-types';
 
 import { createTarget } from 'actions/targetActions';
 import { CREATE_TARGET_RESET } from 'constants/targetActions';
@@ -106,12 +106,31 @@ const CreateTargetForm = ({
 };
 
 CreateTargetForm.propTypes = {
-  currentLocation: object.isRequired,
+  currentLocation: shape({
+    latitude: number,
+    longitude: number,
+    latitudeDelta: number,
+    longitudeDelta: number,
+  }).isRequired,
   onPressButton: func.isRequired,
-  currentSubViewState: object.isRequired,
-  topicListState: object.isRequired,
+  currentSubViewState: shape({
+    bounceValue: object,
+    isHidden: bool,
+  }).isRequired,
+  topicListState: shape({
+    bounceValue: object,
+    isHidden: bool,
+  }).isRequired,
   toggleTopicListView: func.isRequired,
-  topicsList: array.isRequired,
+  topicsList: arrayOf(
+    shape({
+      topic: shape({
+        icon: string,
+        id: number,
+        label: string,
+      }),
+    }),
+  ).isRequired,
 };
 
 CreateTargetForm.defaultProps = {

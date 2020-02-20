@@ -2,7 +2,7 @@ import React from 'react';
 import { Image } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import MapView, { Marker as MapMarker } from 'react-native-maps';
-import { bool, number, object, string } from 'prop-types';
+import { bool, number, string, shape } from 'prop-types';
 
 import { WHITE, YELLOW, YELLOW_TRANSPARENT } from 'constants/colors';
 import { CIRCLE_RADIUS, CIRCLE_BORDER_WIDTH } from 'constants/map';
@@ -55,7 +55,12 @@ const Marker = ({
 Marker.propTypes = {
   draggable: bool,
   icon: number,
-  location: object.isRequired,
+  location: shape({
+    latitude: number,
+    longitude: number,
+    latitudeDelta: number,
+    longitudeDelta: number,
+  }).isRequired,
   markerKey: number.isRequired,
   showCircle: bool,
   uriIcon: string,
