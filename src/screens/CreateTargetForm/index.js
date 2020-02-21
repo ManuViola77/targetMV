@@ -2,24 +2,30 @@ import React, { useCallback, useEffect } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
-import { arrayOf, bool, func, number, object, shape, string } from 'prop-types';
+import { arrayOf, func } from 'prop-types';
 
 import { createTarget } from 'actions/targetActions';
-import { CREATE_TARGET_RESET } from 'constants/targetActions';
-import {
-  title,
-  latitude,
-  longitude,
-  radius,
-  topicId,
-  errorMsg,
-  topicSelected,
-} from 'constants/fields';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import DeleteTargetModal from 'components/DeleteTargetModal';
 import TopicListPicker from 'components/TopicListPicker';
+import {
+  errorMsg,
+  latitude,
+  longitude,
+  radius,
+  title,
+  topicId,
+  topicSelected,
+} from 'constants/fields';
+import {
+  locationShape,
+  selectedTargetShape,
+  subViewStateShape,
+  topicShape,
+} from 'constants/shapes';
+import { CREATE_TARGET_RESET } from 'constants/targetActions';
 import useFormStates from 'hooks/useFormStates';
 import useModalState from 'hooks/useModalState';
 import strings from 'locale';
@@ -28,12 +34,12 @@ import styles from './styles';
 
 const CreateTargetForm = ({
   currentLocation,
-  onPressButton,
   currentSubViewState,
-  topicListState,
+  onPressButton,
+  selectedTarget,
   toggleTopicListView,
   topicsList,
-  selectedTarget,
+  topicListState,
 }) => {
   const { COMMON, CREATE_TARGET, DELETE_TARGET } = strings;
 
@@ -45,12 +51,11 @@ const CreateTargetForm = ({
 
   const { error, status } = useStatus(createTarget);
   const {
-    values,
     errors,
     handleChange,
     handleConfirmForm,
-    resetState,
     setValues,
+    values,
   } = useFormStates(createTargetRequest);
 
   const errorMessages = { ...errors, ...error };
@@ -90,30 +95,30 @@ const CreateTargetForm = ({
   return (
     <View style={styles.container}>
       <Input
-        title={CREATE_TARGET.area}
-        text={values[radius]}
         callback={newValue => handleChange(radius, newValue)}
-        errorMessage={errorMessages[radius]}
         editable={!selectedTarget.id}
+        errorMessage={errorMessages[radius]}
+        text={values[radius]}
+        title={CREATE_TARGET.area}
       />
       <Input
-        title={CREATE_TARGET.title}
-        text={values[title]}
         callback={newValue => handleChange(title, newValue)}
+        editable={!selectedTarget.id}
         errorMessage={errorMessages[title]}
         help={CREATE_TARGET.helpTitle}
-        editable={!selectedTarget.id}
+        text={values[title]}
+        title={CREATE_TARGET.title}
       />
       <TopicListPicker
-        title={CREATE_TARGET.topic}
-        topicSelected={values[topicSelected]}
         callback={newValue => handleChange(topicSelected, newValue)}
+        editable={!selectedTarget.id}
         errorMessage={errorMessages[topicId]}
         help={CREATE_TARGET.helpTopic}
+        title={CREATE_TARGET.topic}
         subViewState={topicListState}
         toggleSubview={toggleTopicListView}
+        topicSelected={values[topicSelected]}
         topicsList={topicsList}
-        editable={!selectedTarget.id}
       />
       <ErrorView error={errorMessages[errorMsg]} />
       {selectedTarget.id ? (
@@ -143,39 +148,21 @@ const CreateTargetForm = ({
 };
 
 CreateTargetForm.propTypes = {
-  currentLocation: shape({
-    latitude: number,
-    longitude: number,
-    latitudeDelta: number,
-    longitudeDelta: number,
-  }).isRequired,
+  currentLocation: locationShape.isRequired,
+  currentSubViewState: subViewStateShape.isRequired,
   onPressButton: func.isRequired,
-  currentSubViewState: shape({
-    bounceValue: object,
-    isHidden: bool,
-  }).isRequired,
-  topicListState: shape({
-    bounceValue: object,
-    isHidden: bool,
-  }).isRequired,
+  selectedTarget: selectedTargetShape,
   toggleTopicListView: func.isRequired,
-  topicsList: arrayOf(
-    shape({
-      topic: shape({
-        icon: string,
-        id: number,
-        label: string,
-      }),
-    }),
-  ).isRequired,
-  selectedTarget: object,
+  topicsList: arrayOf(topicShape).isRequired,
+  topicListState: subViewStateShape.isRequired,
 };
 
 CreateTargetForm.defaultProps = {
   currentLocation: {},
   currentSubViewState: {},
-  topicListState: {},
+  selectedTarget: {},
   topicsList: [],
+  topicListState: {},
 };
 
 export default CreateTargetForm;

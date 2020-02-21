@@ -4,7 +4,7 @@ import { string, func } from 'prop-types';
 
 import styles from './styles';
 
-const Link = ({ text, onPress }) => (
+const Link = ({ onPress, text }) => (
   <TouchableOpacity onPress={onPress}>
     <Text style={styles.text}>{text}</Text>
   </TouchableOpacity>

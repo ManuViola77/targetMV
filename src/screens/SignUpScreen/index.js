@@ -56,47 +56,46 @@ const SignUp = ({ navigation }) => {
       <SafeAreaView style={styles.safeArea}>
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'handled'}>
           <Input
-            title={SIGN_UP.name}
-            text={values[name]}
+            autoCapitalize="words"
             callback={newValue => handleChange(name, newValue)}
             errorMessage={errorMessages[name]}
-            autoCapitalize="words"
+            text={values[name]}
+            title={SIGN_UP.name}
           />
           <Input
-            title={SIGN_UP.email}
-            text={values[email]}
             callback={newValue => handleChange(email, newValue)}
             errorMessage={errorMessages[email]}
+            text={values[email]}
+            title={SIGN_UP.email}
           />
           <Input
-            title={SIGN_UP.password}
-            secureTextEntry
-            text={values[password]}
             callback={newValue => handleChange(password, newValue)}
             errorMessage={errorMessages[password]}
             help={SIGN_UP_HELP.helpPassword}
+            secureTextEntry
+            text={values[password]}
+            title={SIGN_UP.password}
           />
           <Input
-            title={SIGN_UP.confirmPassword}
-            secureTextEntry
-            text={values[confirmPassword]}
             callback={newValue => handleChange(confirmPassword, newValue)}
             errorMessage={errorMessages[confirmPassword]}
+            secureTextEntry
+            text={values[confirmPassword]}
+            title={SIGN_UP.confirmPassword}
           />
           <Picker
-            title={SIGN_UP.gender}
-            text={values[gender]}
-            placeholder={GENDER.placeholder}
-            options={GENDER.options}
             callback={newValue => handleChange(gender, newValue)}
             errorMessage={errorMessages[gender]}
+            options={GENDER.options}
+            placeholder={GENDER.placeholder}
+            text={values[gender]}
+            title={SIGN_UP.gender}
           />
           <ErrorView error={errorMessages[errorMsg]} />
           <Button
-            title={status === LOADING ? COMMON.loading : SIGN_UP.button}
             onPress={() => handleConfirmForm(signUpValidations)}
+            title={status === LOADING ? COMMON.loading : SIGN_UP.button}
           />
-
           <View style={styles.allLeftSpace}>
             <View style={styles.lineStyle} />
             <TouchableOpacity onPress={signIn}>

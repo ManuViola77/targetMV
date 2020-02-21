@@ -6,28 +6,28 @@ import ErrorView from 'components/common/form/ErrorView';
 import styles from './styles';
 
 const Input = ({
-  title,
-  secureTextEntry,
-  text,
-  callback,
-  errorMessage,
   autoCapitalize,
   autoCorrect,
-  help,
+  callback,
   editable,
+  errorMessage,
+  help,
+  title,
+  text,
+  secureTextEntry,
 }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       <TextInput
-        secureTextEntry={secureTextEntry}
-        value={text}
-        onChangeText={callback}
-        style={[styles.input, errorMessage ? styles.inputError : {}]}
         autoCapitalize={autoCapitalize}
         autoCorrect={autoCorrect}
-        placeholder={help}
         editable={editable}
+        onChangeText={callback}
+        placeholder={help}
+        secureTextEntry={secureTextEntry}
+        style={[styles.input, errorMessage ? styles.inputError : {}]}
+        value={text}
       />
       {!!errorMessage && <ErrorView error={errorMessage[0]} />}
     </View>
@@ -35,25 +35,25 @@ const Input = ({
 };
 
 Input.propTypes = {
-  title: string.isRequired,
-  secureTextEntry: bool,
-  text: string.isRequired,
-  callback: func.isRequired,
-  errorMessage: arrayOf(string),
   autoCapitalize: string,
   autoCorrect: bool,
-  help: string,
+  callback: func.isRequired,
   editable: bool,
+  errorMessage: arrayOf(string),
+  help: string,
+  secureTextEntry: bool,
+  text: string.isRequired,
+  title: string.isRequired,
 };
 
 Input.defaultProps = {
-  secureTextEntry: false,
-  text: '',
-  errorMessage: null,
   autoCapitalize: 'none',
   autoCorrect: false,
-  help: '',
   editable: true,
+  errorMessage: null,
+  help: '',
+  secureTextEntry: false,
+  text: '',
 };
 
 export default Input;

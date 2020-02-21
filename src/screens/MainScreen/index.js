@@ -76,40 +76,40 @@ const Main = ({ navigation }) => {
   return (
     <>
       <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        showUserLocation
         followUserLocation
         loadingEnabled
-        region={selectedTarget.id ? selectedTarget.location : currentLocation}
         onPress={() =>
           !topicListState.isHidden
             ? toggleTopicListView(topicListState.isHidden)
             : !createTargetState.isHidden &&
               closeSubView(createTargetState.isHidden)
         }
+        provider={PROVIDER_GOOGLE}
+        region={selectedTarget.id ? selectedTarget.location : currentLocation}
+        showUserLocation
+        style={styles.map}
       >
         <Marker
-          icon={location_marker}
-          location={currentLocation}
-          id={0}
-          showCircle
           draggable
+          icon={location_marker}
+          id={0}
+          location={currentLocation}
+          showCircle
         />
         {targetsList &&
           targetsList.map(target => {
             const { id, lat, lng, radius, topic } = target;
             return (
               <Marker
-                icon={location_marker}
-                uriIcon={topic ? topic.icon : null}
-                location={{ latitude: lat, longitude: lng }}
-                id={id}
-                onPress={toggleDeleteTarget}
-                showCircle
-                radius={radius}
                 deleteMode={selectedTarget.id === id}
+                icon={location_marker}
+                id={id}
+                location={{ latitude: lat, longitude: lng }}
+                onPress={toggleDeleteTarget}
+                radius={radius}
+                showCircle
                 target={target}
+                uriIcon={topic ? topic.icon : null}
               />
             );
           })}
@@ -129,12 +129,12 @@ const Main = ({ navigation }) => {
       >
         <CreateTargetForm
           currentLocation={currentLocation}
-          onPressButton={closeSubView}
           currentSubViewState={createTargetState}
+          onPressButton={closeSubView}
+          selectedTarget={selectedTarget}
+          toggleTopicListView={toggleTopicListView}
           topicsList={topicsList}
           topicListState={topicListState}
-          toggleTopicListView={toggleTopicListView}
-          selectedTarget={selectedTarget}
         />
       </Animated.View>
     </>

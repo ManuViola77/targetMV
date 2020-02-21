@@ -67,22 +67,22 @@ const LoginScreen = ({ navigation }) => {
       <Header title={COMMON.headerTitle} />
       <SafeAreaView style={styles.safeArea}>
         <Input
-          title={LOGIN.email}
-          text={values[email]}
           callback={newValue => handleChange(email, newValue)}
           errorMessage={errorMessages[email]}
+          text={values[email]}
+          title={LOGIN.email}
         />
         <Input
-          title={LOGIN.password}
-          secureTextEntry
-          text={values[password]}
           callback={newValue => handleChange(password, newValue)}
           errorMessage={errorMessages[password]}
+          text={values[password]}
+          title={LOGIN.password}
+          secureTextEntry
         />
         <ErrorView error={errorMessages[errorMsg]} />
         <Button
-          title={status === LOADING ? COMMON.loading : LOGIN.button}
           onPress={() => handleConfirmForm(signInValidations)}
+          title={status === LOADING ? COMMON.loading : LOGIN.button}
         />
         <View style={styles.container}>
           <TouchableOpacity>

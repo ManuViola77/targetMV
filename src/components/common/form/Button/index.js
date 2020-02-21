@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native';
-import { string, object } from 'prop-types';
+import { Text, TouchableOpacity, ViewPropTypes } from 'react-native';
+import { string } from 'prop-types';
 
 import styles from './styles';
 
@@ -11,7 +11,7 @@ const Button = ({ title, style, ...props }) => (
 );
 
 Button.propTypes = {
-  style: object,
+  style: ViewPropTypes.style,
   title: string.isRequired,
 };
 

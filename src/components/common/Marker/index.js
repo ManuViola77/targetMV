@@ -17,19 +17,20 @@ import {
   LATITUDE_DELTA,
   LONGITUDE_DELTA,
 } from 'constants/map';
+import { locationShape, selectedTargetShape } from 'constants/shapes';
 import styles from './styles';
 
 const Marker = ({
+  deleteMode,
   draggable,
   icon,
-  location,
   id,
-  showCircle,
-  uriIcon,
-  radius,
+  location,
   onPress,
-  deleteMode,
+  radius,
+  showCircle,
   target,
+  uriIcon,
 }) => {
   const circle = useRef(null);
 
@@ -67,11 +68,8 @@ const Marker = ({
     <>
       {showCircle && (
         <Circle
-          ref={circle}
           center={location}
-          radius={uriIcon ? radius : CIRCLE_RADIUS}
-          strokeWidth={uriIcon ? 0 : CIRCLE_BORDER_WIDTH}
-          strokeColor={YELLOW}
+          ref={circle}
           fillColor={
             uriIcon
               ? deleteMode
@@ -79,29 +77,31 @@ const Marker = ({
                 : YELLOW_TRANSPARENT
               : WHITE
           }
+          radius={uriIcon ? radius : CIRCLE_RADIUS}
+          strokeColor={YELLOW}
+          strokeWidth={uriIcon ? 0 : CIRCLE_BORDER_WIDTH}
         />
       )}
       <MapMarker
-        key={id}
+        anchor={uriIcon ? { x: 0.5, y: 0.5 } : { x: 0.5, y: 1 }}
         coordinate={location}
         draggable
-        anchor={uriIcon ? { x: 0.5, y: 0.5 } : { x: 0.5, y: 1 }}
-        onPress={e => {
-          e.stopPropagation();
+        key={id}
+        onPress={event => {
+          event.stopPropagation();
           uriIcon ? onPress(selectedTarget) : null;
         }}
       >
         {uriIcon ? (
           <Avatar
-            size={25}
-            rounded
-            source={{ uri: uriIcon }}
             overlayContainerStyle={
               deleteMode
                 ? styles.selectedUriIconContainer
                 : styles.uriIconContainer
             }
-            activeOpacity={0.7}
+            rounded
+            size={25}
+            source={{ uri: uriIcon }}
           />
         ) : (
           <Image source={icon} />
@@ -112,30 +112,15 @@ const Marker = ({
 };
 
 Marker.propTypes = {
+  deleteMode: bool,
   draggable: bool,
   icon: number,
-  location: shape({
-    latitude: number,
-    longitude: number,
-    latitudeDelta: number,
-    longitudeDelta: number,
-  }).isRequired,
   id: number.isRequired,
+  location: locationShape.isRequired,
   onPress: func,
   showCircle: bool,
+  target: selectedTargetShape,
   uriIcon: string,
-  deleteMode: bool,
-  target: shape({
-    id: number,
-    lat: number,
-    lng: number,
-    radius: number,
-    topic: shape({
-      icon: string,
-      id: number,
-      label: string,
-    }),
-  }),
 };
 
 export default Marker;

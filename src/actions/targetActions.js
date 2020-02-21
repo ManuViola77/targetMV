@@ -34,7 +34,7 @@ export const getTargets = createThunk(GET_TARGETS, async () => {
 export const deleteTarget = createThunk(DELETE_TARGET, async idTarget => {
   try {
     await targetService.deleteTarget(idTarget);
-  } catch (e) {
+  } catch ({ data }) {
     throw parseError(data);
   }
 });

@@ -1,30 +1,25 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { arrayOf, func, number, shape, string } from 'prop-types';
+import { arrayOf, func } from 'prop-types';
 
 import ListItem from 'components/TopicListItem';
+import { topicShape } from 'constants/shapes';
 import styles from './styles';
 
 const TopicList = ({ list, onPress }) => (
   <FlatList
-    style={styles.flatList}
-    ItemSeparatorComponent={() => <View style={styles.separator} />}
     data={list}
-    renderItem={({ item }) => <ListItem item={item.topic} onPress={onPress} />}
+    ItemSeparatorComponent={() => <View style={styles.separator} />}
     keyExtractor={({ topic: { id } }) => id.toString()}
+    renderItem={({ item: { topic } }) => (
+      <ListItem item={topic} onPress={onPress} />
+    )}
+    style={styles.flatList}
   />
 );
 
 TopicList.propTypes = {
-  list: arrayOf(
-    shape({
-      topic: shape({
-        icon: string,
-        id: number,
-        label: string,
-      }),
-    }),
-  ).isRequired,
+  list: arrayOf(topicShape).isRequired,
   onPress: func.isRequired,
 };
 

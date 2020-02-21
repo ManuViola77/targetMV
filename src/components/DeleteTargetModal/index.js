@@ -4,20 +4,21 @@ import { Avatar } from 'react-native-elements';
 import Modal from 'react-native-modal';
 import { useDispatch } from 'react-redux';
 import { LOADING, SUCCESS, useStatus } from '@rootstrap/redux-tools';
-import { bool, func, object } from 'prop-types';
+import { bool, func } from 'prop-types';
 
 import { deleteTarget } from 'actions/targetActions';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Link from 'components/common/Link';
 import { errorMsg } from 'constants/fields';
+import { selectedTargetShape } from 'constants/shapes';
 import { DELETE_TARGET_RESET } from 'constants/targetActions';
 import strings from 'locale';
 import styles from './styles';
 
 const DeleteTargetModal = ({
-  isModalVisible,
   closeModal,
+  isModalVisible,
   target,
   toggleCreateTargetView,
 }) => {
@@ -52,22 +53,21 @@ const DeleteTargetModal = ({
     <Modal
       animationIn="slideInUp"
       animationOut="slideOutDown"
+      isVisible={isModalVisible}
       onBackdropPress={closeModal}
       onSwipeComplete={closeModal}
-      swipeDirection="right"
-      isVisible={isModalVisible}
       style={styles.modal}
+      swipeDirection="right"
     >
       <View style={styles.container}>
         <Text style={styles.confirmText}>{DELETE_TARGET.confirmText}</Text>
         <View style={styles.circleView}>
           <View style={styles.iconContainer}>
             <Avatar
-              size={30}
-              rounded
-              source={{ uri: topic.icon }}
               overlayContainerStyle={styles.icon}
-              activeOpacity={0.7}
+              rounded
+              size={30}
+              source={{ uri: topic.icon }}
             />
           </View>
         </View>
@@ -76,8 +76,8 @@ const DeleteTargetModal = ({
         <ErrorView error={errorMessages[errorMsg]} />
         <View>
           <Button
-            title={status === LOADING ? COMMON.loading : DELETE_TARGET.button}
             onPress={() => deleteTargetRequest(id)}
+            title={status === LOADING ? COMMON.loading : DELETE_TARGET.button}
           />
           <Link text={DELETE_TARGET.cancel} onPress={closeModal} />
         </View>
@@ -87,9 +87,9 @@ const DeleteTargetModal = ({
 };
 
 DeleteTargetModal.propTypes = {
-  isModalVisible: bool.isRequired,
   closeModal: func.isRequired,
-  target: object.isRequired,
+  isModalVisible: bool.isRequired,
+  target: selectedTargetShape.isRequired,
   toggleCreateTargetView: func.isRequired,
 };
 
