@@ -46,6 +46,8 @@ const DeleteTargetModal = ({
     }
   }, [status]);
 
+  const { id, title, topic } = target;
+
   return (
     <Modal
       animationIn="slideInUp"
@@ -63,19 +65,19 @@ const DeleteTargetModal = ({
             <Avatar
               size={30}
               rounded
-              source={{ uri: target.topic.icon }}
+              source={{ uri: topic.icon }}
               overlayContainerStyle={styles.icon}
               activeOpacity={0.7}
             />
           </View>
         </View>
-        <Text style={styles.targetTitle}>{target.title}</Text>
+        <Text style={styles.targetTitle}>{title}</Text>
         <Text style={styles.rememberText}>{DELETE_TARGET.rememberText}</Text>
         <ErrorView error={errorMessages[errorMsg]} />
         <View>
           <Button
             title={status === LOADING ? COMMON.loading : DELETE_TARGET.button}
-            onPress={() => deleteTargetRequest(target.id)}
+            onPress={() => deleteTargetRequest(id)}
           />
           <Link text={DELETE_TARGET.cancel} onPress={closeModal} />
         </View>

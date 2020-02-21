@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Image, Platform } from 'react-native';
 import { Avatar } from 'react-native-elements';
 import { Circle, Marker as MapMarker } from 'react-native-maps';
-import { bool, func, number, object, string, shape } from 'prop-types';
+import { bool, func, number, string, shape } from 'prop-types';
 
 import {
   BLUE_TRANSPARENT,
@@ -40,7 +40,11 @@ const Marker = ({
   useEffect(() => {
     if (Platform.OS === IOS && circle && circle.current) {
       circle.current.setNativeProps({
-        fillColor: uriIcon ? YELLOW_TRANSPARENT : WHITE,
+        fillColor: uriIcon
+          ? deleteMode
+            ? BLUE_TRANSPARENT
+            : YELLOW_TRANSPARENT
+          : WHITE,
         strokeColor: YELLOW,
       });
     }
@@ -121,7 +125,17 @@ Marker.propTypes = {
   showCircle: bool,
   uriIcon: string,
   deleteMode: bool,
-  target: object,
+  target: shape({
+    id: number,
+    lat: number,
+    lng: number,
+    radius: number,
+    topic: shape({
+      icon: string,
+      id: number,
+      label: string,
+    }),
+  }),
 };
 
 export default Marker;

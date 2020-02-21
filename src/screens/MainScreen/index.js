@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Animated, Image, Text, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch, useSelector } from 'react-redux';
@@ -69,7 +69,6 @@ const Main = ({ navigation }) => {
   };
 
   const closeSubView = isHidden => {
-    console.log('in closeSubView: isHidden:  ', isHidden);
     resetSelectedTarget();
     toggleCreateTargetView(isHidden);
   };
@@ -98,19 +97,22 @@ const Main = ({ navigation }) => {
           draggable
         />
         {targetsList &&
-          targetsList.map(target => (
-            <Marker
-              icon={location_marker}
-              uriIcon={topic ? target.topic.icon : null}
-              location={{ latitude: target.lat, longitude: target.lng }}
-              id={target.id}
-              onPress={toggleDeleteTarget}
-              showCircle
-              radius={target.radius}
-              deleteMode={selectedTarget.id === target.id}
-              target={target}
-            />
-          ))}
+          targetsList.map(target => {
+            const { id, lat, lng, radius, topic } = target;
+            return (
+              <Marker
+                icon={location_marker}
+                uriIcon={topic ? topic.icon : null}
+                location={{ latitude: lat, longitude: lng }}
+                id={id}
+                onPress={toggleDeleteTarget}
+                showCircle
+                radius={radius}
+                deleteMode={selectedTarget.id === id}
+                target={target}
+              />
+            );
+          })}
       </MapView>
       <TouchableOpacity
         style={styles.newTarget}
