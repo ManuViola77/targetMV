@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { GREY, RED, BLACK, WHITE } from 'constants/colors';
-import { TOPICS_HEIGHT } from 'constants/targetActions';
+import { TOPICS_HEIGHT } from 'constants/topicActions';
 
 const styles = StyleSheet.create({
   box: {

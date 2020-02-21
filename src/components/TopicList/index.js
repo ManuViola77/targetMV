@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { array, func } from 'prop-types';
+import { arrayOf, func, number, shape, string } from 'prop-types';
 
 import ListItem from 'components/TopicListItem';
 import styles from './styles';
@@ -16,7 +16,15 @@ const TopicList = ({ list, onPress }) => (
 );
 
 TopicList.propTypes = {
-  list: array.isRequired,
+  list: arrayOf(
+    shape({
+      topic: shape({
+        icon: string,
+        id: number,
+        label: string,
+      }),
+    }),
+  ).isRequired,
   onPress: func.isRequired,
 };
 

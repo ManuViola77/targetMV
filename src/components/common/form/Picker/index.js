@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import RNPickerSelect from 'react-native-picker-select';
-import { string, array, object, func } from 'prop-types';
+import { arrayOf, func, object, shape, string } from 'prop-types';
 
 import styles from './styles';
 
@@ -42,10 +42,18 @@ const Picker = ({
 Picker.propTypes = {
   title: string.isRequired,
   text: string.isRequired,
-  placeholder: object.isRequired,
-  options: array.isRequired,
+  placeholder: shape({
+    label: string,
+    value: string,
+  }).isRequired,
+  options: arrayOf(
+    shape({
+      label: string,
+      value: string,
+    }),
+  ).isRequired,
   callback: func.isRequired,
-  errorMessage: array,
+  errorMessage: arrayOf(string),
 };
 
 Picker.defaultProps = {

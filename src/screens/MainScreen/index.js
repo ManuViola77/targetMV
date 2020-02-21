@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Animated, Image, Text, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { getTargets } from 'actions/targetActions';
+import { getTopics } from 'actions/topicActions';
 import location_marker from 'assets/images/location_marker.png';
 import target from 'assets/images/target.png';
-import { SUB_VIEW_HEIGHT, TOPICS_HEIGHT } from 'constants/targetActions';
+import { SUB_VIEW_HEIGHT } from 'constants/targetActions';
+import { TOPICS_HEIGHT } from 'constants/topicActions';
 import Marker from 'components/common/Marker';
 import useAnimateCreateTarget from 'hooks/useAnimateCreateTarget';
 import useGPSLocation from 'hooks/useGPSLocation';
@@ -30,6 +34,28 @@ const Main = ({ navigation }) => {
   const topicListState = topicList.subViewState;
   const toggleTopicListView = topicList.toggleSubview;
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTopics());
+    dispatch(getTargets());
+  }, [dispatch, createTargetState]);
+
+  const apiTargetsList = useSelector(state => state.targets.targetsList);
+  const topicsList = useSelector(state => state.topics.topicsList);
+
+  let targetsList = useMemo(() => {
+    if (apiTargetsList && topicsList) {
+      return (targetsList = apiTargetsList.map(({ target }) => {
+        const { topicId } = target;
+        return {
+          ...target,
+          topic: topicsList.find(({ topic: { id } }) => id === topicId).topic,
+        };
+      }));
+    }
+  }, [topicsList, apiTargetsList]);
+
   return (
     <>
       <MapView
@@ -51,7 +77,19 @@ const Main = ({ navigation }) => {
           location={currentLocation}
           markerKey={0}
           showCircle
+          draggable
         />
+        {targetsList &&
+          targetsList.map(({ id, lat, lng, radius, topic }) => (
+            <Marker
+              icon={location_marker}
+              uriIcon={topic ? topic.icon : null}
+              location={{ latitude: lat, longitude: lng }}
+              markerKey={id}
+              showCircle
+              radius={radius}
+            />
+          ))}
       </MapView>
       <TouchableOpacity
         style={styles.newTarget}
@@ -70,6 +108,7 @@ const Main = ({ navigation }) => {
           currentLocation={currentLocation}
           onPressButton={toggleCreateTargetView}
           currentSubViewState={createTargetState}
+          topicsList={topicsList}
           topicListState={topicListState}
           toggleTopicListView={toggleTopicListView}
         />
