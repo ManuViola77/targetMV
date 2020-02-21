@@ -10,6 +10,7 @@ import { deleteTarget } from 'actions/targetActions';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Link from 'components/common/Link';
+import { AVATAR_MEDIUM } from 'constants/common';
 import { errorMsg } from 'constants/fields';
 import { selectedTargetShape } from 'constants/shapes';
 import { DELETE_TARGET_RESET } from 'constants/targetActions';
@@ -66,7 +67,7 @@ const DeleteTargetModal = ({
             <Avatar
               overlayContainerStyle={styles.icon}
               rounded
-              size={30}
+              size={AVATAR_MEDIUM}
               source={{ uri: topic.icon }}
             />
           </View>
@@ -79,7 +80,7 @@ const DeleteTargetModal = ({
             onPress={() => deleteTargetRequest(id)}
             title={status === LOADING ? COMMON.loading : DELETE_TARGET.button}
           />
-          <Link text={DELETE_TARGET.cancel} onPress={closeModal} />
+          <Link onPress={closeModal} text={DELETE_TARGET.cancel} />
         </View>
       </View>
     </Modal>

@@ -10,7 +10,7 @@ import {
   YELLOW,
   YELLOW_TRANSPARENT,
 } from 'constants/colors';
-import { IOS } from 'constants/common';
+import { AVATAR_SMALL, IOS } from 'constants/common';
 import {
   CIRCLE_RADIUS,
   CIRCLE_BORDER_WIDTH,
@@ -100,7 +100,7 @@ const Marker = ({
                 : styles.uriIconContainer
             }
             rounded
-            size={25}
+            size={AVATAR_SMALL}
             source={{ uri: uriIcon }}
           />
         ) : (

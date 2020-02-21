@@ -1,15 +1,16 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import { WHITE, YELLOW_TRANSPARENT } from 'constants/colors';
+import { CIRCLE_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH } from 'constants/common';
 
 const styles = StyleSheet.create({
   circleView: {
     alignSelf: 'center',
     backgroundColor: YELLOW_TRANSPARENT,
-    borderRadius: 100 / 2,
-    height: 100,
+    borderRadius: CIRCLE_SIZE / 2,
+    height: CIRCLE_SIZE,
     justifyContent: 'center',
-    width: 100,
+    width: CIRCLE_SIZE,
   },
 
   confirmText: {
@@ -36,9 +37,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: WHITE,
     justifyContent: 'space-around',
-    marginHorizontal: Dimensions.get('window').width / 10,
-    marginTop: Dimensions.get('window').height / 6,
-    maxHeight: (5 * Dimensions.get('window').height) / 8,
+    marginHorizontal: WINDOW_WIDTH / 10,
+    marginTop: WINDOW_HEIGHT / 6,
+    maxHeight: (5 * WINDOW_HEIGHT) / 8,
   },
 
   rememberText: {
