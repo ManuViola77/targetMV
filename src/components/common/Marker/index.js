@@ -38,14 +38,21 @@ const Marker = ({
   This is a temporary workaround for the following issue in react-native-maps:
   https://github.com/react-native-community/react-native-maps/issues/2698.
   */
+
+  let getFillColor = () => {
+    if (uriIcon) {
+      return deleteMode ? BLUE_TRANSPARENT : YELLOW_TRANSPARENT;
+    } else {
+      return WHITE;
+    }
+  };
+
+  const fillColor = getFillColor();
+
   useEffect(() => {
     if (Platform.OS === IOS && circle && circle.current) {
       circle.current.setNativeProps({
-        fillColor: uriIcon
-          ? deleteMode
-            ? BLUE_TRANSPARENT
-            : YELLOW_TRANSPARENT
-          : WHITE,
+        fillColor,
         strokeColor: YELLOW,
       });
     }
@@ -70,13 +77,7 @@ const Marker = ({
         <Circle
           center={location}
           ref={circle}
-          fillColor={
-            uriIcon
-              ? deleteMode
-                ? BLUE_TRANSPARENT
-                : YELLOW_TRANSPARENT
-              : WHITE
-          }
+          fillColor={fillColor}
           radius={uriIcon ? radius : CIRCLE_RADIUS}
           strokeColor={YELLOW}
           strokeWidth={uriIcon ? 0 : CIRCLE_BORDER_WIDTH}
