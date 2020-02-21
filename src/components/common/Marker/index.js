@@ -60,11 +60,12 @@ const Marker = ({
 
   let selectedTarget = {};
   if (target) {
+    const { lat, lng } = target;
     selectedTarget = {
       ...target,
       location: {
-        latitude: target.lat,
-        longitude: target.lng,
+        latitude: lat,
+        longitude: lng,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },

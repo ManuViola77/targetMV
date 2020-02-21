@@ -12,11 +12,11 @@ import DeleteTargetModal from 'components/DeleteTargetModal';
 import TopicListPicker from 'components/TopicListPicker';
 import {
   errorMsg,
-  latitude,
-  longitude,
-  radius,
-  title,
-  topicId,
+  latitude as latitudeField,
+  longitude as longitudeField,
+  radius as radiusField,
+  title as titleField,
+  topicId as topicIdField,
   topicSelected,
 } from 'constants/fields';
 import {
@@ -60,18 +60,20 @@ const CreateTargetForm = ({
 
   const errorMessages = { ...errors, ...error };
 
-  const initialState = selectedTarget.id
+  const { id, lat, lng, radius, title, topic, topicId } = selectedTarget;
+  const { latitude, longitude } = currentLocation;
+  const initialState = id
     ? {
-        [title]: selectedTarget.title,
-        [latitude]: selectedTarget.lat,
-        [longitude]: selectedTarget.lng,
-        [radius]: selectedTarget.radius.toString(),
-        [topicSelected]: selectedTarget.topic,
-        [topicId]: selectedTarget.topicId,
+        [titleField]: title,
+        [latitudeField]: lat,
+        [longitudeField]: lng,
+        [radiusField]: radius.toString(),
+        [topicSelected]: topic,
+        [topicIdField]: topicId,
       }
     : {
-        [latitude]: currentLocation.latitude,
-        [longitude]: currentLocation.longitude,
+        [latitudeField]: latitude,
+        [longitudeField]: longitude,
       };
 
   const setInitialState = () => setValues(initialState);
@@ -95,24 +97,24 @@ const CreateTargetForm = ({
   return (
     <View style={styles.container}>
       <Input
-        callback={newValue => handleChange(radius, newValue)}
+        callback={newValue => handleChange(radiusField, newValue)}
         editable={!selectedTarget.id}
-        errorMessage={errorMessages[radius]}
-        text={values[radius]}
+        errorMessage={errorMessages[radiusField]}
+        text={values[radiusField]}
         title={CREATE_TARGET.area}
       />
       <Input
-        callback={newValue => handleChange(title, newValue)}
+        callback={newValue => handleChange(titleField, newValue)}
         editable={!selectedTarget.id}
-        errorMessage={errorMessages[title]}
+        errorMessage={errorMessages[titleField]}
         help={CREATE_TARGET.helpTitle}
-        text={values[title]}
+        text={values[titleField]}
         title={CREATE_TARGET.title}
       />
       <TopicListPicker
         callback={newValue => handleChange(topicSelected, newValue)}
         editable={!selectedTarget.id}
-        errorMessage={errorMessages[topicId]}
+        errorMessage={errorMessages[topicIdField]}
         help={CREATE_TARGET.helpTopic}
         title={CREATE_TARGET.topic}
         subViewState={topicListState}

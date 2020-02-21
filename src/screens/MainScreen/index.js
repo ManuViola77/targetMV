@@ -73,6 +73,8 @@ const Main = ({ navigation }) => {
     toggleCreateTargetView(isHidden);
   };
 
+  const { id: idSelectedTarget, location } = selectedTarget;
+
   return (
     <>
       <MapView
@@ -85,7 +87,7 @@ const Main = ({ navigation }) => {
               closeSubView(createTargetState.isHidden)
         }
         provider={PROVIDER_GOOGLE}
-        region={selectedTarget.id ? selectedTarget.location : currentLocation}
+        region={idSelectedTarget ? location : currentLocation}
         showUserLocation
         style={styles.map}
       >
