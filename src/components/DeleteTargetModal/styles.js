@@ -1,7 +1,10 @@
 import { StyleSheet } from 'react-native';
 
 import { WHITE, YELLOW_TRANSPARENT } from 'constants/colors';
-import { CIRCLE_SIZE, WINDOW_HEIGHT, WINDOW_WIDTH } from 'constants/common';
+import { WINDOW_HEIGHT, WINDOW_WIDTH } from 'constants/common';
+
+export const AVATAR_SIZE = 30;
+export const CIRCLE_SIZE = 100;
 
 const styles = StyleSheet.create({
   circleView: {

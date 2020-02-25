@@ -10,12 +10,11 @@ import { deleteTarget } from 'actions/targetActions';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Link from 'components/common/Link';
-import { AVATAR_MEDIUM } from 'constants/common';
 import { errorMsg } from 'constants/fields';
 import { selectedTargetShape } from 'constants/shapes';
 import { DELETE_TARGET_RESET } from 'constants/targetActions';
 import strings from 'locale';
-import styles from './styles';
+import styles, { AVATAR_SIZE } from './styles';
 
 const DeleteTargetModal = ({
   closeModal,
@@ -67,7 +66,7 @@ const DeleteTargetModal = ({
             <Avatar
               overlayContainerStyle={styles.icon}
               rounded
-              size={AVATAR_MEDIUM}
+              size={AVATAR_SIZE}
               source={{ uri: topic.icon }}
             />
           </View>

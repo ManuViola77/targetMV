@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Image, Platform } from 'react-native';
-import { Avatar } from 'react-native-elements';
 import { Circle, Marker as MapMarker } from 'react-native-maps';
-import { bool, func, number, string, shape } from 'prop-types';
+import { bool, func, number, string } from 'prop-types';
 
 import {
   BLUE_TRANSPARENT,
@@ -10,7 +9,7 @@ import {
   YELLOW,
   YELLOW_TRANSPARENT,
 } from 'constants/colors';
-import { AVATAR_SMALL, IOS } from 'constants/common';
+import { IOS } from 'constants/common';
 import {
   CIRCLE_RADIUS,
   CIRCLE_BORDER_WIDTH,
@@ -94,20 +93,10 @@ const Marker = ({
           uriIcon ? onPress(selectedTarget) : null;
         }}
       >
-        {uriIcon ? (
-          <Avatar
-            overlayContainerStyle={
-              deleteMode
-                ? styles.selectedUriIconContainer
-                : styles.uriIconContainer
-            }
-            rounded
-            size={AVATAR_SMALL}
-            source={{ uri: uriIcon }}
-          />
-        ) : (
-          <Image source={icon} />
-        )}
+        <Image
+          style={uriIcon ? styles.icon : {}}
+          source={uriIcon ? { uri: uriIcon } : icon}
+        />
       </MapMarker>
     </>
   );

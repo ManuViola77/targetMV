@@ -1,14 +1,10 @@
 import { StyleSheet } from 'react-native';
 
-import { BLUE_TRANSPARENT, YELLOW_TRANSPARENT } from 'constants/colors';
-
 const styles = StyleSheet.create({
-  selectedUriIconContainer: {
-    backgroundColor: BLUE_TRANSPARENT,
-  },
-
-  uriIconContainer: {
-    backgroundColor: YELLOW_TRANSPARENT,
+  icon: {
+    borderRadius: 200,
+    height: 35,
+    width: 35,
   },
 });
 

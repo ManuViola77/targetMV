@@ -81,7 +81,7 @@ const CreateTargetForm = ({
   // sets de initial state value for latitude and longitude
   useEffect(() => {
     setInitialState();
-  }, [currentLocation]);
+  }, []);
 
   // reset states when this form is hidden/unhidden
   useEffect(() => {

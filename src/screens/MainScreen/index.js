@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { createRef, useEffect, useMemo } from 'react';
 import { Animated, Image, Text, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,6 +7,7 @@ import { getTargets } from 'actions/targetActions';
 import { getTopics } from 'actions/topicActions';
 import location_marker from 'assets/images/location_marker.png';
 import target from 'assets/images/target.png';
+import { INITIAL_LOCATION } from 'constants/map';
 import { SUB_VIEW_HEIGHT } from 'constants/targetActions';
 import { TOPICS_HEIGHT } from 'constants/topicActions';
 import Marker from 'components/common/Marker';
@@ -21,9 +22,13 @@ import styles from './styles';
 const Main = ({ navigation }) => {
   useNavigateOnLogoutEffect(navigation);
 
-  const { currentLocation, useWatchLocation } = useGPSLocation();
+  const mapView = createRef();
 
-  useWatchLocation();
+  const {
+    currentLocation,
+    currentLocationOnMap,
+    setCurrentLocationOnMap,
+  } = useGPSLocation();
 
   // state for animation for CreateTargetForm
   const createTarget = useAnimateCreateTarget(SUB_VIEW_HEIGHT);
@@ -37,10 +42,14 @@ const Main = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getTopicsAndTargets = () => {
     dispatch(getTopics());
     dispatch(getTargets());
-  }, [dispatch, createTargetState]);
+  };
+
+  useEffect(() => {
+    getTopicsAndTargets();
+  }, []);
 
   const apiTargetsList = useSelector(state => state.targets.targetsList);
   const topicsList = useSelector(state => state.topics.topicsList);
@@ -71,14 +80,33 @@ const Main = ({ navigation }) => {
   const closeSubView = isHidden => {
     resetSelectedTarget();
     toggleCreateTargetView(isHidden);
+    getTopicsAndTargets();
+    mapView.current.animateToRegion(currentLocation);
   };
 
   const { id: idSelectedTarget, location } = selectedTarget;
+
+  // Instead of constantly follow the users location, it moves to marker's location
+  // when a target is pressed and it moves to current location just the first time
+  // a current location is different than the initial one.
+  // The current location marker still moves as the user location changes, but the map
+  // doesn't follow, so the user can move the map anywhere.
+  useEffect(() => {
+    if (idSelectedTarget) {
+      mapView.current.animateToRegion(location);
+    } else {
+      if (!currentLocationOnMap && currentLocation !== INITIAL_LOCATION) {
+        mapView.current.animateToRegion(currentLocation);
+        setCurrentLocationOnMap(true);
+      }
+    }
+  }, [currentLocation, idSelectedTarget]);
 
   return (
     <>
       <MapView
         followUserLocation
+        initialRegion={currentLocation}
         loadingEnabled
         onPress={() =>
           !topicListState.isHidden
@@ -87,7 +115,7 @@ const Main = ({ navigation }) => {
               closeSubView(createTargetState.isHidden)
         }
         provider={PROVIDER_GOOGLE}
-        region={idSelectedTarget ? location : currentLocation}
+        ref={mapView}
         showUserLocation
         style={styles.map}
       >
