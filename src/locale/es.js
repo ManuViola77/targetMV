@@ -33,7 +33,7 @@ export default {
     cancel: 'Cancelar',
     confirmText: '¿Seguro que desea eliminar este target?',
     rememberText:
-      'Recuerda que si lo elimina, ya no podrá chatear con sus coincidencias',
+      'Recuerde que si lo elimina, ya no podrá chatear con sus coincidencias',
   },
 
   GENDER: {

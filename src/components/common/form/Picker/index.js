@@ -50,7 +50,6 @@ Picker.propTypes = {
 };
 
 Picker.defaultProps = {
-  errorMessage: null,
   text: '',
 };
 

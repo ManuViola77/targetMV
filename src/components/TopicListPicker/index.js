@@ -77,11 +77,8 @@ TopicListPicker.propTypes = {
 
 TopicListPicker.defaultProps = {
   editable: true,
-  errorMessage: null,
   help: '',
-  subViewState: null,
   title: '',
-  topicSelected: null,
   topicsList: [],
 };
 

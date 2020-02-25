@@ -50,7 +50,6 @@ Input.defaultProps = {
   autoCapitalize: 'none',
   autoCorrect: false,
   editable: true,
-  errorMessage: null,
   help: '',
   secureTextEntry: false,
   text: '',
