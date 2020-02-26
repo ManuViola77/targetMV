@@ -82,9 +82,11 @@ const CreateTargetForm = ({
     setInitialState();
   }, []);
 
-  // reset states when this form is hidden/unhidden
+  // reset states when this form is hidden/unhidden and isn't delete mode (no selectedTarget)
   useEffect(() => {
-    dispatch(createTargetReset());
+    !selectedTarget.id &&
+      currentSubViewState.isHidden &&
+      dispatch(createTargetReset());
     setInitialState();
   }, [currentSubViewState]);
 

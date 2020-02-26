@@ -35,7 +35,7 @@ const DeleteTargetModal = ({
 
   // reset states when this form is hidden/unhidden
   useEffect(() => {
-    dispatch(deleteTargetReset());
+    !isModalVisible && dispatch(deleteTargetReset());
   }, [isModalVisible]);
 
   // close modal and targetView when delete is success
