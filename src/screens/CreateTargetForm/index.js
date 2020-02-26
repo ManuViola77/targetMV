@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
@@ -26,7 +26,6 @@ import {
   topicShape,
 } from 'constants/shapes';
 import useFormStates from 'hooks/useFormStates';
-import useModalState from 'hooks/useModalState';
 import strings from 'locale';
 import createTargetValidations from 'validations/createTargetValidations';
 import styles from './styles';
@@ -90,7 +89,7 @@ const CreateTargetForm = ({
     setInitialState();
   }, [currentSubViewState]);
 
-  const { isModalVisible, setIsModalVisible } = useModalState();
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const openModal = () => setIsModalVisible(true);
   const closeModal = () => setIsModalVisible(false);

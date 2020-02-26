@@ -29,11 +29,9 @@ const DeleteTargetModal = ({
     [dispatch],
   );
 
-  const { error, status } = useStatus(deleteTarget);
+  const { error = {}, status } = useStatus(deleteTarget);
 
-  const errorMessages = { ...error };
-
-  // reset states when this form is hidden/unhidden
+  // reset states when this form is hidden
   useEffect(() => {
     !isModalVisible && dispatch(deleteTargetReset());
   }, [isModalVisible]);
@@ -72,7 +70,7 @@ const DeleteTargetModal = ({
         </View>
         <Text style={styles.targetTitle}>{title}</Text>
         <Text style={styles.rememberText}>{DELETE_TARGET.rememberText}</Text>
-        <ErrorView error={errorMessages[errorMsg]} />
+        {error && <ErrorView error={error[errorMsg]} />}
         <View>
           <Button
             onPress={() => deleteTargetRequest(id)}

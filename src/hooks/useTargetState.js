@@ -6,11 +6,7 @@ const useTargetState = () => {
 
   const resetSelectedTarget = () => setSelectedTarget(initialState);
 
-  return {
-    resetSelectedTarget,
-    selectedTarget,
-    setSelectedTarget,
-  };
+  return [resetSelectedTarget, selectedTarget, setSelectedTarget];
 };
 
 export default useTargetState;

@@ -66,11 +66,11 @@ const Main = ({ navigation }) => {
     }
   }, [topicsList, apiTargetsList]);
 
-  const {
+  const [
     resetSelectedTarget,
     selectedTarget,
     setSelectedTarget,
-  } = useTargetState();
+  ] = useTargetState();
 
   const toggleDeleteTarget = selTarget => {
     setSelectedTarget(selTarget);
@@ -123,6 +123,7 @@ const Main = ({ navigation }) => {
           draggable
           icon={location_marker}
           id={0}
+          key={0}
           location={currentLocation}
           showCircle
         />
@@ -134,6 +135,7 @@ const Main = ({ navigation }) => {
                 deleteMode={selectedTarget.id === id}
                 icon={location_marker}
                 id={id}
+                key={id}
                 location={{ latitude: lat, longitude: lng }}
                 onPress={toggleDeleteTarget}
                 radius={radius}
