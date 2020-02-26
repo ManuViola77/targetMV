@@ -9,7 +9,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
-import { login } from 'actions/userActions';
+import { login, loginReset } from 'actions/userActions';
 import loginIcon from 'assets/images/logoLogin.png';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
@@ -17,7 +17,6 @@ import Input from 'components/common/form/Input';
 import Header from 'components/common/Header';
 import { email, password, errorMsg } from 'constants/fields';
 import { SIGN_UP_SCREEN } from 'constants/screens';
-import { LOGIN_RESET } from 'constants/userActions';
 import useFormStates from 'hooks/useFormStates';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 import strings from 'locale';
@@ -46,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
   const errorMessages = { ...errors, ...error };
 
   const cleanUp = () => {
-    dispatch(LOGIN_RESET);
+    dispatch(loginReset());
     resetState({}, {});
   };
 

@@ -10,7 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
-import { signUp } from 'actions/userActions';
+import { signUp, signUpReset } from 'actions/userActions';
 import loginIcon from 'assets/images/logoLogin.png';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
@@ -25,7 +25,6 @@ import {
   gender,
   errorMsg,
 } from 'constants/fields';
-import { SIGNUP_RESET } from 'constants/userActions';
 import useFormStates from 'hooks/useFormStates';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 import strings from 'locale';
@@ -36,7 +35,7 @@ const { SIGN_UP, SIGN_UP_HELP, GENDER, COMMON } = strings;
 
 const SignUp = ({ navigation }) => {
   useEffect(() => {
-    return () => dispatch(SIGNUP_RESET);
+    return () => dispatch(signUpReset());
   }, []);
 
   const signIn = useCallback(() => navigation.goBack(), [navigation]);

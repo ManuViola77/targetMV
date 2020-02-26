@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
 import { arrayOf, func } from 'prop-types';
 
-import { createTarget } from 'actions/targetActions';
+import { createTarget, createTargetReset } from 'actions/targetActions';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
@@ -25,7 +25,6 @@ import {
   subViewStateShape,
   topicShape,
 } from 'constants/shapes';
-import { CREATE_TARGET_RESET } from 'constants/targetActions';
 import useFormStates from 'hooks/useFormStates';
 import useModalState from 'hooks/useModalState';
 import strings from 'locale';
@@ -85,7 +84,7 @@ const CreateTargetForm = ({
 
   // reset states when this form is hidden/unhidden
   useEffect(() => {
-    dispatch(CREATE_TARGET_RESET);
+    dispatch(createTargetReset());
     setInitialState();
   }, [currentSubViewState]);
 

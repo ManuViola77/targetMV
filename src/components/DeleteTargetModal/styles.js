@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { WHITE, YELLOW_TRANSPARENT } from 'constants/colors';
-import { WINDOW_HEIGHT, WINDOW_WIDTH } from 'constants/common';
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from 'constants/common';
 
 export const AVATAR_SIZE = 30;
 export const CIRCLE_SIZE = 100;
@@ -40,9 +40,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: WHITE,
     justifyContent: 'space-around',
-    marginHorizontal: WINDOW_WIDTH / 10,
-    marginTop: WINDOW_HEIGHT / 6,
-    maxHeight: (5 * WINDOW_HEIGHT) / 8,
+    marginHorizontal: SCREEN_WIDTH / 10,
+    marginTop: SCREEN_HEIGHT / 6,
+    maxHeight: (5 * SCREEN_HEIGHT) / 8,
   },
 
   rememberText: {

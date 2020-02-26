@@ -8,8 +8,8 @@ import { getTopics } from 'actions/topicActions';
 import location_marker from 'assets/images/location_marker.png';
 import target from 'assets/images/target.png';
 import { INITIAL_LOCATION } from 'constants/map';
-import { SUB_VIEW_HEIGHT } from 'constants/targetActions';
-import { TOPICS_HEIGHT } from 'constants/topicActions';
+import { CREATE_TARGET_HEIGHT } from 'constants/common';
+import { TOPICS_HEIGHT } from 'constants/common';
 import Marker from 'components/common/Marker';
 import useAnimateCreateTarget from 'hooks/useAnimateCreateTarget';
 import useGPSLocation from 'hooks/useGPSLocation';
@@ -31,7 +31,7 @@ const Main = ({ navigation }) => {
   } = useGPSLocation();
 
   // state for animation for CreateTargetForm
-  const createTarget = useAnimateCreateTarget(SUB_VIEW_HEIGHT);
+  const createTarget = useAnimateCreateTarget(CREATE_TARGET_HEIGHT);
   const createTargetState = createTarget.subViewState;
   const toggleCreateTargetView = createTarget.toggleSubview;
 

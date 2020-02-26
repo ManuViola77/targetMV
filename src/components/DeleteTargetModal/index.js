@@ -6,13 +6,12 @@ import { useDispatch } from 'react-redux';
 import { LOADING, SUCCESS, useStatus } from '@rootstrap/redux-tools';
 import { bool, func } from 'prop-types';
 
-import { deleteTarget } from 'actions/targetActions';
+import { deleteTarget, deleteTargetReset } from 'actions/targetActions';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Link from 'components/common/Link';
 import { errorMsg } from 'constants/fields';
 import { selectedTargetShape } from 'constants/shapes';
-import { DELETE_TARGET_RESET } from 'constants/targetActions';
 import strings from 'locale';
 import styles, { AVATAR_SIZE } from './styles';
 
@@ -36,7 +35,7 @@ const DeleteTargetModal = ({
 
   // reset states when this form is hidden/unhidden
   useEffect(() => {
-    dispatch(DELETE_TARGET_RESET);
+    dispatch(deleteTargetReset());
   }, [isModalVisible]);
 
   // close modal and targetView when delete is success

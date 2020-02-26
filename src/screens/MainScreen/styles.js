@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 import { WHITE } from 'constants/colors';
-import { SUB_VIEW_HEIGHT } from 'constants/targetActions';
+import { CREATE_TARGET_HEIGHT } from 'constants/common';
 
 const styles = StyleSheet.create({
   map: {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     backgroundColor: WHITE,
-    height: SUB_VIEW_HEIGHT,
+    height: CREATE_TARGET_HEIGHT,
   },
 
   text: {
