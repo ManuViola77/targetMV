@@ -10,7 +10,7 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
-import { signUp } from 'actions/userActions';
+import { signUp, signUpReset } from 'actions/userActions';
 import loginIcon from 'assets/images/logoLogin.png';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
@@ -25,7 +25,6 @@ import {
   gender,
   errorMsg,
 } from 'constants/fields';
-import { SIGNUP_RESET } from 'constants/userActions';
 import useFormStates from 'hooks/useFormStates';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 import strings from 'locale';
@@ -36,7 +35,7 @@ const { SIGN_UP, SIGN_UP_HELP, GENDER, COMMON } = strings;
 
 const SignUp = ({ navigation }) => {
   useEffect(() => {
-    return () => dispatch(SIGNUP_RESET);
+    return () => dispatch(signUpReset());
   }, []);
 
   const signIn = useCallback(() => navigation.goBack(), [navigation]);
@@ -56,47 +55,46 @@ const SignUp = ({ navigation }) => {
       <SafeAreaView style={styles.safeArea}>
         <KeyboardAwareScrollView keyboardShouldPersistTaps={'handled'}>
           <Input
-            title={SIGN_UP.name}
-            text={values[name]}
+            autoCapitalize="words"
             callback={newValue => handleChange(name, newValue)}
             errorMessage={errorMessages[name]}
-            autoCapitalize="words"
+            text={values[name]}
+            title={SIGN_UP.name}
           />
           <Input
-            title={SIGN_UP.email}
-            text={values[email]}
             callback={newValue => handleChange(email, newValue)}
             errorMessage={errorMessages[email]}
+            text={values[email]}
+            title={SIGN_UP.email}
           />
           <Input
-            title={SIGN_UP.password}
-            secureTextEntry
-            text={values[password]}
             callback={newValue => handleChange(password, newValue)}
             errorMessage={errorMessages[password]}
             help={SIGN_UP_HELP.helpPassword}
+            secureTextEntry
+            text={values[password]}
+            title={SIGN_UP.password}
           />
           <Input
-            title={SIGN_UP.confirmPassword}
-            secureTextEntry
-            text={values[confirmPassword]}
             callback={newValue => handleChange(confirmPassword, newValue)}
             errorMessage={errorMessages[confirmPassword]}
+            secureTextEntry
+            text={values[confirmPassword]}
+            title={SIGN_UP.confirmPassword}
           />
           <Picker
-            title={SIGN_UP.gender}
-            text={values[gender]}
-            placeholder={GENDER.placeholder}
-            options={GENDER.options}
             callback={newValue => handleChange(gender, newValue)}
             errorMessage={errorMessages[gender]}
+            options={GENDER.options}
+            placeholder={GENDER.placeholder}
+            text={values[gender]}
+            title={SIGN_UP.gender}
           />
           <ErrorView error={errorMessages[errorMsg]} />
           <Button
-            title={status === LOADING ? COMMON.loading : SIGN_UP.button}
             onPress={() => handleConfirmForm(signUpValidations)}
+            title={status === LOADING ? COMMON.loading : SIGN_UP.button}
           />
-
           <View style={styles.allLeftSpace}>
             <View style={styles.lineStyle} />
             <TouchableOpacity onPress={signIn}>

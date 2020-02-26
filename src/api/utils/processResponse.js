@@ -1,8 +1,8 @@
 import humps from 'humps';
-import { API } from 'locale';
+import strings from 'locale';
 
 export default async response => {
-  if (!response) throw new Error({ message: API.errorMessage });
+  if (!response) throw new Error({ message: strings.API.errorMessage });
 
   try {
     const json = await response.json();
@@ -12,7 +12,7 @@ export default async response => {
     );
     return response;
   } catch (error) {
-    response.data = { message: API.errorNotJSON };
+    response.data = { message: strings.API.errorNotJSON };
     return response;
   }
 };

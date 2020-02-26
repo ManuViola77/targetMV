@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { createRef, useEffect, useMemo } from 'react';
 import { Animated, Image, Text, TouchableOpacity } from 'react-native';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 import { useDispatch, useSelector } from 'react-redux';
@@ -7,12 +7,14 @@ import { getTargets } from 'actions/targetActions';
 import { getTopics } from 'actions/topicActions';
 import location_marker from 'assets/images/location_marker.png';
 import target from 'assets/images/target.png';
-import { SUB_VIEW_HEIGHT } from 'constants/targetActions';
-import { TOPICS_HEIGHT } from 'constants/topicActions';
+import { INITIAL_LOCATION } from 'constants/map';
+import { CREATE_TARGET_HEIGHT } from 'constants/common';
+import { TOPICS_HEIGHT } from 'constants/common';
 import Marker from 'components/common/Marker';
 import useAnimateCreateTarget from 'hooks/useAnimateCreateTarget';
 import useGPSLocation from 'hooks/useGPSLocation';
 import useNavigateOnLogoutEffect from 'hooks/useNavigateOnLogoutEffect';
+import useTargetState from 'hooks/useTargetState';
 import strings from 'locale';
 import CreateTargetForm from 'screens/CreateTargetForm';
 import styles from './styles';
@@ -20,12 +22,16 @@ import styles from './styles';
 const Main = ({ navigation }) => {
   useNavigateOnLogoutEffect(navigation);
 
-  const { currentLocation, useWatchLocation } = useGPSLocation();
+  const mapView = createRef();
 
-  useWatchLocation();
+  const {
+    currentLocation,
+    currentLocationOnMap,
+    setCurrentLocationOnMap,
+  } = useGPSLocation();
 
   // state for animation for CreateTargetForm
-  const createTarget = useAnimateCreateTarget(SUB_VIEW_HEIGHT);
+  const createTarget = useAnimateCreateTarget(CREATE_TARGET_HEIGHT);
   const createTargetState = createTarget.subViewState;
   const toggleCreateTargetView = createTarget.toggleSubview;
 
@@ -36,10 +42,14 @@ const Main = ({ navigation }) => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
+  const getTopicsAndTargets = () => {
     dispatch(getTopics());
     dispatch(getTargets());
-  }, [dispatch, createTargetState]);
+  };
+
+  useEffect(() => {
+    getTopicsAndTargets();
+  }, []);
 
   const apiTargetsList = useSelector(state => state.targets.targetsList);
   const topicsList = useSelector(state => state.topics.topicsList);
@@ -56,40 +66,85 @@ const Main = ({ navigation }) => {
     }
   }, [topicsList, apiTargetsList]);
 
+  const [
+    resetSelectedTarget,
+    selectedTarget,
+    setSelectedTarget,
+  ] = useTargetState();
+
+  const toggleDeleteTarget = selTarget => {
+    setSelectedTarget(selTarget);
+    toggleCreateTargetView(true);
+  };
+
+  const closeSubView = isHidden => {
+    resetSelectedTarget();
+    toggleCreateTargetView(isHidden);
+    getTopicsAndTargets();
+    mapView.current.animateToRegion(currentLocation);
+  };
+
+  const { id: idSelectedTarget, location } = selectedTarget;
+
+  // Instead of constantly follow the users location, it moves to marker's location
+  // when a target is pressed and it moves to current location just the first time
+  // a current location is different than the initial one.
+  // The current location marker still moves as the user location changes, but the map
+  // doesn't follow, so the user can move the map anywhere.
+  useEffect(() => {
+    if (idSelectedTarget) {
+      mapView.current.animateToRegion(location);
+    } else {
+      if (!currentLocationOnMap && currentLocation !== INITIAL_LOCATION) {
+        mapView.current.animateToRegion(currentLocation);
+        setCurrentLocationOnMap(true);
+      }
+    }
+  }, [currentLocation, idSelectedTarget]);
+
   return (
     <>
       <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        showUserLocation
         followUserLocation
+        initialRegion={currentLocation}
         loadingEnabled
-        region={currentLocation}
         onPress={() =>
           !topicListState.isHidden
             ? toggleTopicListView(topicListState.isHidden)
             : !createTargetState.isHidden &&
-              toggleCreateTargetView(createTargetState.isHidden)
+              closeSubView(createTargetState.isHidden)
         }
+        provider={PROVIDER_GOOGLE}
+        ref={mapView}
+        showUserLocation
+        style={styles.map}
       >
         <Marker
-          icon={location_marker}
-          location={currentLocation}
-          markerKey={0}
-          showCircle
           draggable
+          icon={location_marker}
+          id={0}
+          key={0}
+          location={currentLocation}
+          showCircle
         />
         {targetsList &&
-          targetsList.map(({ id, lat, lng, radius, topic }) => (
-            <Marker
-              icon={location_marker}
-              uriIcon={topic ? topic.icon : null}
-              location={{ latitude: lat, longitude: lng }}
-              markerKey={id}
-              showCircle
-              radius={radius}
-            />
-          ))}
+          targetsList.map(target => {
+            const { id, lat, lng, radius, topic } = target;
+            return (
+              <Marker
+                deleteMode={selectedTarget.id === id}
+                icon={location_marker}
+                id={id}
+                key={id}
+                location={{ latitude: lat, longitude: lng }}
+                onPress={toggleDeleteTarget}
+                radius={radius}
+                showCircle
+                target={target}
+                uriIcon={topic ? topic.icon : null}
+              />
+            );
+          })}
       </MapView>
       <TouchableOpacity
         style={styles.newTarget}
@@ -106,11 +161,12 @@ const Main = ({ navigation }) => {
       >
         <CreateTargetForm
           currentLocation={currentLocation}
-          onPressButton={toggleCreateTargetView}
           currentSubViewState={createTargetState}
+          onPressButton={closeSubView}
+          selectedTarget={selectedTarget}
+          toggleTopicListView={toggleTopicListView}
           topicsList={topicsList}
           topicListState={topicListState}
-          toggleTopicListView={toggleTopicListView}
         />
       </Animated.View>
     </>

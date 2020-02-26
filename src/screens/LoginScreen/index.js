@@ -9,7 +9,7 @@ import {
 import { useDispatch } from 'react-redux';
 import { useStatus, LOADING } from '@rootstrap/redux-tools';
 
-import { login } from 'actions/userActions';
+import { login, loginReset } from 'actions/userActions';
 import loginIcon from 'assets/images/logoLogin.png';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
@@ -17,7 +17,6 @@ import Input from 'components/common/form/Input';
 import Header from 'components/common/Header';
 import { email, password, errorMsg } from 'constants/fields';
 import { SIGN_UP_SCREEN } from 'constants/screens';
-import { LOGIN_RESET } from 'constants/userActions';
 import useFormStates from 'hooks/useFormStates';
 import useNavigateOnLoginEffect from 'hooks/useNavigateOnLoginEffect';
 import strings from 'locale';
@@ -46,7 +45,7 @@ const LoginScreen = ({ navigation }) => {
   const errorMessages = { ...errors, ...error };
 
   const cleanUp = () => {
-    dispatch(LOGIN_RESET);
+    dispatch(loginReset());
     resetState({}, {});
   };
 
@@ -67,22 +66,22 @@ const LoginScreen = ({ navigation }) => {
       <Header title={COMMON.headerTitle} />
       <SafeAreaView style={styles.safeArea}>
         <Input
-          title={LOGIN.email}
-          text={values[email]}
           callback={newValue => handleChange(email, newValue)}
           errorMessage={errorMessages[email]}
+          text={values[email]}
+          title={LOGIN.email}
         />
         <Input
-          title={LOGIN.password}
-          secureTextEntry
-          text={values[password]}
           callback={newValue => handleChange(password, newValue)}
           errorMessage={errorMessages[password]}
+          text={values[password]}
+          title={LOGIN.password}
+          secureTextEntry
         />
         <ErrorView error={errorMessages[errorMsg]} />
         <Button
-          title={status === LOADING ? COMMON.loading : LOGIN.button}
           onPress={() => handleConfirmForm(signInValidations)}
+          title={status === LOADING ? COMMON.loading : LOGIN.button}
         />
         <View style={styles.container}>
           <TouchableOpacity>

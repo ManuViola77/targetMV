@@ -3,7 +3,7 @@ import humps from 'humps';
 import InterceptorManager from 'api/utils/InterceptorManager';
 import processResponse from 'api/utils/processResponse';
 import { HTTP_VERB } from 'constants/api';
-import { API } from 'locale';
+import strings from 'locale';
 
 class ApiService {
   baseUrl = '';
@@ -61,7 +61,7 @@ class ApiService {
       );
       const response = await fetch(url, request);
       if (!response) {
-        throw new Error({ message: API.errorMessage });
+        throw new Error({ message: strings.API.errorMessage });
       }
 
       return this.handleResponse(response);

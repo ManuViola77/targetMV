@@ -1,8 +1,9 @@
 import { createThunk } from '@rootstrap/redux-tools';
 
-import { GET_TOPICS } from 'constants/topicActions';
 import topicService from 'services/topicService';
 import parseError from 'utils/parseError';
+
+const GET_TOPICS = 'GET_TOPICS';
 
 export const getTopics = createThunk(GET_TOPICS, async () => {
   try {
@@ -14,3 +15,5 @@ export const getTopics = createThunk(GET_TOPICS, async () => {
     throw parseError(data);
   }
 });
+
+export const { success: getTopicsSuccess } = getTopics;

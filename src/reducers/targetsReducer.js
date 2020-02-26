@@ -1,10 +1,10 @@
 import { createReducer } from '@rootstrap/redux-tools';
-import { getTargets } from 'actions/targetActions';
+import { getTargetsSuccess } from 'actions/targetActions';
 
 const initialState = { targetsList: [] };
 
 const targetsReducer = {
-  [getTargets.success]: (store, action) => {
+  [getTargetsSuccess]: (store, action) => {
     store.targetsList = action.payload;
   },
 };

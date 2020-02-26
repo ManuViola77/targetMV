@@ -1,10 +1,10 @@
 import { createReducer } from '@rootstrap/redux-tools';
-import { getTopics } from 'actions/topicActions';
+import { getTopicsSuccess } from 'actions/topicActions';
 
 const initialState = { topicsList: [] };
 
 const topicsReducer = {
-  [getTopics.success]: (store, action) => {
+  [getTopicsSuccess]: (store, action) => {
     store.topicsList = action.payload;
   },
 };

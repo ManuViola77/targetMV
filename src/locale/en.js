@@ -28,6 +28,14 @@ export default {
     emptyTopic: "Topic can't be blank",
   },
 
+  DELETE_TARGET: {
+    button: 'Delete',
+    cancel: 'Cancel',
+    confirmText: 'Are you sure you want to delete this target?',
+    rememberText:
+      "Remember that if you delete it, you won't be able to chat with it's matches anymore",
+  },
+
   GENDER: {
     placeholder: { label: 'Select your gender', value: '' },
     options: [

@@ -1,19 +1,25 @@
 import React from 'react';
 import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
-import { arrayOf, bool, func, number, object, shape, string } from 'prop-types';
+import { arrayOf, bool, func, string } from 'prop-types';
 
 import ErrorView from 'components/common/form/ErrorView';
 import TopicList from 'components/TopicList';
+import {
+  subViewStateShape,
+  topicItemShape,
+  topicShape,
+} from 'constants/shapes';
 import styles from './styles';
 
 const TopicListPicker = ({
-  title,
-  topicSelected,
   callback,
+  editable,
   errorMessage,
   help,
   subViewState,
+  title,
   toggleSubview,
+  topicSelected,
   topicsList,
 }) => {
   const onPressTopic = (item, isHidden) => {
@@ -26,6 +32,7 @@ const TopicListPicker = ({
       <View style={styles.container}>
         <Text style={styles.title}>{title}</Text>
         <TouchableOpacity
+          disabled={!editable}
           onPress={() => toggleSubview(subViewState.isHidden)}
           style={[styles.box, errorMessage ? styles.error : {}]}
         >
@@ -46,9 +53,9 @@ const TopicListPicker = ({
       >
         {!subViewState.isHidden && (
           <TopicList
+            currentSubViewState={subViewState}
             list={topicsList}
             onPress={onPressTopic}
-            currentSubViewState={subViewState}
           />
         )}
       </Animated.View>
@@ -57,37 +64,21 @@ const TopicListPicker = ({
 };
 
 TopicListPicker.propTypes = {
-  title: string.isRequired,
-  topicSelected: shape({
-    icon: string,
-    id: number,
-    label: string,
-  }),
   callback: func.isRequired,
+  editable: bool,
   errorMessage: arrayOf(string),
   help: string,
-  subViewState: shape({
-    bounceValue: object,
-    isHidden: bool,
-  }).isRequired,
+  subViewState: subViewStateShape.isRequired,
+  title: string.isRequired,
   toggleSubview: func.isRequired,
-  topicsList: arrayOf(
-    shape({
-      topic: shape({
-        icon: string,
-        id: number,
-        label: string,
-      }),
-    }),
-  ).isRequired,
+  topicSelected: topicItemShape,
+  topicsList: arrayOf(topicShape).isRequired,
 };
 
 TopicListPicker.defaultProps = {
-  title: '',
-  topicSelected: null,
-  errorMessage: null,
+  editable: true,
   help: '',
-  subViewState: null,
+  title: '',
   topicsList: [],
 };
 
