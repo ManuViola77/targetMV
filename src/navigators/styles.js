@@ -1,12 +1,16 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
+  arrowBackStyle: {
+    marginRight: 30,
+  },
+
   leftIcon: {
-    marginLeft: 10,
+    marginLeft: 20,
   },
 
   rightIcon: {
-    marginRight: 10,
+    marginRight: 20,
   },
 });
 
