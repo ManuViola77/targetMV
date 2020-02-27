@@ -1,5 +1,10 @@
 import { createReducer } from '@rootstrap/redux-tools';
-import { loginSuccess, signUpSuccess, logoutSuccess, updateSession } from 'actions/userActions';
+import {
+  loginSuccess,
+  signUpSuccess,
+  logoutSuccess,
+  updateSession,
+} from 'actions/userActions';
 
 const initialState = {
   user: null,
@@ -7,7 +12,7 @@ const initialState = {
 };
 
 const handleLoginSuccess = (state, { payload }) => {
-  state.user = payload;
+  state.userId = payload;
 };
 
 const handleLogoutSuccess = () => {

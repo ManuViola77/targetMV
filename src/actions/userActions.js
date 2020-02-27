@@ -11,9 +11,11 @@ const UPDATE_SESSION = 'UPDATE_SESSION';
 export const login = createThunk(LOGIN, async user => {
   try {
     const {
-      data: { user: createdUser },
+      data: {
+        data: { id: userId },
+      },
     } = await userService.login({ user });
-    return createdUser;
+    return userId;
   } catch ({ data }) {
     throw parseError(data);
   }

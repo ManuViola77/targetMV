@@ -55,6 +55,16 @@ export default {
     signUp: 'Registrarse',
   },
 
+  PROFILE: {
+    email: 'Email',
+    firstName: 'Nombre',
+    lastName: 'Apellido',
+    logOut: 'Cerrar Sesión',
+    password: 'Cambiar Contraseña',
+    save: 'Guardar Cambios',
+    username: 'Usuario',
+  },
+
   SIGN_UP: {
     title: 'Registrarse',
     name: 'Nombre',
