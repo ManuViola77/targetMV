@@ -1,16 +1,8 @@
-import {
-  name,
-  email,
-  firstName,
-  lastName,
-  gender,
-  avatar,
-  //push_token,
-} from 'constants/fields';
+import { name, email, gender } from 'constants/fields';
 
 import strings from 'locale';
 
-const { SIGN_UP_ERROR /*, UPDATE_PROFILE_ERROR*/ } = strings;
+const { SIGN_UP_ERROR } = strings;
 
 const updateProfileValidations = {
   [gender]: {
