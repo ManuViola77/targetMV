@@ -4,8 +4,8 @@ import { getProfileSuccess } from 'actions/profileActions';
 const initialState = { user: {} };
 
 const profileReducer = {
-  [getProfileSuccess]: (store, action) => {
-    store.user = action.payload;
+  [getProfileSuccess]: (store, { payload }) => {
+    store.user = payload;
   },
 };
 

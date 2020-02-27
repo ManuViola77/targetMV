@@ -137,10 +137,7 @@ const ProfileScreen = ({ navigation }) => {
         text={values[lastNameField]}
         title={PROFILE.lastName}
       />
-      <Link
-        text={PROFILE.password}
-        onPress={() => console.log('change password')}
-      />
+      <Link text={PROFILE.password} onPress={() => {}} />
       <ErrorView error={errors[errorMsg]} />
       <Button
         title={PROFILE.save}
