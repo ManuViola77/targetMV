@@ -55,6 +55,16 @@ export default {
     signUp: 'Sign Up',
   },
 
+  PROFILE: {
+    email: 'Email',
+    firstName: 'First Name',
+    lastName: 'Last Name',
+    logOut: 'Log out',
+    password: 'Change Password',
+    save: 'Save Changes',
+    username: 'Username',
+  },
+
   SIGN_UP: {
     title: 'Sign up',
     name: 'Name',

@@ -1,13 +1,19 @@
 import { createReducer } from '@rootstrap/redux-tools';
-import { loginSuccess, signUpSuccess, logoutSuccess, updateSession } from 'actions/userActions';
+
+import {
+  loginSuccess,
+  signUpSuccess,
+  logoutSuccess,
+  updateSession,
+} from 'actions/userActions';
 
 const initialState = {
-  user: null,
+  userId: null,
   info: null,
 };
 
 const handleLoginSuccess = (state, { payload }) => {
-  state.user = payload;
+  state.userId = payload;
 };
 
 const handleLogoutSuccess = () => {
