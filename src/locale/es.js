@@ -55,6 +55,12 @@ export default {
     signUp: 'Registrarse',
   },
 
+  PHOTO_PERMISSION: {
+    title: 'Explicación del Permiso',
+    message:
+      'Se quiere acceder a las fotos para poder elegir una como foto de perfil',
+  },
+
   PROFILE: {
     email: 'Email',
     firstName: 'Nombre',
@@ -94,6 +100,7 @@ export default {
   TITLE: {
     createTarget: 'Crear Nuevo Target',
     main: 'Puntos Target',
+    photos: 'Fotos',
     profile: 'Perfil',
   },
 };

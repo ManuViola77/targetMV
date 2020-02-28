@@ -55,6 +55,11 @@ export default {
     signUp: 'Sign Up',
   },
 
+  PHOTO_PERMISSION: {
+    title: 'Permission Explanation',
+    message: 'Want to access your photos so you can choose an avatar',
+  },
+
   PROFILE: {
     email: 'Email',
     firstName: 'First Name',
@@ -94,6 +99,7 @@ export default {
   TITLE: {
     createTarget: 'Create New Target',
     main: 'Target Points',
+    photos: 'Photos',
     profile: 'Profile',
   },
 };

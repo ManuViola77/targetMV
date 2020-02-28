@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Image, ImageBackground, Alert } from 'react-native';
+import { Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStatus, ERROR, LOADING, SUCCESS } from '@rootstrap/redux-tools';
 
@@ -24,6 +24,7 @@ import {
   avatar as avatarField,
   errorMsg,
 } from 'constants/fields';
+import { CAMERA_ROLL_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
 import strings from 'locale';
 import updateProfileValidations from 'validations/updateProfileValidations';
@@ -105,13 +106,17 @@ const ProfileScreen = ({ navigation }) => {
         source={profile_logo}
         style={styles.image}
       >
-        <Image
-          resizeMode="contain"
-          source={
-            avatar.normalUrl ? { uri: avatar.normalUrl } : default_profile_image
-          }
-          style={styles.profileImage}
-        />
+        <TouchableOpacity onPress={() => navigation.push(CAMERA_ROLL_SCREEN)}>
+          <Image
+            resizeMode="contain"
+            source={
+              avatar.normalUrl
+                ? { uri: avatar.normalUrl }
+                : default_profile_image
+            }
+            style={styles.profileImage}
+          />
+        </TouchableOpacity>
       </ImageBackground>
       <Input
         callback={newValue => handleChange(usernameField, newValue)}
