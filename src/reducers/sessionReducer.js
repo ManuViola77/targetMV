@@ -1,4 +1,5 @@
 import { createReducer } from '@rootstrap/redux-tools';
+
 import {
   loginSuccess,
   signUpSuccess,
@@ -7,7 +8,7 @@ import {
 } from 'actions/userActions';
 
 const initialState = {
-  user: null,
+  userId: null,
   info: null,
 };
 

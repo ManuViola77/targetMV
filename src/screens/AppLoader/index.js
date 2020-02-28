@@ -8,8 +8,8 @@ import styles from './styles';
 
 export default function AppLoader({ navigation }) {
   useSessionChangeEffect(
-    ({ user, info }) => {
-      navigation.navigate(user && info ? MAIN_SCREEN : LOGIN_SCREEN);
+    ({ userId, info }) => {
+      navigation.navigate(userId && info ? MAIN_SCREEN : LOGIN_SCREEN);
     },
     [navigation],
   );
