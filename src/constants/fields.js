@@ -5,6 +5,9 @@ export const password = 'password';
 export const confirmPassword = 'password_confirmation';
 export const gender = 'gender';
 
+// parameters
+export const profile = 'profile';
+
 // profile
 export const firstName = 'first_name';
 export const lastName = 'last_name';

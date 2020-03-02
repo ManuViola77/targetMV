@@ -21,7 +21,7 @@ export const updateProfile = createThunk(
   UPDATE_PROFILE,
   async (id, profile) => {
     try {
-      await profileService.updateProfile(id, profile);
+      profileService.updateProfile(id, profile);
     } catch ({ data }) {
       throw parseError(data);
     }

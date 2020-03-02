@@ -23,6 +23,7 @@ import {
   gender as genderField,
   avatar as avatarField,
   errorMsg,
+  profile,
 } from 'constants/fields';
 import { CAMERA_ROLL_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
@@ -35,7 +36,7 @@ const { PROFILE, COMMON } = strings;
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
-  const userId = useSelector(state => state.session.userId);
+  const userId = useSelector(({ session: { userId } }) => userId);
 
   useEffect(() => {
     dispatch(getProfile(userId));
@@ -48,7 +49,7 @@ const ProfileScreen = ({ navigation }) => {
     gender = '',
     lastName = '',
     username = '',
-  } = useSelector(state => state.profile.user);
+  } = useSelector(({ profile: { user } }) => user);
 
   const { status: logoutStatus } = useStatus(logout);
   const { status: getProfileStatus } = useStatus(getProfile);
@@ -106,7 +107,13 @@ const ProfileScreen = ({ navigation }) => {
         source={profile_logo}
         style={styles.image}
       >
-        <TouchableOpacity onPress={() => navigation.push(CAMERA_ROLL_SCREEN)}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(CAMERA_ROLL_SCREEN, {
+              [profile]: values,
+            })
+          }
+        >
           <Image
             resizeMode="contain"
             source={
