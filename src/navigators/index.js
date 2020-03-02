@@ -4,7 +4,7 @@ import { createAppContainer } from 'react-navigation';
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import arrow_back from 'assets/images/arrow_back.png';
+import arrowBack from 'assets/images/arrow_back.png';
 import chatBubble from 'assets/images/chat_bubble.png';
 import profileIcon from 'assets/images/profile.png';
 import { PROFILE_SCREEN } from 'constants/screens';
@@ -53,7 +53,7 @@ const MainNavigator = createStackNavigator({
       headerLeft: null,
       headerRight: (
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={arrow_back} style={styles.arrowBackStyle} />
+          <Image source={arrowBack} style={styles.arrowBackStyle} />
         </TouchableOpacity>
       ),
       headerStyle: {
@@ -68,7 +68,7 @@ const MainNavigator = createStackNavigator({
       headerLeft: null,
       headerRight: (
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={arrow_back} style={styles.arrowBackStyle} />
+          <Image source={arrowBack} style={styles.arrowBackStyle} />
         </TouchableOpacity>
       ),
       headerStyle: {

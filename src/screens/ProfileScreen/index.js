@@ -23,9 +23,8 @@ import {
   gender as genderField,
   avatar as avatarField,
   errorMsg,
-  callback as callbackParam,
-  profile as profileParam,
 } from 'constants/fields';
+import { callbackParam, profileParam } from 'constants/parameters';
 import { CAMERA_ROLL_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
 import strings from 'locale';

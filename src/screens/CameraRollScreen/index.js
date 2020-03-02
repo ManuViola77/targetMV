@@ -14,21 +14,15 @@ import ImageEditor from '@react-native-community/image-editor';
 import { updateProfile, updateProfileReset } from 'actions/profileActions';
 import ErrorView from 'components/common/form/ErrorView';
 import CameraRollItem from 'components/CameraRollItem';
-import {
-  avatar as avatarField,
-  errorMsg,
-  profile as profileParam,
-  callback as callbackParam,
-} from 'constants/fields';
+import { avatar as avatarField, errorMsg } from 'constants/fields';
+import { callbackParam, profileParam } from 'constants/parameters';
 import useCameraRollPhotos from 'hooks/useCameraRollPhotos';
 import strings from 'locale';
 import styles from './styles';
 
 const CameraRollScreen = ({ navigation }) => {
   const { COMMON } = strings;
-  const {
-    photos: { data: photosCamera },
-  } = useCameraRollPhotos();
+  const { data: photosCamera } = useCameraRollPhotos();
 
   const [selectedPhoto, setSelectedPhoto] = useState('');
 

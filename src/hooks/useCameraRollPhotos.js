@@ -40,9 +40,7 @@ const useCameraRollPhotos = () => {
     setPhotosState();
   }, []);
 
-  return {
-    photos,
-  };
+  return photos;
 };
 
 export default useCameraRollPhotos;
