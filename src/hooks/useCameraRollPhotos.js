@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { PermissionsAndroid, Platform } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll';
 
@@ -24,22 +24,24 @@ const useCameraRollPhotos = () => {
       }
     }
 
-    CameraRoll.getPhotos({
-      first: 50,
-      assetType: 'Photos',
-      groupTypes: 'All',
-    })
-      .then(({ edges }) => {
-        setPhotos({ data: edges });
-      })
-      .catch(error => {
-        console.log(error);
+    try {
+      const { edges } = await CameraRoll.getPhotos({
+        first: 50,
+        assetType: 'Photos',
+        groupTypes: 'All',
       });
+      setPhotos({ data: edges });
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  useEffect(() => {
+    setPhotosState();
+  }, []);
 
   return {
     photos,
-    setPhotosState,
   };
 };
 

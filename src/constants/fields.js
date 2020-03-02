@@ -7,6 +7,7 @@ export const gender = 'gender';
 
 // parameters
 export const profile = 'profile';
+export const callback = 'callback';
 
 // profile
 export const firstName = 'first_name';

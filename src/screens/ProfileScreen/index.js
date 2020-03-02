@@ -23,7 +23,8 @@ import {
   gender as genderField,
   avatar as avatarField,
   errorMsg,
-  profile,
+  callback as callbackParam,
+  profile as profileParam,
 } from 'constants/fields';
 import { CAMERA_ROLL_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
@@ -38,8 +39,12 @@ const ProfileScreen = ({ navigation }) => {
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
   const userId = useSelector(({ session: { userId } }) => userId);
 
-  useEffect(() => {
+  const getProfileRequest = useCallback(() => {
     dispatch(getProfile(userId));
+  }, [dispatch]);
+
+  useEffect(() => {
+    getProfileRequest();
   }, []);
 
   const {
@@ -88,17 +93,18 @@ const ProfileScreen = ({ navigation }) => {
   }, [getProfileStatus]);
 
   useEffect(() => {
-    switch (updateProfileStatus) {
-      case SUCCESS:
-        dispatch(updateProfileReset());
-        navigation.goBack();
-        break;
-
-      case ERROR:
-        errors[errorMsg] = COMMON.somethingWentWrong;
-        break;
+    if (updateProfileStatus === ERROR) {
+      errors[errorMsg] = COMMON.somethingWentWrong;
     }
   }, [updateProfileStatus]);
+
+  const saveChanges = useCallback(async () => {
+    await handleConfirmForm(updateProfileValidations);
+    if (updateProfileStatus === SUCCESS) {
+      dispatch(updateProfileReset());
+      navigation.goBack();
+    }
+  });
 
   return (
     <>
@@ -110,7 +116,8 @@ const ProfileScreen = ({ navigation }) => {
         <TouchableOpacity
           onPress={() =>
             navigation.navigate(CAMERA_ROLL_SCREEN, {
-              [profile]: values,
+              [profileParam]: values,
+              [callbackParam]: getProfileRequest,
             })
           }
         >
@@ -151,10 +158,7 @@ const ProfileScreen = ({ navigation }) => {
       />
       <Link text={PROFILE.password} onPress={() => {}} />
       <ErrorView error={errors[errorMsg]} />
-      <Button
-        title={PROFILE.save}
-        onPress={() => handleConfirmForm(updateProfileValidations)}
-      />
+      <Button title={PROFILE.save} onPress={saveChanges} />
       <Link
         onPress={handleLogout}
         text={logoutStatus === LOADING ? COMMON.loading : PROFILE.logOut}
