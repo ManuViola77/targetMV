@@ -6,11 +6,6 @@ const AVATAR_SIZE = 60;
 const BADGE_SIZE = 24;
 const ICON_SIZE = 40;
 
-export const badgeTop = 10;
-export const badgeRight = -20;
-export const badgeLeft = 0;
-export const badgeBottom = 0;
-
 const styles = StyleSheet.create({
   avatar: {
     borderRadius: AVATAR_SIZE / 2,
@@ -28,7 +23,11 @@ const styles = StyleSheet.create({
   },
 
   badgeContainer: {
+    bottom: 0,
+    left: 0,
     position: 'absolute',
+    right: -20,
+    top: 10,
   },
 
   badgeText: {

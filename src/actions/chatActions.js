@@ -7,10 +7,7 @@ const GET_CONVERSATIONS = 'GET_CONVERSATIONS';
 
 export const getConversations = createThunk(GET_CONVERSATIONS, async () => {
   try {
-    const {
-      data: { matches },
-    } = await chatService.getConversations();
-    return matches;
+    return (await chatService.getConversations()).data.matches;
   } catch ({ data }) {
     throw parseError(data);
   }

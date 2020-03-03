@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { useStatus, LOADING } from '@rootstrap/redux-tools';
+import { useStatus, LOADING, SUCCESS } from '@rootstrap/redux-tools';
 import { arrayOf, func } from 'prop-types';
 
 import { createTarget, createTargetReset } from 'actions/targetActions';
@@ -43,7 +43,7 @@ const CreateTargetForm = ({
 
   const dispatch = useDispatch();
   const createTargetRequest = useCallback(
-    target => dispatch(createTarget(target, onPressButton, false)),
+    target => dispatch(createTarget(target)),
     [dispatch],
   );
 
@@ -57,6 +57,10 @@ const CreateTargetForm = ({
   } = useFormStates(createTargetRequest);
 
   const errorMessages = { ...errors, ...error };
+
+  useEffect(() => {
+    status === SUCCESS && onPressButton(false);
+  }, [status]);
 
   const { id, lat, lng, radius, title, topic, topicId } = selectedTarget;
   const { latitude, longitude } = currentLocation;

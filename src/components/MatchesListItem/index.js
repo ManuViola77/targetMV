@@ -6,7 +6,7 @@ import { func } from 'prop-types';
 import defaultProfileImage from 'assets/images/default_profile_image.png';
 import { matchesShape } from 'constants/shapes';
 import strings from 'locale';
-import styles, { badgeTop, badgeRight, badgeLeft, badgeBottom } from './styles';
+import styles from './styles';
 
 const MatchesListItem = ({ item, onPress }) => {
   const {
@@ -47,15 +47,7 @@ const MatchesListItem = ({ item, onPress }) => {
               textStyle={styles.badgeText}
               value={unreadMessages}
               status="warning"
-              containerStyle={[
-                styles.badgeContainer,
-                {
-                  top: badgeTop,
-                  right: badgeRight,
-                  left: badgeLeft,
-                  buttom: badgeBottom,
-                },
-              ]}
+              containerStyle={styles.badgeContainer}
             />
           )}
         </View>

@@ -8,10 +8,7 @@ const UPDATE_PROFILE = 'UPDATE_PROFILE';
 
 export const getProfile = createThunk(GET_PROFILE, async id => {
   try {
-    const {
-      data: { user },
-    } = await profileService.getProfile(id);
-    return user;
+    return (await profileService.getProfile(id)).data.user;
   } catch ({ data }) {
     throw parseError(data);
   }
