@@ -4,6 +4,10 @@ export default {
     errorNotJSON: 'La respuesta no es JSON',
   },
 
+  CHAT: {
+    start: 'Empieza la charla!',
+  },
+
   COMMON: {
     headerTitle: 'Target MV',
     loading: 'Cargando',

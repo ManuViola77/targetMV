@@ -15,22 +15,31 @@ const styles = StyleSheet.create({
 
   horizontalContainer: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
 
   icon: {
-    height: 20,
+    alignSelf: 'center',
+    height: 30,
     margin: 10,
-    marginLeft: 20,
-    width: 20,
+    marginRight: 20,
+    width: 30,
   },
 
   name: {
-    margin: 10,
+    fontWeight: 'bold',
   },
 
   separator: {
     borderBottomWidth: 1,
     borderColor: GREY,
+  },
+
+  textContainer: {
+    alignItems: 'flex-start',
+    flex: 1,
+    justifyContent: 'space-around',
+    margin: 10,
   },
 });
 

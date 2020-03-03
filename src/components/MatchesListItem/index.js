@@ -4,15 +4,19 @@ import { func } from 'prop-types';
 
 import defaultProfileImage from 'assets/images/default_profile_image.png';
 import { matchesShape } from 'constants/shapes';
+import strings from 'locale';
 import styles from './styles';
 
 const MatchesListItem = ({ item, onPress }) => {
   const {
+    lastMessage,
     user: {
       avatar: { smallThumbUrl },
       fullName,
     },
   } = item;
+
+  const { CHAT } = strings;
   return (
     <>
       <TouchableOpacity
@@ -23,7 +27,14 @@ const MatchesListItem = ({ item, onPress }) => {
           source={smallThumbUrl ? { uri: smallThumbUrl } : defaultProfileImage}
           style={styles.avatar}
         />
-        <Text style={styles.name}>{fullName} </Text>
+        <View style={styles.textContainer}>
+          <Text style={styles.name}>{fullName} </Text>
+          <Text>{lastMessage ? lastMessage : CHAT.start} </Text>
+        </View>
+        <Image
+          source={smallThumbUrl ? { uri: smallThumbUrl } : defaultProfileImage}
+          style={styles.icon}
+        />
       </TouchableOpacity>
       <View style={styles.separator} />
     </>
