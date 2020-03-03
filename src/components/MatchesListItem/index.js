@@ -1,12 +1,13 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { Badge } from 'react-native-elements';
 import { func } from 'prop-types';
 
 import defaultProfileImage from 'assets/images/default_profile_image.png';
+import ImagePlaceholder from 'components/common/ImagePlaceholder';
 import { matchesShape } from 'constants/shapes';
 import strings from 'locale';
-import styles from './styles';
+import styles, { AVATAR_SIZE, ICON_SIZE } from './styles';
 
 const MatchesListItem = ({ item, onPress }) => {
   const {
@@ -26,8 +27,12 @@ const MatchesListItem = ({ item, onPress }) => {
         onPress={() => onPress(item)}
         style={styles.horizontalContainer}
       >
-        <Image
-          source={smallThumbUrl ? { uri: smallThumbUrl } : defaultProfileImage}
+        <ImagePlaceholder
+          borderRadius={AVATAR_SIZE / 2}
+          icon={defaultProfileImage}
+          iconUrl={smallThumbUrl}
+          placeholder={defaultProfileImage}
+          placeholderStyle={styles.avatarPlaceholder}
           style={styles.avatar}
         />
         <View style={styles.textContainer}>
@@ -35,10 +40,12 @@ const MatchesListItem = ({ item, onPress }) => {
           <Text>{lastMessage ? lastMessage : CHAT.start} </Text>
         </View>
         <View style={styles.topicBadge}>
-          <Image
-            source={
-              smallThumbUrl ? { uri: smallThumbUrl } : defaultProfileImage
-            }
+          <ImagePlaceholder
+            borderRadius={ICON_SIZE / 2}
+            icon={defaultProfileImage}
+            iconUrl={smallThumbUrl}
+            placeholder={defaultProfileImage}
+            placeholderStyle={styles.iconPlaceholder}
             style={styles.icon}
           />
           {!!unreadMessages && (

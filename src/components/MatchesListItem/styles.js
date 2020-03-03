@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 
 import { GREY } from 'constants/colors';
 
-const AVATAR_SIZE = 60;
-const BADGE_SIZE = 24;
-const ICON_SIZE = 40;
+export const AVATAR_SIZE = 60;
+export const BADGE_SIZE = 24;
+export const ICON_SIZE = 40;
 
 const styles = StyleSheet.create({
   avatar: {
@@ -12,6 +12,11 @@ const styles = StyleSheet.create({
     height: AVATAR_SIZE,
     margin: 10,
     marginLeft: 20,
+    width: AVATAR_SIZE,
+  },
+
+  avatarPlaceholder: {
+    height: AVATAR_SIZE,
     width: AVATAR_SIZE,
   },
 
@@ -45,6 +50,11 @@ const styles = StyleSheet.create({
     height: ICON_SIZE,
     margin: 10,
     marginRight: 20,
+    width: ICON_SIZE,
+  },
+
+  iconPlaceholder: {
+    height: ICON_SIZE,
     width: ICON_SIZE,
   },
 

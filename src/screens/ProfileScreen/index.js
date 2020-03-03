@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Image, ImageBackground, TouchableOpacity } from 'react-native';
+import { ImageBackground, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStatus, ERROR, LOADING, SUCCESS } from '@rootstrap/redux-tools';
 
@@ -15,6 +15,7 @@ import Link from 'components/common/Link';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
+import ImagePlaceholder from 'components/common/ImagePlaceholder';
 import {
   name as usernameField,
   email as emailField,
@@ -29,7 +30,7 @@ import { CAMERA_ROLL_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
 import strings from 'locale';
 import updateProfileValidations from 'validations/updateProfileValidations';
-import styles from './styles';
+import styles, { profileImageSize } from './styles';
 
 const { PROFILE, COMMON } = strings;
 
@@ -120,11 +121,12 @@ const ProfileScreen = ({ navigation }) => {
             })
           }
         >
-          <Image
-            resizeMode="contain"
-            source={
-              avatar.normalUrl ? { uri: avatar.normalUrl } : defaultProfileImage
-            }
+          <ImagePlaceholder
+            borderRadius={profileImageSize / 2}
+            icon={defaultProfileImage}
+            iconUrl={avatar.normalUrl}
+            placeholder={defaultProfileImage}
+            placeholderStyle={styles.profileImagePlaceholder}
             style={styles.profileImage}
           />
         </TouchableOpacity>
