@@ -12,7 +12,6 @@ export const createTarget = createThunk(
   async (target, postAction, isHidden) => {
     try {
       const { data } = await targetService.createTarget({ target });
-      console.log(data);
       postAction && postAction(isHidden);
       return data;
     } catch ({ data }) {

@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getConversations } from 'actions/chatActions';
 import MatchesList from 'components/MatchesList';
-import styles from './styles';
 
 const ChatScreen = () => {
   const dispatch = useDispatch();
@@ -17,7 +16,7 @@ const ChatScreen = () => {
   return (
     <MatchesList
       list={conversations}
-      onPress={item => console.log('item selected: ', item)}
+      // TODO: onPress={item => navigate to conversation sending item as parameter}
     />
   );
 };
