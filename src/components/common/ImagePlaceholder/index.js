@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image } from 'react-native';
 import ImageLoad from 'react-native-image-placeholder';
+import { number, object, string } from 'prop-types';
 
 const ImagePlaceholder = ({
   borderRadius,
@@ -24,5 +25,19 @@ const ImagePlaceholder = ({
     )}
   </>
 );
+
+ImagePlaceholder.propTypes = {
+  borderRadius: number,
+  icon: number,
+  iconUrl: string,
+  placeholder: number,
+  placeholderStyle: object,
+  style: object,
+};
+
+ImagePlaceholder.defaultProps = {
+  placeholderStyle: {},
+  style: {},
+};
 
 export default ImagePlaceholder;
