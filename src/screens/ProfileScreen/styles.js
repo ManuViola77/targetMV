@@ -1,5 +1,7 @@
 import { StyleSheet } from 'react-native';
 
+const profileImageSize = 120;
+
 const styles = StyleSheet.create({
   image: {
     height: 200,
@@ -9,10 +11,11 @@ const styles = StyleSheet.create({
   },
 
   profileImage: {
-    height: 120,
+    borderRadius: profileImageSize / 2,
+    height: profileImageSize,
     marginLeft: 145,
     marginTop: 55,
-    width: 120,
+    width: profileImageSize,
   },
 });
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Image, ImageBackground, Alert } from 'react-native';
+import { Image, ImageBackground, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStatus, ERROR, LOADING, SUCCESS } from '@rootstrap/redux-tools';
 
@@ -24,6 +24,8 @@ import {
   avatar as avatarField,
   errorMsg,
 } from 'constants/fields';
+import { callbackParam, profileParam } from 'constants/parameters';
+import { CAMERA_ROLL_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
 import strings from 'locale';
 import updateProfileValidations from 'validations/updateProfileValidations';
@@ -34,10 +36,14 @@ const { PROFILE, COMMON } = strings;
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
-  const userId = useSelector(state => state.session.userId);
+  const userId = useSelector(({ session: { userId } }) => userId);
+
+  const getProfileRequest = useCallback(() => {
+    dispatch(getProfile(userId));
+  }, [dispatch]);
 
   useEffect(() => {
-    dispatch(getProfile(userId));
+    getProfileRequest();
   }, []);
 
   const {
@@ -47,7 +53,7 @@ const ProfileScreen = ({ navigation }) => {
     gender = '',
     lastName = '',
     username = '',
-  } = useSelector(state => state.profile.user);
+  } = useSelector(({ profile: { user } }) => user);
 
   const { status: logoutStatus } = useStatus(logout);
   const { status: getProfileStatus } = useStatus(getProfile);
@@ -86,17 +92,18 @@ const ProfileScreen = ({ navigation }) => {
   }, [getProfileStatus]);
 
   useEffect(() => {
-    switch (updateProfileStatus) {
-      case SUCCESS:
-        dispatch(updateProfileReset());
-        navigation.goBack();
-        break;
-
-      case ERROR:
-        errors[errorMsg] = COMMON.somethingWentWrong;
-        break;
+    if (updateProfileStatus === ERROR) {
+      errors[errorMsg] = COMMON.somethingWentWrong;
     }
   }, [updateProfileStatus]);
+
+  const saveChanges = useCallback(async () => {
+    await handleConfirmForm(updateProfileValidations);
+    if (updateProfileStatus === SUCCESS) {
+      dispatch(updateProfileReset());
+      navigation.goBack();
+    }
+  });
 
   return (
     <>
@@ -105,13 +112,24 @@ const ProfileScreen = ({ navigation }) => {
         source={profile_logo}
         style={styles.image}
       >
-        <Image
-          resizeMode="contain"
-          source={
-            avatar.normalUrl ? { uri: avatar.normalUrl } : default_profile_image
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate(CAMERA_ROLL_SCREEN, {
+              [profileParam]: values,
+              [callbackParam]: getProfileRequest,
+            })
           }
-          style={styles.profileImage}
-        />
+        >
+          <Image
+            resizeMode="contain"
+            source={
+              avatar.normalUrl
+                ? { uri: avatar.normalUrl }
+                : default_profile_image
+            }
+            style={styles.profileImage}
+          />
+        </TouchableOpacity>
       </ImageBackground>
       <Input
         callback={newValue => handleChange(usernameField, newValue)}
@@ -139,10 +157,7 @@ const ProfileScreen = ({ navigation }) => {
       />
       <Link text={PROFILE.password} onPress={() => {}} />
       <ErrorView error={errors[errorMsg]} />
-      <Button
-        title={PROFILE.save}
-        onPress={() => handleConfirmForm(updateProfileValidations)}
-      />
+      <Button title={PROFILE.save} onPress={saveChanges} />
       <Link
         onPress={handleLogout}
         text={logoutStatus === LOADING ? COMMON.loading : PROFILE.logOut}

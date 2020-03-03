@@ -4,17 +4,20 @@ import { createAppContainer } from 'react-navigation';
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import { createStackNavigator } from 'react-navigation-stack';
 
-import arrow_back from 'assets/images/arrow_back.png';
+import arrowBack from 'assets/images/arrow_back.png';
 import chatBubble from 'assets/images/chat_bubble.png';
 import profileIcon from 'assets/images/profile.png';
 import { PROFILE_SCREEN } from 'constants/screens';
 import strings from 'locale';
 import AppLoader from 'screens/AppLoader';
+import CameraRollScreen from 'screens/CameraRollScreen';
 import LoginScreen from 'screens/LoginScreen';
 import MainScreen from 'screens/MainScreen';
 import ProfileScreen from 'screens/ProfileScreen';
 import SignUpScreen from 'screens/SignUpScreen';
 import styles from './styles';
+
+const { TITLE } = strings;
 
 const AuthNavigator = createStackNavigator(
   {
@@ -32,7 +35,7 @@ const MainNavigator = createStackNavigator({
   MainScreen: {
     screen: MainScreen,
     navigationOptions: ({ navigation }) => ({
-      title: strings.TITLE.main,
+      title: TITLE.main,
       headerLeft: (
         <TouchableOpacity onPress={() => navigation.push(PROFILE_SCREEN)}>
           <Image source={profileIcon} style={styles.leftIcon} />
@@ -50,13 +53,28 @@ const MainNavigator = createStackNavigator({
       headerLeft: null,
       headerRight: (
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={arrow_back} style={styles.arrowBackStyle} />
+          <Image source={arrowBack} style={styles.arrowBackStyle} />
         </TouchableOpacity>
       ),
       headerStyle: {
         borderBottomWidth: 0,
       },
-      title: strings.TITLE.profile,
+      title: TITLE.profile,
+    }),
+  },
+  CameraRollScreen: {
+    screen: CameraRollScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: null,
+      headerRight: (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Image source={arrowBack} style={styles.arrowBackStyle} />
+        </TouchableOpacity>
+      ),
+      headerStyle: {
+        borderBottomWidth: 0,
+      },
+      title: TITLE.photos,
     }),
   },
 });
