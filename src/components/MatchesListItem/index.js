@@ -11,7 +11,7 @@ import styles, { badgeTop, badgeRight, badgeLeft, badgeBottom } from './styles';
 const MatchesListItem = ({ item, onPress }) => {
   const {
     lastMessage,
-    //unreadMessages,
+    unreadMessages,
     user: {
       avatar: { smallThumbUrl },
       fullName,
@@ -19,8 +19,6 @@ const MatchesListItem = ({ item, onPress }) => {
   } = item;
 
   const { CHAT } = strings;
-
-  const unreadMessages = 3;
 
   return (
     <>
