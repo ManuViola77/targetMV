@@ -1,15 +1,17 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Badge } from 'react-native-elements';
 import { func } from 'prop-types';
 
 import defaultProfileImage from 'assets/images/default_profile_image.png';
 import { matchesShape } from 'constants/shapes';
 import strings from 'locale';
-import styles from './styles';
+import styles, { top, right, left, bottom } from './styles';
 
 const MatchesListItem = ({ item, onPress }) => {
   const {
     lastMessage,
+    unreadMessages,
     user: {
       avatar: { smallThumbUrl },
       fullName,
@@ -17,6 +19,7 @@ const MatchesListItem = ({ item, onPress }) => {
   } = item;
 
   const { CHAT } = strings;
+
   return (
     <>
       <TouchableOpacity
@@ -31,10 +34,26 @@ const MatchesListItem = ({ item, onPress }) => {
           <Text style={styles.name}>{fullName} </Text>
           <Text>{lastMessage ? lastMessage : CHAT.start} </Text>
         </View>
-        <Image
-          source={smallThumbUrl ? { uri: smallThumbUrl } : defaultProfileImage}
-          style={styles.icon}
-        />
+        <View style={styles.topicBadge}>
+          <Image
+            source={
+              smallThumbUrl ? { uri: smallThumbUrl } : defaultProfileImage
+            }
+            style={styles.icon}
+          />
+          {!!unreadMessages && (
+            <Badge
+              badgeStyle={styles.badge}
+              textStyle={styles.badgeText}
+              value={unreadMessages}
+              status="warning"
+              containerStyle={[
+                styles.badgeContainer,
+                { top, right, left, bottom },
+              ]}
+            />
+          )}
+        </View>
       </TouchableOpacity>
       <View style={styles.separator} />
     </>
