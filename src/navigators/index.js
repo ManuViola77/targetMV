@@ -6,11 +6,14 @@ import { createStackNavigator } from 'react-navigation-stack';
 
 import arrowBack from 'assets/images/arrow_back.png';
 import chatBubble from 'assets/images/chat_bubble.png';
+import mark from 'assets/images/mark.png';
 import profileIcon from 'assets/images/profile.png';
-import { PROFILE_SCREEN } from 'constants/screens';
+import NavHeader from 'components/common/NavHeader';
+import { CHAT_SCREEN, PROFILE_SCREEN } from 'constants/screens';
 import strings from 'locale';
 import AppLoader from 'screens/AppLoader';
 import CameraRollScreen from 'screens/CameraRollScreen';
+import ChatScreen from 'screens/ChatScreen';
 import LoginScreen from 'screens/LoginScreen';
 import MainScreen from 'screens/MainScreen';
 import ProfileScreen from 'screens/ProfileScreen';
@@ -18,6 +21,15 @@ import SignUpScreen from 'screens/SignUpScreen';
 import styles from './styles';
 
 const { TITLE } = strings;
+
+const goBackComponent = navigation => (
+  <NavHeader
+    icon={arrowBack}
+    isUri={false}
+    onPress={() => navigation.goBack()}
+    style={styles.arrowBackStyle}
+  />
+);
 
 const AuthNavigator = createStackNavigator(
   {
@@ -37,11 +49,21 @@ const MainNavigator = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
       title: TITLE.main,
       headerLeft: (
-        <TouchableOpacity onPress={() => navigation.push(PROFILE_SCREEN)}>
-          <Image source={profileIcon} style={styles.leftIcon} />
-        </TouchableOpacity>
+        <NavHeader
+          icon={profileIcon}
+          isUri={false}
+          onPress={() => navigation.push(PROFILE_SCREEN)}
+          style={styles.leftIcon}
+        />
       ),
-      headerRight: <Image source={chatBubble} style={styles.rightIcon} />,
+      headerRight: (
+        <NavHeader
+          icon={chatBubble}
+          isUri={false}
+          onPress={() => navigation.push(CHAT_SCREEN)}
+          style={styles.rightIcon}
+        />
+      ),
       headerStyle: {
         borderBottomWidth: 0,
       },
@@ -50,12 +72,8 @@ const MainNavigator = createStackNavigator({
   ProfileScreen: {
     screen: ProfileScreen,
     navigationOptions: ({ navigation }) => ({
-      headerLeft: null,
-      headerRight: (
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={arrowBack} style={styles.arrowBackStyle} />
-        </TouchableOpacity>
-      ),
+      headerLeft: goBackComponent(navigation),
+      headerRight: null,
       headerStyle: {
         borderBottomWidth: 0,
       },
@@ -65,16 +83,34 @@ const MainNavigator = createStackNavigator({
   CameraRollScreen: {
     screen: CameraRollScreen,
     navigationOptions: ({ navigation }) => ({
-      headerLeft: null,
-      headerRight: (
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Image source={arrowBack} style={styles.arrowBackStyle} />
-        </TouchableOpacity>
-      ),
+      headerLeft: goBackComponent(navigation),
+      headerRight: null,
       headerStyle: {
         borderBottomWidth: 0,
       },
       title: TITLE.photos,
+    }),
+  },
+  ChatScreen: {
+    screen: ChatScreen,
+    navigationOptions: ({ navigation }) => ({
+      headerLeft: (
+        <NavHeader
+          icon={profileIcon}
+          isUri={false}
+          onPress={() => navigation.push(PROFILE_SCREEN)}
+          style={styles.leftIcon}
+        />
+      ),
+      headerRight: (
+        <NavHeader
+          icon={mark}
+          isUri={false}
+          onPress={() => navigation.goBack()}
+          style={styles.rightIcon}
+        />
+      ),
+      title: TITLE.chat,
     }),
   },
 });

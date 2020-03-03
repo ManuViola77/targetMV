@@ -9,8 +9,8 @@ import {
   updateProfileReset,
 } from 'actions/profileActions';
 import { logout } from 'actions/userActions';
-import default_profile_image from 'assets/images/default_profile_image.png';
-import profile_logo from 'assets/images/profile_logo.png';
+import defaultProfileImage from 'assets/images/default_profile_image.png';
+import profileLogo from 'assets/images/profile_logo.png';
 import Link from 'components/common/Link';
 import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
@@ -109,7 +109,7 @@ const ProfileScreen = ({ navigation }) => {
     <>
       <ImageBackground
         resizeMode="contain"
-        source={profile_logo}
+        source={profileLogo}
         style={styles.image}
       >
         <TouchableOpacity
@@ -123,9 +123,7 @@ const ProfileScreen = ({ navigation }) => {
           <Image
             resizeMode="contain"
             source={
-              avatar.normalUrl
-                ? { uri: avatar.normalUrl }
-                : default_profile_image
+              avatar.normalUrl ? { uri: avatar.normalUrl } : defaultProfileImage
             }
             style={styles.profileImage}
           />

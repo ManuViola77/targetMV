@@ -97,6 +97,7 @@ export default {
   },
 
   TITLE: {
+    chat: 'Chat',
     createTarget: 'Create New Target',
     main: 'Target Points',
     photos: 'Photos',

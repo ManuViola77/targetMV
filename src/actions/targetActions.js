@@ -11,8 +11,10 @@ export const createTarget = createThunk(
   CREATE_TARGET,
   async (target, postAction, isHidden) => {
     try {
-      await targetService.createTarget({ target });
+      const { data } = await targetService.createTarget({ target });
+      console.log(data);
       postAction && postAction(isHidden);
+      return data;
     } catch ({ data }) {
       throw parseError(data);
     }
