@@ -1,22 +1,21 @@
 import React from 'react';
 import { Image, TouchableOpacity } from 'react-native';
-import { bool, func, number, object } from 'prop-types';
+import { func, number, object, string } from 'prop-types';
 
-const NavHeader = ({ icon, isUri, onPress, style }) => (
+const NavHeader = ({ icon, iconUrl, onPress, style }) => (
   <TouchableOpacity onPress={onPress}>
-    <Image source={isUri ? { uri: icon } : icon} style={style} />
+    <Image source={iconUrl ? { uri: iconUrl } : icon} style={style} />
   </TouchableOpacity>
 );
 
 NavHeader.propTypes = {
   icon: number,
-  isUri: bool,
+  iconUrl: string,
   onPress: func.isRequired,
   style: object,
 };
 
 NavHeader.defaultProps = {
-  isUri: false,
   style: {},
 };
 

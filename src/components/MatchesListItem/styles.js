@@ -6,10 +6,10 @@ const AVATAR_SIZE = 60;
 const BADGE_SIZE = 24;
 const ICON_SIZE = 40;
 
-export const top = 10;
-export const right = -20;
-export const left = 0;
-export const bottom = 0;
+export const badgeTop = 10;
+export const badgeRight = -20;
+export const badgeLeft = 0;
+export const badgeBottom = 0;
 
 const styles = StyleSheet.create({
   avatar: {

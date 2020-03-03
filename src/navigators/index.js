@@ -1,5 +1,4 @@
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
 import { createAppContainer } from 'react-navigation';
 import createAnimatedSwitchNavigator from 'react-navigation-animated-switch';
 import { createStackNavigator } from 'react-navigation-stack';
@@ -25,7 +24,6 @@ const { TITLE } = strings;
 const goBackComponent = navigation => (
   <NavHeader
     icon={arrowBack}
-    isUri={false}
     onPress={() => navigation.goBack()}
     style={styles.arrowBackStyle}
   />
@@ -51,7 +49,6 @@ const MainNavigator = createStackNavigator({
       headerLeft: (
         <NavHeader
           icon={profileIcon}
-          isUri={false}
           onPress={() => navigation.push(PROFILE_SCREEN)}
           style={styles.leftIcon}
         />
@@ -59,7 +56,6 @@ const MainNavigator = createStackNavigator({
       headerRight: (
         <NavHeader
           icon={chatBubble}
-          isUri={false}
           onPress={() => navigation.push(CHAT_SCREEN)}
           style={styles.rightIcon}
         />
@@ -97,7 +93,6 @@ const MainNavigator = createStackNavigator({
       headerLeft: (
         <NavHeader
           icon={profileIcon}
-          isUri={false}
           onPress={() => navigation.push(PROFILE_SCREEN)}
           style={styles.leftIcon}
         />
@@ -105,7 +100,6 @@ const MainNavigator = createStackNavigator({
       headerRight: (
         <NavHeader
           icon={mark}
-          isUri={false}
           onPress={() => navigation.goBack()}
           style={styles.rightIcon}
         />

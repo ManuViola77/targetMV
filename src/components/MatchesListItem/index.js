@@ -6,12 +6,12 @@ import { func } from 'prop-types';
 import defaultProfileImage from 'assets/images/default_profile_image.png';
 import { matchesShape } from 'constants/shapes';
 import strings from 'locale';
-import styles, { top, right, left, bottom } from './styles';
+import styles, { badgeTop, badgeRight, badgeLeft, badgeBottom } from './styles';
 
 const MatchesListItem = ({ item, onPress }) => {
   const {
     lastMessage,
-    unreadMessages,
+    //unreadMessages,
     user: {
       avatar: { smallThumbUrl },
       fullName,
@@ -19,6 +19,8 @@ const MatchesListItem = ({ item, onPress }) => {
   } = item;
 
   const { CHAT } = strings;
+
+  const unreadMessages = 3;
 
   return (
     <>
@@ -49,7 +51,12 @@ const MatchesListItem = ({ item, onPress }) => {
               status="warning"
               containerStyle={[
                 styles.badgeContainer,
-                { top, right, left, bottom },
+                {
+                  top: badgeTop,
+                  right: badgeRight,
+                  left: badgeLeft,
+                  buttom: badgeBottom,
+                },
               ]}
             />
           )}
