@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, ViewPropTypes } from 'react-native';
 import { Badge } from 'react-native-elements';
 import { func } from 'prop-types';
 
@@ -22,45 +22,42 @@ const MatchesListItem = ({ item, onPress }) => {
   const { CHAT } = strings;
 
   return (
-    <>
-      <TouchableOpacity
-        onPress={() => onPress(item)}
-        style={styles.horizontalContainer}
-      >
+    <TouchableOpacity
+      onPress={() => onPress(item)}
+      style={styles.horizontalContainer}
+    >
+      <ImagePlaceholder
+        borderRadius={AVATAR_SIZE / 2}
+        icon={defaultProfileImage}
+        iconUrl={smallThumbUrl}
+        placeholder={defaultProfileImage}
+        placeholderStyle={styles.avatarPlaceholder}
+        style={styles.avatar}
+      />
+      <View style={styles.textContainer}>
+        <Text style={styles.name}>{fullName} </Text>
+        <Text>{lastMessage || `${CHAT.start}${fullName}!`} </Text>
+      </View>
+      <View style={styles.topicBadge}>
         <ImagePlaceholder
-          borderRadius={AVATAR_SIZE / 2}
+          borderRadius={ICON_SIZE / 2}
           icon={defaultProfileImage}
           iconUrl={smallThumbUrl}
           placeholder={defaultProfileImage}
-          placeholderStyle={styles.avatarPlaceholder}
-          style={styles.avatar}
+          placeholderStyle={styles.iconPlaceholder}
+          style={styles.icon}
         />
-        <View style={styles.textContainer}>
-          <Text style={styles.name}>{fullName} </Text>
-          <Text>{lastMessage ? lastMessage : CHAT.start} </Text>
-        </View>
-        <View style={styles.topicBadge}>
-          <ImagePlaceholder
-            borderRadius={ICON_SIZE / 2}
-            icon={defaultProfileImage}
-            iconUrl={smallThumbUrl}
-            placeholder={defaultProfileImage}
-            placeholderStyle={styles.iconPlaceholder}
-            style={styles.icon}
+        {!!unreadMessages && (
+          <Badge
+            badgeStyle={styles.badge}
+            textStyle={styles.badgeText}
+            value={unreadMessages}
+            status="warning"
+            containerStyle={styles.badgeContainer}
           />
-          {!!unreadMessages && (
-            <Badge
-              badgeStyle={styles.badge}
-              textStyle={styles.badgeText}
-              value={unreadMessages}
-              status="warning"
-              containerStyle={styles.badgeContainer}
-            />
-          )}
-        </View>
-      </TouchableOpacity>
-      <View style={styles.separator} />
-    </>
+        )}
+      </View>
+    </TouchableOpacity>
   );
 };
 

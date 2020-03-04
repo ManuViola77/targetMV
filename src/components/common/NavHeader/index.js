@@ -1,6 +1,6 @@
 import React from 'react';
-import { Image, TouchableOpacity } from 'react-native';
-import { func, number, object, string } from 'prop-types';
+import { Image, TouchableOpacity, ViewPropTypes } from 'react-native';
+import { func, number, string } from 'prop-types';
 
 const NavHeader = ({ icon, iconUrl, onPress, style }) => (
   <TouchableOpacity onPress={onPress}>
@@ -12,7 +12,7 @@ NavHeader.propTypes = {
   icon: number,
   iconUrl: string,
   onPress: func.isRequired,
-  style: object,
+  style: ViewPropTypes.style,
 };
 
 NavHeader.defaultProps = {

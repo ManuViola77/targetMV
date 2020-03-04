@@ -5,7 +5,7 @@ export default {
   },
 
   CHAT: {
-    start: 'Empieza la charla!',
+    start: 'Empieza una conversación con ',
   },
 
   COMMON: {

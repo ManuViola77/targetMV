@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
   },
 
   horizontalContainer: {
+    borderBottomWidth: 1,
+    borderColor: GREY,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -60,11 +62,6 @@ const styles = StyleSheet.create({
 
   name: {
     fontWeight: 'bold',
-  },
-
-  separator: {
-    borderBottomWidth: 1,
-    borderColor: GREY,
   },
 
   textContainer: {
