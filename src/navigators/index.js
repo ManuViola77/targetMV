@@ -8,11 +8,13 @@ import chatBubble from 'assets/images/chat_bubble.png';
 import mark from 'assets/images/mark.png';
 import profileIcon from 'assets/images/profile.png';
 import NavHeader from 'components/common/NavHeader';
+import { targetMatchParam } from 'constants/parameters';
 import { CHAT_SCREEN, PROFILE_SCREEN } from 'constants/screens';
 import strings from 'locale';
 import AppLoader from 'screens/AppLoader';
 import CameraRollScreen from 'screens/CameraRollScreen';
 import ChatScreen from 'screens/ChatScreen';
+import ConversationScreen from 'screens/ConversationScreen';
 import LoginScreen from 'screens/LoginScreen';
 import MainScreen from 'screens/MainScreen';
 import ProfileScreen from 'screens/ProfileScreen';
@@ -65,6 +67,7 @@ const MainNavigator = createStackNavigator({
       },
     }),
   },
+
   ProfileScreen: {
     screen: ProfileScreen,
     navigationOptions: ({ navigation }) => ({
@@ -76,6 +79,7 @@ const MainNavigator = createStackNavigator({
       title: TITLE.profile,
     }),
   },
+
   CameraRollScreen: {
     screen: CameraRollScreen,
     navigationOptions: ({ navigation }) => ({
@@ -87,6 +91,7 @@ const MainNavigator = createStackNavigator({
       title: TITLE.photos,
     }),
   },
+
   ChatScreen: {
     screen: ChatScreen,
     navigationOptions: ({ navigation }) => ({
@@ -105,6 +110,32 @@ const MainNavigator = createStackNavigator({
         />
       ),
       title: TITLE.chat,
+    }),
+  },
+
+  ConversationScreen: {
+    screen: ConversationScreen,
+    navigationOptions: ({
+      navigation,
+      navigation: {
+        state: {
+          params: {
+            [targetMatchParam]: {
+              user: {
+                // TODO: when topicIcon is not null use topicIcon instead of avatar
+                avatar: { smallThumbUrl },
+                fullName,
+              },
+            },
+          },
+        },
+      },
+    }) => ({
+      headerLeft: goBackComponent(navigation),
+      headerRight: (
+        <NavHeader iconUrl={smallThumbUrl} style={styles.rightIconUrl} />
+      ),
+      title: fullName,
     }),
   },
 });

@@ -2,9 +2,11 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getConversations } from 'actions/chatActions';
+import { targetMatchParam } from 'constants/parameters';
+import { CONVERSATION_SCREEN } from 'constants/screens';
 import MatchesList from 'components/MatchesList';
 
-const ChatScreen = () => {
+const ChatScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -16,7 +18,9 @@ const ChatScreen = () => {
   return (
     <MatchesList
       list={conversations}
-      // TODO: onPress={item => navigate to conversation sending item as parameter}
+      onPress={item =>
+        navigation.push(CONVERSATION_SCREEN, { [targetMatchParam]: item })
+      }
     />
   );
 };

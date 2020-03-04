@@ -11,7 +11,7 @@ const NavHeader = ({ icon, iconUrl, onPress, style }) => (
 NavHeader.propTypes = {
   icon: number,
   iconUrl: string,
-  onPress: func.isRequired,
+  onPress: func,
   style: ViewPropTypes.style,
 };
 
