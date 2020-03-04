@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   arrowBackStyle: {
-    marginRight: 30,
+    marginLeft: 30,
   },
 
   leftIcon: {

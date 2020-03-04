@@ -7,24 +7,17 @@ const CREATE_TARGET = 'CREATE_TARGET';
 const DELETE_TARGET = 'DELETE_TARGET';
 const GET_TARGETS = 'GET_TARGETS';
 
-export const createTarget = createThunk(
-  CREATE_TARGET,
-  async (target, postAction, isHidden) => {
-    try {
-      await targetService.createTarget({ target });
-      postAction && postAction(isHidden);
-    } catch ({ data }) {
-      throw parseError(data);
-    }
-  },
-);
+export const createTarget = createThunk(CREATE_TARGET, async target => {
+  try {
+    return (await targetService.createTarget({ target })).data;
+  } catch ({ data }) {
+    throw parseError(data);
+  }
+});
 
 export const getTargets = createThunk(GET_TARGETS, async () => {
   try {
-    const {
-      data: { targets },
-    } = await targetService.getTargets();
-    return targets;
+    return (await targetService.getTargets()).data.targets;
   } catch ({ data }) {
     throw parseError(data);
   }

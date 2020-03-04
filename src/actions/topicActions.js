@@ -7,10 +7,7 @@ const GET_TOPICS = 'GET_TOPICS';
 
 export const getTopics = createThunk(GET_TOPICS, async () => {
   try {
-    const {
-      data: { topics },
-    } = await topicService.getTopics();
-    return topics;
+    return (await topicService.getTopics()).data.topics;
   } catch ({ data }) {
     throw parseError(data);
   }

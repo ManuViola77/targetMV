@@ -11,6 +11,8 @@ const useCameraRollPhotos = () => {
   const { PHOTO_PERMISSION } = strings;
 
   const setPhotosState = async () => {
+    let permission = true;
+
     if (Platform.OS === ANDROID) {
       const result = await PermissionsAndroid.request(
         PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
@@ -20,19 +22,21 @@ const useCameraRollPhotos = () => {
         },
       );
       if (result !== GRANTED) {
-        console.log('Access to pictures was denied');
+        permission = false;
       }
     }
 
-    try {
-      const { edges } = await CameraRoll.getPhotos({
-        first: 50,
-        assetType: 'Photos',
-        groupTypes: 'All',
-      });
-      setPhotos({ data: edges });
-    } catch (error) {
-      console.log(error);
+    if (permission) {
+      try {
+        const { edges } = await CameraRoll.getPhotos({
+          first: 50,
+          assetType: 'Photos',
+          groupTypes: 'All',
+        });
+        setPhotos({ data: edges });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

@@ -4,6 +4,10 @@ export default {
     errorNotJSON: 'La respuesta no es JSON',
   },
 
+  CHAT: {
+    start: 'Empieza una conversación con ',
+  },
+
   COMMON: {
     headerTitle: 'Target MV',
     loading: 'Cargando',
@@ -98,6 +102,7 @@ export default {
   },
 
   TITLE: {
+    chat: 'Chat',
     createTarget: 'Crear Nuevo Target',
     main: 'Puntos Target',
     photos: 'Fotos',

@@ -10,12 +10,7 @@ const UPDATE_SESSION = 'UPDATE_SESSION';
 
 export const login = createThunk(LOGIN, async user => {
   try {
-    const {
-      data: {
-        data: { id: userId },
-      },
-    } = await userService.login({ user });
-    return userId;
+    return (await userService.login({ user })).data.data.id;
   } catch ({ data }) {
     throw parseError(data);
   }
@@ -31,10 +26,7 @@ export const logout = createThunk(LOGOUT, async () => {
 
 export const signUp = createThunk(SIGNUP, async user => {
   try {
-    const {
-      data: { user: createdUser },
-    } = await userService.signUp({ user });
-    return createdUser;
+    return (await userService.signUp({ user })).data.user;
   } catch ({ data }) {
     throw parseError(data);
   }

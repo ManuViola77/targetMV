@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-const profileImageSize = 120;
+export const profileImageSize = 120;
 
 const styles = StyleSheet.create({
   image: {
@@ -8,6 +8,11 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginLeft: 20,
     width: 300,
+  },
+
+  profileImagePlaceholder: {
+    height: profileImageSize,
+    width: profileImageSize,
   },
 
   profileImage: {

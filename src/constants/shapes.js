@@ -7,6 +7,22 @@ export const locationShape = shape({
   longitudeDelta: number,
 });
 
+export const matchesShape = shape({
+  lastMessage: string,
+  matchId: number,
+  topicIcon: string,
+  unreadMessages: number,
+  user: shape({
+    avatar: shape({
+      normalUrl: string,
+      originalUrl: string,
+      smallThumbUrl: string,
+    }),
+    fullName: string,
+    id: number,
+  }),
+});
+
 export const pickerShape = shape({
   label: string,
   value: string,
