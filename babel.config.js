@@ -5,6 +5,7 @@ module.exports = {
       'module-resolver',
       {
         alias: {
+          actionCable: './src/actionCable',
           actions: './src/actions',
           api: './src/api',
           assets: './assets',
