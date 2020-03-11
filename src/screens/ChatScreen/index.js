@@ -10,7 +10,12 @@ const ChatScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getConversations());
+    // Refresh conversations when it comes back from ConversationScreen
+    const focusListener = navigation.addListener('didFocus', () => {
+      dispatch(getConversations());
+    });
+
+    return () => focusListener.remove();
   }, []);
 
   const conversations = useSelector(({ chat: { matches } }) => matches);

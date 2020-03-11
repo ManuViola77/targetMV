@@ -40,11 +40,10 @@ const actionCableMiddleware = (() => {
         const channel = cable.subscriptions.create(
           { channel: CHAT_CHANNEL, match_conversation_id: matchId },
           {
-            received: data => {
-              const message = data;
-
-              store.dispatch(receiveMessage({ message }));
+            received: message => {
+              store.dispatch(receiveMessage(message));
             },
+
             speak: (message, matchId) => {
               const { text: content } = message;
 

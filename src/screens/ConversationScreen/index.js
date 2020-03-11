@@ -34,6 +34,12 @@ const ConversationScreen = () => {
   }, []);
 
   const messagesSession = useSelector(({ chat: { messages } }) => messages);
+  const newMessage = useSelector(({ chat: { newMessage } }) => newMessage);
+
+  useEffect(() => {
+    // refresh messages when I recieve new messages
+    dispatch(getMessages(matchId, 1));
+  }, [newMessage]);
 
   let messages = useMemo(() => {
     if (messagesSession) {
@@ -54,7 +60,6 @@ const ConversationScreen = () => {
 
   return (
     <>
-      <Text>This is Conversation Screen {matchId}</Text>
       <GiftedChat
         messages={messages}
         onSend={handleOnSend}
