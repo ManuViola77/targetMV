@@ -1,5 +1,4 @@
 import Config from 'react-native-config';
-import humps from 'humps';
 
 import {
   createConsumer,
@@ -11,6 +10,7 @@ import {
 } from 'actions/chatActions';
 import { clearOnboarding } from 'actions/onboardingActions';
 import actionCable from './actionCable';
+import { CHAT_CHANNEL, SEND_MESSAGE } from 'constants/chat';
 import { applyQueryParams } from 'utils/helpers';
 
 const actionCableMiddleware = (() => {
@@ -35,11 +35,10 @@ const actionCableMiddleware = (() => {
       }
 
       case subscribe.toString(): {
-        console.log('subscribe ');
         const { matchId } = action.payload;
 
         const channel = cable.subscriptions.create(
-          { channel: 'ChatChannel', match_conversation_id: matchId },
+          { channel: CHAT_CHANNEL, match_conversation_id: matchId },
           {
             received: data => {
               const message = data;
@@ -54,7 +53,7 @@ const actionCableMiddleware = (() => {
                 content,
               };
 
-              channel.perform('send_message', data);
+              channel.perform(SEND_MESSAGE, data);
             },
           },
         );
@@ -77,12 +76,6 @@ const actionCableMiddleware = (() => {
       case sendMessage.toString(): {
         const { message, matchId } = action.payload;
         const [channel] = chatChannels;
-        console.log(
-          'in sendMessage, message: ',
-          message,
-          ' channel: ',
-          channel,
-        );
         channel.speak(message, matchId);
         break;
       }
