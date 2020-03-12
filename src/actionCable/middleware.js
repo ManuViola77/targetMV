@@ -8,7 +8,6 @@ import {
   subscribe,
   unsubscribe,
 } from 'actions/chatActions';
-import { clearOnboarding } from 'actions/onboardingActions';
 import actionCable from './actionCable';
 import { CHAT_CHANNEL, SEND_MESSAGE } from 'constants/chat';
 import { applyQueryParams } from 'utils/helpers';
@@ -20,7 +19,7 @@ const actionCableMiddleware = (() => {
   return store => next => action => {
     switch (action.type) {
       case createConsumer.toString(): {
-        cable && cable.disconnect();
+        cable?.disconnect();
         const { uid } = action.payload;
 
         const queryParams = {
@@ -62,13 +61,12 @@ const actionCableMiddleware = (() => {
 
       case unsubscribe.toString(): {
         const channel = chatChannels.shift();
-        channel && channel.unsubscribe();
-        store.dispatch(clearOnboarding());
+        channel?.unsubscribe();
         break;
       }
 
       case disconnectActionCable.toString(): {
-        cable && cable.disconnect();
+        cable?.disconnect();
         break;
       }
 

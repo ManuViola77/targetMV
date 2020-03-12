@@ -1,5 +1,6 @@
 import { createReducer } from '@rootstrap/redux-tools';
 import {
+  CLEAR_CHAT_STATE,
   getConversationsSuccess,
   getMessagesSuccess,
   RECEIVE_MESSAGE,
@@ -8,6 +9,11 @@ import {
 const initialState = { matches: [] };
 
 const chatReducer = {
+  [CLEAR_CHAT_STATE]: store => {
+    store.messages = undefined;
+    store.newMessage = undefined;
+  },
+
   [getConversationsSuccess]: (store, { payload }) => {
     store.matches = payload;
   },
@@ -17,7 +23,7 @@ const chatReducer = {
   },
 
   [RECEIVE_MESSAGE]: (store, { payload }) => {
-    store.newMessage = payload;
+    store.messages = [...store.messages, payload];
   },
 };
 

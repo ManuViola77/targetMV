@@ -1,32 +1,78 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { Text } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
+import { useNavigationParam } from 'react-navigation-hooks';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getConversations } from 'actions/chatActions';
+import {
+  clearChatState,
+  createConsumer,
+  disconnectActionCable,
+  getMessages,
+  sendMessage,
+  subscribe,
+  unsubscribe,
+} from 'actions/chatActions';
 import { targetMatchParam } from 'constants/parameters';
-import { CONVERSATION_SCREEN } from 'constants/screens';
-import MatchesList from 'components/MatchesList';
 
-const ChatScreen = ({ navigation }) => {
+const ChatScreen = () => {
+  const { matchId } = useNavigationParam(targetMatchParam);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // Refresh conversations when it comes back from ConversationScreen
-    const focusListener = navigation.addListener('didFocus', () => {
-      dispatch(getConversations());
-    });
+  const info = useSelector(({ session: { info } }) => info);
 
-    return () => focusListener.remove();
+  useEffect(() => {
+    const dispatches = async () => {
+      await dispatch(createConsumer(info));
+      await dispatch(subscribe({ matchId }));
+      // parameters are id and page
+      await dispatch(getMessages(matchId, 1));
+    };
+    dispatches();
+
+    return () => {
+      dispatch(unsubscribe());
+      dispatch(disconnectActionCable());
+      dispatch(clearChatState());
+    };
   }, []);
 
-  const conversations = useSelector(({ chat: { matches } }) => matches);
+  const messagesSession = useSelector(({ chat: { messages } }) => messages);
+
+  let messages = useMemo(() => {
+    if (messagesSession) {
+      return (messages = messagesSession.map(message => {
+        const { id } = message;
+        return {
+          ...message,
+          _id: id,
+        };
+      }));
+    }
+  }, [messagesSession]);
+
+  const handleOnSend = newMessages => {
+    const [message] = newMessages;
+    dispatch(sendMessage({ message, matchId }));
+  };
 
   return (
-    <MatchesList
-      list={conversations}
-      onPress={item =>
-        navigation.push(CONVERSATION_SCREEN, { [targetMatchParam]: item })
-      }
-    />
+    <>
+      <GiftedChat
+        messages={messages}
+        onSend={handleOnSend}
+        renderAvatar={null}
+        alwaysShowSend
+        renderMessage={({ currentMessage: { content } }) => (
+          <Text>{content}</Text>
+        )}
+        invertibleScrollViewProps={{ overScrollMode: 'never' }}
+        alignTop
+        bottomOffset={0}
+      />
+    </>
   );
 };
+
 export default ChatScreen;

@@ -1,4 +1,5 @@
 import api from 'api';
+import { applyQueryParams } from 'utils/helpers';
 
 class ChatService {
   getConversations() {
@@ -6,7 +7,14 @@ class ChatService {
   }
 
   getMessages(id, page) {
-    return api.get(`/match_conversations/${id}/messages?{page=${page}}`);
+    const queryParams = {
+      page,
+    };
+    const url = applyQueryParams(
+      `/match_conversations/${id}/messages`,
+      queryParams,
+    );
+    return api.get(url);
   }
 }
 
