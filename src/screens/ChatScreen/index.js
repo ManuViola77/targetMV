@@ -21,6 +21,7 @@ const ChatScreen = () => {
   const dispatch = useDispatch();
 
   const info = useSelector(({ session: { info } }) => info);
+  const userId = useSelector(({ session: { userId } }) => userId);
 
   useEffect(() => {
     const dispatches = async () => {
@@ -42,15 +43,29 @@ const ChatScreen = () => {
 
   let messages = useMemo(() => {
     if (messagesSession) {
-      return (messages = messagesSession.map(message => {
-        const { id } = message;
-        return {
-          ...message,
-          _id: id,
-        };
-      }));
+      return (messages = messagesSession
+        .map(message => {
+          const {
+            id,
+            content,
+            date,
+            user: {
+              id: messageUserId,
+              avatar: { url },
+            },
+          } = message;
+          return {
+            _id: id,
+            text: content,
+            createdAt: date,
+            user: { _id: messageUserId, avatar: url },
+          };
+        })
+        .reverse());
     }
   }, [messagesSession]);
+
+  console.log('messages: ', messages);
 
   const handleOnSend = newMessages => {
     const [message] = newMessages;
@@ -60,16 +75,15 @@ const ChatScreen = () => {
   return (
     <>
       <GiftedChat
+        alignTop
+        alwaysShowSend
+        bottomOffset={0}
         messages={messages}
         onSend={handleOnSend}
-        renderAvatar={null}
-        alwaysShowSend
-        renderMessage={({ currentMessage: { content } }) => (
-          <Text>{content}</Text>
-        )}
-        invertibleScrollViewProps={{ overScrollMode: 'never' }}
-        alignTop
-        bottomOffset={0}
+        showUserAvatar
+        user={{
+          _id: userId,
+        }}
       />
     </>
   );
