@@ -11,7 +11,6 @@ const initialState = { matches: [] };
 const chatReducer = {
   [CLEAR_CHAT_STATE]: store => {
     store.messages = undefined;
-    store.newMessage = undefined;
   },
 
   [getConversationsSuccess]: (store, { payload }) => {
