@@ -4,6 +4,7 @@ import { createLogger } from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import AppReducer from 'reducers';
 import { thunkMiddleware } from '@rootstrap/redux-tools';
+import actionCableMiddleware from '../actionCable/middleware';
 
 /* eslint-disable */
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -16,7 +17,7 @@ const persistConfig = {
 };
 
 export default function configureStore(initialState) {
-  const middlewares = [thunkMiddleware];
+  const middlewares = [thunkMiddleware, actionCableMiddleware];
 
   if (__DEV__) {
     const logger = createLogger({

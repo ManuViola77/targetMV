@@ -58,9 +58,11 @@ const Main = ({ navigation }) => {
     if (apiTargetsList && topicsList) {
       return (targetsList = apiTargetsList.map(({ target }) => {
         const { topicId } = target;
+        let topic = topicsList.find(({ topic: { id } }) => id === topicId);
+        topic && (topic = topic.topic);
         return {
           ...target,
-          topic: topicsList.find(({ topic: { id } }) => id === topicId).topic,
+          topic,
         };
       }));
     }
@@ -128,7 +130,7 @@ const Main = ({ navigation }) => {
           showCircle
         />
         {targetsList &&
-          targetsList.map(target => {
+          targetsList.map((target = {}) => {
             const { id, lat, lng, radius, topic } = target;
             return (
               <Marker
