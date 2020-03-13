@@ -35,7 +35,10 @@ export const getConversations = createThunk(GET_CONVERSATIONS, async () => {
 // get all messages from a conversation (1 conversation = * messages)
 export const getMessages = createThunk(GET_MESSAGES, async (id, page) => {
   try {
-    return (await chatService.getMessages(id, page)).data.messages;
+    const {
+      data: { messages },
+    } = await chatService.getMessages(id, page);
+    return { messages, page };
   } catch ({ data }) {
     throw parseError(data);
   }

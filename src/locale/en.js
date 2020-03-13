@@ -5,6 +5,7 @@ export default {
   },
 
   CHAT: {
+    send: 'Send',
     start: 'Start a conversation with ',
   },
 
