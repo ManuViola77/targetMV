@@ -12,6 +12,7 @@ import {
   subscribe,
   unsubscribe,
 } from 'actions/chatActions';
+import defaultProfileImage from 'assets/images/default_profile_image.png';
 import { CHAT_PAGE_COUNT } from 'constants/chat';
 import { targetMatchParam } from 'constants/parameters';
 import Send from 'components/chat/Send';
@@ -62,7 +63,10 @@ const ChatScreen = () => {
             _id: id,
             text: content,
             createdAt: date,
-            user: { _id: messageUserId, avatar: url },
+            user: {
+              _id: messageUserId,
+              avatar: url ? url : defaultProfileImage,
+            },
           };
         })
         .reverse());
