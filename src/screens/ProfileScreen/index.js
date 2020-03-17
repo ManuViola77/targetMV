@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { ImageBackground, TouchableOpacity } from 'react-native';
+import { ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStatus, ERROR, LOADING, SUCCESS } from '@rootstrap/redux-tools';
 
@@ -107,7 +107,7 @@ const ProfileScreen = ({ navigation }) => {
   });
 
   return (
-    <>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground
         resizeMode="contain"
         source={profileLogo}
@@ -162,7 +162,7 @@ const ProfileScreen = ({ navigation }) => {
         onPress={handleLogout}
         text={logoutStatus === LOADING ? COMMON.loading : PROFILE.logOut}
       />
-    </>
+    </ScrollView>
   );
 };
 

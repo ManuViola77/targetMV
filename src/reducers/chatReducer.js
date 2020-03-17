@@ -8,6 +8,10 @@ import {
 
 const initialState = { matches: [] };
 
+const isInCollection = (array, id) => {
+  return array.find(({ id: elementId }) => elementId === id);
+};
+
 const chatReducer = {
   [CLEAR_CHAT_STATE]: store => {
     store.messages = undefined;
@@ -17,8 +21,15 @@ const chatReducer = {
     store.matches = payload;
   },
 
-  [getMessagesSuccess]: (store, { payload }) => {
-    store.messages = payload;
+  [getMessagesSuccess]: (store, { payload: { messages, page } }) => {
+    if (page !== 1) {
+      const newMessages = messages.filter(({ id }) => {
+        return !isInCollection(store.messages, id);
+      });
+      store.messages = [...newMessages, ...store.messages];
+    } else {
+      store.messages = messages;
+    }
   },
 
   [RECEIVE_MESSAGE]: (store, { payload }) => {
