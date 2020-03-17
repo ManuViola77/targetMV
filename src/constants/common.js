@@ -3,12 +3,7 @@ import { Dimensions } from 'react-native';
 export const ANDROID = 'android';
 export const IOS = 'ios';
 
-export const FB_PERMISSIONS = [
-  'email',
-  'user_gender',
-  'user_friends',
-  'public_profile',
-];
+export const FB_PERMISSIONS = ['email'];
 
 export const GRANTED = 'granted';
 
