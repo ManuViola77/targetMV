@@ -79,5 +79,20 @@
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
 	</array>
+
+	<!-- Facebook Login configuration -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb166925907359293</string>
+			</array>
+		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>166925907359293</string>
+	<key>FacebookDisplayName</key>
+	<string>Target MV</string>
 </dict>
 </plist>

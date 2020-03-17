@@ -3,10 +3,20 @@ import { createThunk, createAction } from '@rootstrap/redux-tools';
 import userService from 'services/userService';
 import parseError from 'utils/parseError';
 
+const FB_LOGIN = 'FB_LOGIN';
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const SIGNUP = 'SIGNUP';
 const UPDATE_SESSION = 'UPDATE_SESSION';
+
+export const facebookLogin = createThunk(FB_LOGIN, async fbToken => {
+  try {
+    const { data } = await userService.facebookLogin({ access_token: fbToken });
+    return data;
+  } catch ({ data }) {
+    throw parseError(data);
+  }
+});
 
 export const login = createThunk(LOGIN, async user => {
   try {

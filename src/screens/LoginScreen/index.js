@@ -15,6 +15,7 @@ import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import Header from 'components/common/Header';
+import FBLoginButton from 'components/FBLoginButton';
 import { email, password, errorMsg } from 'constants/fields';
 import { SIGN_UP_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
@@ -87,9 +88,8 @@ const LoginScreen = ({ navigation }) => {
           <TouchableOpacity>
             <Text style={styles.smallLink}>{LOGIN.forgotPass}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.mediumSpace}>
-            <Text style={styles.boldLink}>{LOGIN.connectFb}</Text>
-          </TouchableOpacity>
+          <Text style={styles.boldLink}>{LOGIN.connectFb}</Text>
+          <FBLoginButton />
           <View style={styles.allLeftSpace}>
             <View style={styles.lineStyle} />
             <TouchableOpacity onPress={signUp}>
