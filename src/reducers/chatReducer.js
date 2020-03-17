@@ -8,9 +8,8 @@ import {
 
 const initialState = { matches: [] };
 
-const isInCollection = (array, id) => {
-  return array.find(({ id: elementId }) => elementId === id);
-};
+const isInCollection = (array, id) =>
+  array.find(({ id: elementId }) => elementId === id);
 
 const chatReducer = {
   [CLEAR_CHAT_STATE]: store => {
@@ -23,9 +22,9 @@ const chatReducer = {
 
   [getMessagesSuccess]: (store, { payload: { messages, page } }) => {
     if (page !== 1) {
-      const newMessages = messages.filter(({ id }) => {
-        return !isInCollection(store.messages, id);
-      });
+      const newMessages = messages.filter(
+        ({ id }) => !isInCollection(store.messages, id),
+      );
       store.messages = [...newMessages, ...store.messages];
     } else {
       store.messages = messages;
