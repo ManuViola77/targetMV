@@ -11,7 +11,7 @@ const UPDATE_SESSION = 'UPDATE_SESSION';
 
 export const facebookLogin = createThunk(FB_LOGIN, async fbToken => {
   try {
-    await userService.facebookLogin({ access_token: fbToken });
+    await userService.facebookLogin({ accessToken: fbToken });
     return fbToken;
   } catch ({ data }) {
     throw parseError(data);

@@ -16,7 +16,7 @@ import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import ImagePlaceholder from 'components/common/ImagePlaceholder';
-import FBLoginButton from 'components/FBLoginButton';
+import FBSessionButton from 'components/FBSessionButton';
 import {
   name as usernameField,
   email as emailField,
@@ -165,7 +165,7 @@ const ProfileScreen = ({ navigation }) => {
       <ErrorView error={errors[errorMsg]} />
       <Button title={PROFILE.save} onPress={saveChanges} />
       {fbToken ? (
-        <FBLoginButton onPress={handleLogout} />
+        <FBSessionButton onPress={handleLogout} />
       ) : (
         <Link
           onPress={handleLogout}

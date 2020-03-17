@@ -8,7 +8,7 @@ import { FB_PERMISSIONS } from 'constants/common';
 import strings from 'locale';
 import styles from './styles';
 
-const FBLoginButton = ({ onPress }) => {
+const FBSessionButton = ({ onPress }) => {
   const { FACEBOOK_LOGIN } = strings;
   const dispatch = useDispatch();
 
@@ -39,4 +39,4 @@ const FBLoginButton = ({ onPress }) => {
   );
 };
 
-export default FBLoginButton;
+export default FBSessionButton;
