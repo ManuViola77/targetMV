@@ -86,13 +86,13 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb166925907359293</string>
+				<string>$(FACEBOOK_CUSTOM_URL_SCHEME)</string>
 			</array>
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>166925907359293</string>
+	<string>$(FACEBOOK_APP_ID)</string>
 	<key>FacebookDisplayName</key>
-	<string>Target MV</string>
+	<string>$(FACEBOOK_DISPLAY_NAME)</string>
 </dict>
 </plist>
