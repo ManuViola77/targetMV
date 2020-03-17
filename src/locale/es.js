@@ -41,6 +41,11 @@ export default {
       'Recuerde que si lo elimina, ya no podrá chatear con sus coincidencias',
   },
 
+  FACEBOOK_LOGIN: {
+    cancel: 'El login fue cancelado',
+    error: 'El login fallo debido al error: ',
+  },
+
   GENDER: {
     placeholder: { label: 'Seleccione su género', value: '' },
     options: [

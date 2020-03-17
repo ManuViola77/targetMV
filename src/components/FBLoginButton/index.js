@@ -5,34 +5,35 @@ import { useDispatch } from 'react-redux';
 
 import { facebookLogin } from 'actions/userActions';
 import { FB_PERMISSIONS } from 'constants/common';
+import strings from 'locale';
+import styles from './styles';
 
-const FBLoginButton = () => {
+const FBLoginButton = ({ onPress }) => {
+  const { FACEBOOK_LOGIN } = strings;
   const dispatch = useDispatch();
+
   const facebookLoginRequest = useCallback(
     fbToken => dispatch(facebookLogin(fbToken)),
     [dispatch],
   );
 
+  const postLogin = async (error, result) => {
+    if (error) {
+      alert(`${FACEBOOK_LOGIN.error}${error.message}`);
+    } else if (result.isCancelled) {
+      alert(FACEBOOK_LOGIN.cancel);
+    } else {
+      const { accessToken } = await AccessToken.getCurrentAccessToken();
+      facebookLoginRequest(accessToken);
+    }
+  };
+
   return (
-    <View>
+    <View style={styles.container}>
       <LoginButton
         permissions={FB_PERMISSIONS}
-        onLoginFinished={(error, result) => {
-          if (error) {
-            alert('Login failed with error: ' + error.message);
-          } else if (result.isCancelled) {
-            alert('Login was cancelled');
-          } else {
-            AccessToken.getCurrentAccessToken().then(({ accessToken }) => {
-              facebookLoginRequest(accessToken);
-            });
-            alert(
-              'Login was successful with permissions: ' +
-                result.grantedPermissions,
-            );
-          }
-        }}
-        onLogoutFinished={() => alert('User logged out')}
+        onLoginFinished={postLogin}
+        onLogoutFinished={onPress}
       />
     </View>
   );

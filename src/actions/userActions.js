@@ -11,8 +11,8 @@ const UPDATE_SESSION = 'UPDATE_SESSION';
 
 export const facebookLogin = createThunk(FB_LOGIN, async fbToken => {
   try {
-    const { data } = await userService.facebookLogin({ access_token: fbToken });
-    return data;
+    await userService.facebookLogin({ access_token: fbToken });
+    return fbToken;
   } catch ({ data }) {
     throw parseError(data);
   }
@@ -44,6 +44,7 @@ export const signUp = createThunk(SIGNUP, async user => {
 
 export const updateSession = createAction(UPDATE_SESSION);
 
+export const { success: facebookLoginSuccess } = facebookLogin;
 export const { success: loginSuccess, reset: loginReset } = login;
-export const { success: signUpSuccess, reset: signUpReset } = signUp;
 export const { success: logoutSuccess } = logout;
+export const { success: signUpSuccess, reset: signUpReset } = signUp;

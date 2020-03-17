@@ -1,30 +1,35 @@
 import { createReducer } from '@rootstrap/redux-tools';
 
 import {
+  facebookLoginSuccess,
   loginSuccess,
-  signUpSuccess,
   logoutSuccess,
+  signUpSuccess,
   updateSession,
 } from 'actions/userActions';
 
 const initialState = {
-  userId: null,
+  fbToken: null,
   info: null,
+  userId: null,
+};
+
+const handleFacebookLoginSuccess = (state, { payload }) => {
+  state.fbToken = payload;
 };
 
 const handleLoginSuccess = (state, { payload }) => {
   state.userId = payload;
 };
 
-const handleLogoutSuccess = () => {
-  return initialState;
-};
+const handleLogoutSuccess = () => initialState;
 
 const handleUpdateSession = (state, { payload }) => {
   state.info = payload;
 };
 
 export default createReducer(initialState, {
+  [facebookLoginSuccess]: handleFacebookLoginSuccess,
   [loginSuccess]: handleLoginSuccess,
   [logoutSuccess]: handleLogoutSuccess,
   [signUpSuccess]: handleLoginSuccess,
