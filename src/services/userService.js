@@ -1,6 +1,10 @@
 import api from 'api';
 
 class UserService {
+  changePassword(passwords) {
+    return api.put('/users/password', passwords);
+  }
+
   login(user) {
     return api.post('/users/sign_in', user);
   }

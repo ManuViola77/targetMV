@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStatus, ERROR, LOADING, SUCCESS } from '@rootstrap/redux-tools';
@@ -16,6 +16,7 @@ import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import ImagePlaceholder from 'components/common/ImagePlaceholder';
+import ChangePasswordModal from 'components/ChangePasswordModal';
 import {
   name as usernameField,
   email as emailField,
@@ -106,6 +107,11 @@ const ProfileScreen = ({ navigation }) => {
     }
   });
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const openModal = () => setIsModalVisible(true);
+  const closeModal = () => setIsModalVisible(false);
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground
@@ -155,7 +161,11 @@ const ProfileScreen = ({ navigation }) => {
         text={values[lastNameField]}
         title={PROFILE.lastName}
       />
-      <Link text={PROFILE.password} onPress={() => {}} />
+      <Link text={PROFILE.password} onPress={openModal} />
+      <ChangePasswordModal
+        isModalVisible={isModalVisible}
+        closeModal={closeModal}
+      />
       <ErrorView error={errors[errorMsg]} />
       <Button title={PROFILE.save} onPress={saveChanges} />
       <Link

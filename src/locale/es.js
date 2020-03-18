@@ -4,6 +4,23 @@ export default {
     errorNotJSON: 'La respuesta no es JSON',
   },
 
+  CHANGE_PASSWORD: {
+    cancel: 'Cancelar',
+    confirmPassword: 'Confirmar Nueva Contraseña',
+    currentPassword: 'Ingrese su Contraseña Actual',
+    password: 'Nueva Contraseña',
+    save: 'Confirmar',
+  },
+
+  CHANGE_PASSWORD_ERROR: {
+    emptyPassword: 'Nueva Contraseña no puede ser vacía',
+    emptyConfirmPassword: 'Confirmar Nueva Contraseña no puede ser vacía',
+    emptyCurrentPassword: 'Contraseña Actual no puede ser vacía',
+    passwordSixChar: 'La nueva contraseña debe tener mínimo 6 caracteres',
+    confirmPasswordMatch:
+      'Confirmar Nueva Contraseña no es igual a Nueva Contraseña',
+  },
+
   CHAT: {
     send: 'Enviar',
     start: 'Empieza una conversación con ',
@@ -103,6 +120,7 @@ export default {
   },
 
   TITLE: {
+    changePassword: 'Cambiar Contraseña',
     chat: 'Chat',
     createTarget: 'Crear Nuevo Target',
     main: 'Puntos Target',

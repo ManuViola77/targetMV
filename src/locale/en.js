@@ -4,6 +4,22 @@ export default {
     errorNotJSON: 'Response not JSON',
   },
 
+  CHANGE_PASSWORD: {
+    cancel: 'Cancel',
+    confirmPassword: 'Confirm new password',
+    currentPassword: 'Enter your current password',
+    password: 'New password',
+    save: 'Done',
+  },
+
+  CHANGE_PASSWORD_ERROR: {
+    emptyPassword: "New Password can't be blank",
+    emptyConfirmPassword: "Confirm New Password can't be blank",
+    emptyCurrentPassword: "Current Password can't be blank",
+    passwordSixChar: 'New Password must be at least 6 characters long',
+    confirmPasswordMatch: 'Confirm New Password is not equal to New Password',
+  },
+
   CHAT: {
     send: 'Send',
     start: 'Start a conversation with ',
@@ -102,6 +118,7 @@ export default {
   },
 
   TITLE: {
+    changePassword: 'Change Password',
     chat: 'Chat',
     createTarget: 'Create New Target',
     main: 'Target Points',
