@@ -39,6 +39,10 @@ const styles = StyleSheet.create({
     marginTop: 85,
   },
 
+  scrollView: {
+    flexGrow: 1,
+  },
+
   smallLink: {
     fontSize: 12,
   },
