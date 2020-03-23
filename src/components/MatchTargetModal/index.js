@@ -36,8 +36,6 @@ const MatchTargetModal = ({
       navigation.push(CHAT_SCREEN, { [targetMatchParam]: chatParam });
     };
 
-    console.log('matchedUser: ', matchedUser);
-
     return (
       <Modal
         animationIn="slideInUp"

@@ -8,17 +8,21 @@ import {
 const initialState = { targetsList: [] };
 
 const targetsReducer = {
-  [createTargetReset]: (store, action) => {
+  [createTargetReset]: store => {
     store.matchedUser = undefined;
     store.matchId = undefined;
   },
 
   [createTargetSuccess]: (store, action) => {
-    if (action.payload.matchConversation) {
+    const {
+      payload,
+      payload: { matchConversation },
+    } = action;
+    if (matchConversation) {
       const {
         matchedUser,
         matchConversation: { id },
-      } = action.payload;
+      } = payload;
       store.matchedUser = matchedUser;
       store.matchId = id;
     }

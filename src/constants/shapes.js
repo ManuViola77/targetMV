@@ -58,11 +58,11 @@ export const topicShape = shape({
 
 export const userShape = shape({
   avatar: avatarShape,
-  email: string,
+  email: string.isRequired,
   firstName: string,
   fullName: string,
   gender: string,
-  id: number,
+  id: number.isRequired,
   lastName: string,
-  username: string,
+  username: string.isRequired,
 });
