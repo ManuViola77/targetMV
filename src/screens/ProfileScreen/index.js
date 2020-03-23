@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ImageBackground, ScrollView, TouchableOpacity } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useStatus, ERROR, LOADING, SUCCESS } from '@rootstrap/redux-tools';
@@ -16,6 +16,7 @@ import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import ImagePlaceholder from 'components/common/ImagePlaceholder';
+import ChangePasswordModal from 'components/ChangePasswordModal';
 import FBSessionButton from 'components/FBSessionButton';
 import {
   name as usernameField,
@@ -112,6 +113,8 @@ const ProfileScreen = ({ navigation }) => {
     }
   });
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground
@@ -161,7 +164,11 @@ const ProfileScreen = ({ navigation }) => {
         text={values[lastNameField]}
         title={PROFILE.lastName}
       />
-      <Link text={PROFILE.password} onPress={() => {}} />
+      <Link text={PROFILE.password} onPress={() => setIsModalVisible(true)} />
+      <ChangePasswordModal
+        closeModal={() => setIsModalVisible(false)}
+        isModalVisible={isModalVisible}
+      />
       <ErrorView error={errors[errorMsg]} />
       <Button title={PROFILE.save} onPress={saveChanges} />
       {fbToken ? (

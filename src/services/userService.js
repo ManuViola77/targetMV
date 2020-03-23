@@ -1,6 +1,10 @@
 import api from 'api';
 
 class UserService {
+  changePassword(passwords) {
+    return api.put('/users/password', passwords);
+  }
+  
   facebookLogin(fbToken) {
     return api.post('/users/facebook', fbToken);
   }
