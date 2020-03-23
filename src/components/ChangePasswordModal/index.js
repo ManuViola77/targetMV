@@ -21,7 +21,7 @@ import strings from 'locale';
 import changePasswordValidations from 'validations/changePasswordValidations';
 import styles from './styles';
 
-const ChangePasswordModal = ({ navigation, closeModal, isModalVisible }) => {
+const ChangePasswordModal = ({ closeModal, isModalVisible }) => {
   const { COMMON, CHANGE_PASSWORD } = strings;
 
   const dispatch = useDispatch();

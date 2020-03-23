@@ -109,9 +109,6 @@ const ProfileScreen = ({ navigation }) => {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const openModal = () => setIsModalVisible(true);
-  const closeModal = () => setIsModalVisible(false);
-
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <ImageBackground
@@ -161,10 +158,10 @@ const ProfileScreen = ({ navigation }) => {
         text={values[lastNameField]}
         title={PROFILE.lastName}
       />
-      <Link text={PROFILE.password} onPress={openModal} />
+      <Link text={PROFILE.password} onPress={() => setIsModalVisible(true)} />
       <ChangePasswordModal
+        closeModal={() => setIsModalVisible(false)}
         isModalVisible={isModalVisible}
-        closeModal={closeModal}
       />
       <ErrorView error={errors[errorMsg]} />
       <Button title={PROFILE.save} onPress={saveChanges} />

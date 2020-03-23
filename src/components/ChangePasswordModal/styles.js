@@ -15,9 +15,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: WHITE,
     justifyContent: 'space-around',
-    marginHorizontal: SCREEN_WIDTH / 16,
-    marginTop: SCREEN_HEIGHT / 6,
-    maxHeight: (2 * SCREEN_HEIGHT) / 3,
+    marginHorizontal: SCREEN_WIDTH * 0.06,
+    marginTop: SCREEN_HEIGHT * 0.2,
+    maxHeight: SCREEN_HEIGHT * 0.6,
   },
 
   scrollView: {
