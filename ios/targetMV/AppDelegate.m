@@ -13,10 +13,14 @@
 #import <React/RCTRootView.h>
 #import <GoogleMaps/GoogleMaps.h>
 
+#import <FBSDKCoreKit/FBSDKCoreKit.h> 
+    
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions]; 
   RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
   RCTRootView *rootView = [[RCTRootView alloc] initWithBridge:bridge
                                                    moduleName:@"targetMV"
@@ -31,6 +35,21 @@
   [self.window makeKeyAndVisible];
   [GMSServices provideAPIKey:[ReactNativeConfig envFor:@"GOOGLE_KEY"]];
   return YES;
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+  [FBSDKAppEvents activateApp];
+}
+
+- (BOOL)application:(UIApplication *)app
+        openURL:(NSURL *)url
+        options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+  return [[FBSDKApplicationDelegate sharedInstance]
+    application:app
+    openURL:url
+    options:options];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

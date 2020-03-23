@@ -57,6 +57,11 @@ export default {
       "Remember that if you delete it, you won't be able to chat with it's matches anymore",
   },
 
+  FACEBOOK_LOGIN: {
+    cancel: 'Login was cancelled',
+    error: 'Login failed with error: ',
+  },
+
   GENDER: {
     placeholder: { label: 'Select your gender', value: '' },
     options: [

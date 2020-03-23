@@ -17,6 +17,7 @@ import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import ImagePlaceholder from 'components/common/ImagePlaceholder';
 import ChangePasswordModal from 'components/ChangePasswordModal';
+import FBSessionButton from 'components/FBSessionButton';
 import {
   name as usernameField,
   email as emailField,
@@ -38,7 +39,12 @@ const { PROFILE, COMMON } = strings;
 const ProfileScreen = ({ navigation }) => {
   const dispatch = useDispatch();
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
-  const userId = useSelector(({ session: { userId } }) => userId);
+  const { fbToken, userId } = useSelector(
+    ({ session: { fbToken, userId } }) => ({
+      fbToken,
+      userId,
+    }),
+  );
 
   const getProfileRequest = useCallback(() => {
     dispatch(getProfile(userId));
@@ -165,10 +171,14 @@ const ProfileScreen = ({ navigation }) => {
       />
       <ErrorView error={errors[errorMsg]} />
       <Button title={PROFILE.save} onPress={saveChanges} />
-      <Link
-        onPress={handleLogout}
-        text={logoutStatus === LOADING ? COMMON.loading : PROFILE.logOut}
-      />
+      {fbToken ? (
+        <FBSessionButton onPress={handleLogout} />
+      ) : (
+        <Link
+          onPress={handleLogout}
+          text={logoutStatus === LOADING ? COMMON.loading : PROFILE.logOut}
+        />
+      )}
     </ScrollView>
   );
 };

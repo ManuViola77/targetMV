@@ -4,6 +4,10 @@ class UserService {
   changePassword(passwords) {
     return api.put('/users/password', passwords);
   }
+  
+  facebookLogin(fbToken) {
+    return api.post('/users/facebook', fbToken);
+  }
 
   login(user) {
     return api.post('/users/sign_in', user);

@@ -26,6 +26,7 @@
     "react-native-action-cable-jwt": "^1.0.3",
     "react-native-config": "^0.12.0",
     "react-native-elements": "^1.2.7",
+    "react-native-fbsdk": "^1.1.2",
     "react-native-fs": "^2.16.6",
     "react-native-geolocation-service": "^4.0.0",
     "react-native-gesture-handler": "^1.5.3",
