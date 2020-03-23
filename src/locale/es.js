@@ -60,6 +60,13 @@ export default {
     signUp: 'Registrarse',
   },
 
+  MATCH_TARGET: {
+    skip: 'Omitir',
+    startChat: 'Bien! Comienza la charla',
+    text: 'Tienes una nueva coincidencia!',
+    yey: 'Yey!',
+  },
+
   PHOTO_PERMISSION: {
     title: 'Explicación del Permiso',
     message:

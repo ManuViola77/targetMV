@@ -31,6 +31,9 @@ export const deleteTarget = createThunk(DELETE_TARGET, async idTarget => {
   }
 });
 
-export const { reset: createTargetReset } = createTarget;
+export const {
+  success: createTargetSuccess,
+  reset: createTargetReset,
+} = createTarget;
 export const { reset: deleteTargetReset } = deleteTarget;
 export const { success: getTargetsSuccess } = getTargets;
