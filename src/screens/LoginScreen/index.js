@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import {
   View,
   SafeAreaView,
+  ScrollView,
   TouchableOpacity,
   Text,
   ImageBackground,
@@ -15,6 +16,7 @@ import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import Header from 'components/common/Header';
+import FBSessionButton from 'components/FBSessionButton';
 import { email, password, errorMsg } from 'constants/fields';
 import { SIGN_UP_SCREEN } from 'constants/screens';
 import useFormStates from 'hooks/useFormStates';
@@ -65,38 +67,39 @@ const LoginScreen = ({ navigation }) => {
     <ImageBackground source={loginIcon} style={styles.image}>
       <Header title={COMMON.headerTitle} />
       <SafeAreaView style={styles.safeArea}>
-        <Input
-          callback={newValue => handleChange(email, newValue)}
-          errorMessage={errorMessages[email]}
-          text={values[email]}
-          title={LOGIN.email}
-        />
-        <Input
-          callback={newValue => handleChange(password, newValue)}
-          errorMessage={errorMessages[password]}
-          text={values[password]}
-          title={LOGIN.password}
-          secureTextEntry
-        />
-        <ErrorView error={errorMessages[errorMsg]} />
-        <Button
-          onPress={() => handleConfirmForm(signInValidations)}
-          title={status === LOADING ? COMMON.loading : LOGIN.button}
-        />
-        <View style={styles.container}>
-          <TouchableOpacity>
-            <Text style={styles.smallLink}>{LOGIN.forgotPass}</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.mediumSpace}>
-            <Text style={styles.boldLink}>{LOGIN.connectFb}</Text>
-          </TouchableOpacity>
-          <View style={styles.allLeftSpace}>
-            <View style={styles.lineStyle} />
-            <TouchableOpacity onPress={signUp}>
-              <Text style={styles.link}>{LOGIN.signUp}</Text>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <Input
+            callback={newValue => handleChange(email, newValue)}
+            errorMessage={errorMessages[email]}
+            text={values[email]}
+            title={LOGIN.email}
+          />
+          <Input
+            callback={newValue => handleChange(password, newValue)}
+            errorMessage={errorMessages[password]}
+            text={values[password]}
+            title={LOGIN.password}
+            secureTextEntry
+          />
+          <ErrorView error={errorMessages[errorMsg]} />
+          <Button
+            onPress={() => handleConfirmForm(signInValidations)}
+            title={status === LOADING ? COMMON.loading : LOGIN.button}
+          />
+          <View style={styles.container}>
+            <TouchableOpacity>
+              <Text style={styles.smallLink}>{LOGIN.forgotPass}</Text>
             </TouchableOpacity>
+            <Text style={styles.boldLink}>{LOGIN.connectFb}</Text>
+            <FBSessionButton />
+            <View style={styles.allLeftSpace}>
+              <View style={styles.lineStyle} />
+              <TouchableOpacity onPress={signUp}>
+                <Text style={styles.link}>{LOGIN.signUp}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

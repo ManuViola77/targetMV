@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
 
   boldLink: {
     fontWeight: 'bold',
+    marginTop: 40,
     textTransform: 'uppercase',
   },
 
@@ -33,13 +34,13 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
   },
 
-  mediumSpace: {
-    marginTop: 40,
-  },
-
   safeArea: {
     flex: 1,
     marginTop: 85,
+  },
+
+  scrollView: {
+    flexGrow: 1,
   },
 
   smallLink: {

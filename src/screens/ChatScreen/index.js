@@ -46,11 +46,11 @@ const ChatScreen = () => {
 
   const messagesSession = useSelector(({ chat: { messages } }) => messages);
 
-  let messages = useMemo(() => {
-    if (messagesSession) {
-      return (messages = messagesSession
-        .map(message => {
-          const {
+  const messages = useMemo(
+    () =>
+      messagesSession
+        ?.map(
+          ({
             id,
             content,
             date,
@@ -58,8 +58,7 @@ const ChatScreen = () => {
               id: messageUserId,
               avatar: { url },
             },
-          } = message;
-          return {
+          }) => ({
             _id: id,
             text: content,
             createdAt: date,
@@ -67,11 +66,11 @@ const ChatScreen = () => {
               _id: messageUserId,
               avatar: url ? url : defaultProfileImage,
             },
-          };
-        })
-        .reverse());
-    }
-  }, [messagesSession]);
+          }),
+        )
+        .reverse(),
+    [messagesSession],
+  );
 
   const handleOnSend = newMessages => {
     const [message] = newMessages;

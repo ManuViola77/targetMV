@@ -3,6 +3,8 @@ import { Dimensions } from 'react-native';
 export const ANDROID = 'android';
 export const IOS = 'ios';
 
+export const FB_PERMISSIONS = ['email'];
+
 export const GRANTED = 'granted';
 
 const { width, height } = Dimensions.get('window');
