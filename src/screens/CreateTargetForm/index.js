@@ -167,6 +167,7 @@ const CreateTargetForm = ({
         closeModal={closeMatchModal}
         isModalVisible={isMatchModalVisible}
         matchId={matchId}
+        matchedUser={matchedUser}
         navigation={navigation}
       />
     </View>

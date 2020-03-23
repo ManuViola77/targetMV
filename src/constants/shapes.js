@@ -1,5 +1,11 @@
 import { bool, number, object, shape, string } from 'prop-types';
 
+export const avatarShape = shape({
+  normalUrl: string,
+  originalUrl: string,
+  smallThumbUrl: string,
+});
+
 export const locationShape = shape({
   latitude: number,
   longitude: number,
@@ -13,11 +19,7 @@ export const matchesShape = shape({
   topicIcon: string,
   unreadMessages: number,
   user: shape({
-    avatar: shape({
-      normalUrl: string,
-      originalUrl: string,
-      smallThumbUrl: string,
-    }),
+    avatar: avatarShape,
     fullName: string,
     id: number,
   }),
@@ -52,4 +54,15 @@ export const topicItemShape = shape({
 
 export const topicShape = shape({
   topic: topicItemShape,
+});
+
+export const userShape = shape({
+  avatar: avatarShape,
+  email: string,
+  firstName: string,
+  fullName: string,
+  gender: string,
+  id: number,
+  lastName: string,
+  username: string,
 });

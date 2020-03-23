@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, View } from 'react-native';
 import Modal from 'react-native-modal';
-import { bool, func } from 'prop-types';
+import { bool, func, number } from 'prop-types';
 
 import defaultProfileImage from 'assets/images/default_profile_image.png';
 import matchLogo from 'assets/images/match_logo.png';
@@ -10,6 +10,7 @@ import ImagePlaceholder from 'components/common/ImagePlaceholder';
 import Link from 'components/common/Link';
 import { targetMatchParam } from 'constants/parameters';
 import { CHAT_SCREEN } from 'constants/screens';
+import { userShape } from 'constants/shapes';
 import strings from 'locale';
 import styles, { profileImageSize } from './styles';
 
@@ -34,6 +35,8 @@ const MatchTargetModal = ({
       closeModal();
       navigation.push(CHAT_SCREEN, { [targetMatchParam]: chatParam });
     };
+
+    console.log('matchedUser: ', matchedUser);
 
     return (
       <Modal
@@ -82,6 +85,8 @@ const MatchTargetModal = ({
 MatchTargetModal.propTypes = {
   closeModal: func.isRequired,
   isModalVisible: bool.isRequired,
+  matchId: number,
+  matchedUser: userShape,
 };
 
 export default MatchTargetModal;
