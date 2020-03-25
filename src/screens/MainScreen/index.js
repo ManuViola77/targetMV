@@ -165,6 +165,7 @@ const Main = ({ navigation }) => {
           currentLocation={currentLocation}
           currentSubViewState={createTargetState}
           onPressButton={closeSubView}
+          navigation={navigation}
           selectedTarget={selectedTarget}
           toggleTopicListView={toggleTopicListView}
           topicsList={topicsList}

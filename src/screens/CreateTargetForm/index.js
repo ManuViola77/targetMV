@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { View } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useStatus, LOADING, SUCCESS } from '@rootstrap/redux-tools';
 import { arrayOf, func } from 'prop-types';
 
@@ -9,6 +9,7 @@ import Button from 'components/common/form/Button';
 import ErrorView from 'components/common/form/ErrorView';
 import Input from 'components/common/form/Input';
 import DeleteTargetModal from 'components/DeleteTargetModal';
+import MatchTargetModal from 'components/MatchTargetModal';
 import TopicListPicker from 'components/TopicListPicker';
 import {
   errorMsg,
@@ -31,6 +32,7 @@ import createTargetValidations from 'validations/createTargetValidations';
 import styles from './styles';
 
 const CreateTargetForm = ({
+  navigation,
   currentLocation,
   currentSubViewState,
   onPressButton,
@@ -58,8 +60,21 @@ const CreateTargetForm = ({
 
   const errorMessages = { ...errors, ...error };
 
+  const matchedUser = useSelector(
+    ({ targets: { matchedUser } }) => matchedUser,
+  );
+
+  const [isMatchModalVisible, setIsMatchModalVisible] = useState(false);
+
+  const closeMatchModal = () => {
+    setIsMatchModalVisible(false);
+    onPressButton(false);
+  };
+
   useEffect(() => {
-    status === SUCCESS && onPressButton(false);
+    if (status === SUCCESS) {
+      matchedUser ? setIsMatchModalVisible(true) : onPressButton(false);
+    }
   }, [status]);
 
   const { id, lat, lng, radius, title, topic, topicId } = selectedTarget;
@@ -95,8 +110,7 @@ const CreateTargetForm = ({
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const openModal = () => setIsModalVisible(true);
-  const closeModal = () => setIsModalVisible(false);
+  const matchId = useSelector(({ targets: { matchId } }) => matchId);
 
   return (
     <View style={styles.container}>
@@ -132,11 +146,11 @@ const CreateTargetForm = ({
           <Button
             style={styles.deleteButton}
             title={status === LOADING ? COMMON.loading : DELETE_TARGET.button}
-            onPress={openModal}
+            onPress={() => setIsModalVisible(true)}
           />
           <DeleteTargetModal
             isModalVisible={isModalVisible}
-            closeModal={closeModal}
+            closeModal={() => setIsModalVisible(false)}
             target={selectedTarget}
             toggleCreateTargetView={onPressButton}
           />
@@ -149,6 +163,13 @@ const CreateTargetForm = ({
           />
         )
       )}
+      <MatchTargetModal
+        closeModal={closeMatchModal}
+        isModalVisible={isMatchModalVisible}
+        matchId={matchId}
+        matchedUser={matchedUser}
+        navigation={navigation}
+      />
     </View>
   );
 };

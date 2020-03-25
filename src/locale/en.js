@@ -81,6 +81,13 @@ export default {
     signUp: 'Sign Up',
   },
 
+  MATCH_TARGET: {
+    skip: 'Skip',
+    startChat: 'Cool! Start chatting',
+    text: 'You have a new match!',
+    yey: 'Yey!',
+  },
+
   PHOTO_PERMISSION: {
     title: 'Permission Explanation',
     message: 'Want to access your photos so you can choose an avatar',
