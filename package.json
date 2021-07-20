@@ -22,7 +22,7 @@
     "query-string": "^6.10.1",
     "react": "16.9.0",
     "react-devtools": "^3.6.3",
-    "react-native": "0.61.5",
+    "react-native": "0.62.3",
     "react-native-action-cable-jwt": "^1.0.3",
     "react-native-config": "^0.12.0",
     "react-native-elements": "^1.2.7",
